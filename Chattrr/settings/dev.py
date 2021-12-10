@@ -70,7 +70,9 @@ ROOT_URLCONF = 'Chattrr.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+        	Path(BASE_DIR, 'frontend/build')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,7 +135,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    Path(BASE_DIR, 'static'),
+    Path(BASE_DIR, 'frontend/build/static'),
 ]
 STATIC_ROOT = Path(BASE_DIR, 'staticfiles')
 
