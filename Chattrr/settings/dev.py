@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # Frameworks
 
     # Created Apps
+    'accounts.apps.AccountsConfig'
 ]
 
 MIDDLEWARE = [
