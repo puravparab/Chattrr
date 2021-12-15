@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import User
+from .models import UserProfile
 
-@admin.register(User)
-class User(admin.ModelAdmin):
+@admin.register(UserProfile)
+class UserProfile(admin.ModelAdmin):
 	list_display = ('display_name', 'username', 'email', 'created_at')
 	fields =['display_name', 'username', 'email']

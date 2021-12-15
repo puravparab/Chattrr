@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Frameworks
+    'rest_framework',
 
     # Created Apps
     'accounts.apps.AccountsConfig'
