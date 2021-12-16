@@ -11,7 +11,7 @@ from .models import UserProfile
 class RegisterUser(APIView):
 	parser_classes = [JSONParser]
 
-	def get(self, request):
+	def post(self, request):
 		data = request.data
 		username = data.get("username")
 		display_name = data.get("display_name")
