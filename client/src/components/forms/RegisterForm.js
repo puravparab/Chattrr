@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
+
 const RegisterForm = () =>{
 	// States for Registration
 	const [username, setUsername] = useState('')
@@ -32,24 +34,41 @@ const RegisterForm = () =>{
   
 	// Handling the password change
 	const handlePassword = (e) => {
-	setPassword(e.target.value);
-	setSubmitted(false);
+		setPassword(e.target.value);
+		setSubmitted(false);
 	};
 
 	// Handling the password2 change
 	const handlePassword2 = (e) => {
-	setPassword2(e.target.value);
-	setSubmitted(false);
+		setPassword2(e.target.value);
+		setSubmitted(false);
 	};
 
 	// Handling the form submission
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (username === '' || display_name === '' || email === '' || password === '' || password2 === '') {
 			setError(true);
 		} else {
 			setSubmitted(true);
 			setError(false);
+
+			const csrftoken = document.cookie.split('; ').find(row => row.startsWith('csrftoken')).split('=')[1]
+			// POST User registration details to accounts/register API
+			const res = await fetch(ROOT_URL + '/accounts/register', {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+					'X-CSRFToken': csrftoken
+				},
+				body: JSON.stringify({
+					"username": username,
+					"display_name": display_name,
+					"password": password,
+					"email": email
+				})
+			})
+			console.log(res.json())
 		}
   	};
 
@@ -81,22 +100,22 @@ const RegisterForm = () =>{
         		{errorMessage()}
         		{successMessage()}
       		</div>
-      		
+
 			<form>
 				<label className="label">Username</label>
-				<input className="input" onChange={handleUsername} value={username} type="text" />
+				<input className="input" onChange={handleUsername} value={username} type="text" required/>
 
 				<label className="label">Display Name</label>
-				<input className="input" onChange={handleDisplayName} value={display_name} type="text" />
+				<input className="input" onChange={handleDisplayName} value={display_name} type="text" required/>
 
 				<label className="label">Email</label>
-				<input className="input" onChange={handleEmail} value={email} type="email" />
+				<input className="input" onChange={handleEmail} value={email} type="email" required/>
 
 				<label className="label">Password</label>
-				<input className="input" onChange={handlePassword} value={password} type="password" />
+				<input className="input" onChange={handlePassword} value={password} type="password" required/>
 
 				<label className="label">Confirm Password</label>
-				<input className="input" onChange={handlePassword2} value={password2} type="password" />
+				<input className="input" onChange={handlePassword2} value={password2} type="password" required/>
 
 				<button onClick={handleSubmit} className="btn" type="submit">Submit</button>
 
