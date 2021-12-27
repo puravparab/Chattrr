@@ -4,7 +4,7 @@ import RegisterForm from "./components/forms/RegisterForm"
 function App() {
   return (
     <div className="App">
-      <h1>Chattrr</h1>
+      <h1 className="title">Chattrr</h1>
       <RegisterForm />
     </div>
   );
