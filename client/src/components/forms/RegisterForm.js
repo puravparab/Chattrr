@@ -117,8 +117,9 @@ const RegisterForm = () =>{
 				<label className="label">Confirm Password</label>
 				<input className="input" onChange={handlePassword2} value={password2} type="password" required/>
 
-				<button onClick={handleSubmit} className="btn" type="submit">Submit</button>
+				<button onClick={handleSubmit} className="btn-submit" type="submit">Create account</button>
 
+				<div className="btn-sign-in"><span>Have an account? <a href="#">Sign in</a></span></div>
 			</form>
 		</div>
 	)
