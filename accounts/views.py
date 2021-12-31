@@ -19,31 +19,47 @@ class RegisterUser(APIView):
 		email = data.get("email")
 
 		# Validate user profile data
-		messages = {'details': {}, 'errors': {}}
-		if UserProfile.objects.filter(email=email).exists():
-			items = []
-			items.append("Account with this email already exists.")
-			messages['errors']["email"] = items
+		no_of_errors = 0
+		messages = {'details': "", 
+					'errors': {
+						"username": "",
+						"email": "",
+						"password": ""
+					}}
+
+		# Validate username
 		if UserProfile.objects.filter(username=username).exists():
 			items = []
-			items.append("Account with this username already exists.")
+			items.append("An account with this username already exists.")
 			messages['errors']["username"] = items
+			no_of_errors += 1
+
+		# Validate email
+		if UserProfile.objects.filter(email=email).exists():
+			items = []
+			items.append("An account with this email already exists.")
+			messages['errors']["email"] = items
+			no_of_errors += 1
 
 		# If errors are detected
-		if messages['errors'] != {}:
+		if no_of_errors != 0:
+			messages["details"] = (f'There are {no_of_errors} errors with this request')
 			return Response(messages, status=status.HTTP_400_BAD_REQUEST)
 		
 		# Create a UserProfile entry
 		try:
+			password = str(password)
+			print(type(password))
 			user_profile = UserProfile.objects.create(
 					username = username,
 					display_name = display_name,
-					# password = password,
-					email = email
+					email = email,
+					# Fix below
+					# password = password			
 				)
 			user_profile.save()
-			messages['details'] = 'Account created'
+			messages['details'] = 'Account successfully created'
 			return Response(messages, status=status.HTTP_200_OK)
 		except Exception as e:
-			messages['errors'] = e
+			messages['errors'] = str(e)
 			return Response(messages, status=status.HTTP_400_BAD_REQUEST)
