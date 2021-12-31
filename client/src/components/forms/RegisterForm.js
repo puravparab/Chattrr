@@ -12,11 +12,22 @@ const RegisterForm = () =>{
 
 	// States for checking the errors
 	const [submitted, setSubmitted] = useState(false);
- 	const [error, setError] = useState(false);
+ 	const [error, setError] = useState({
+ 		username: "",
+ 		email: "",
+ 		password: "",
+ 		password2: ""
+ 	});
 
 	// Handling the username change
 	const handleUsername = (e) => {
 		setUsername(e.target.value);
+		setError((error) => {
+    		return {
+				...error,
+				username: "",
+			}
+    	})
 		setSubmitted(false);
   	};
 
@@ -29,29 +40,63 @@ const RegisterForm = () =>{
   	// Handling the email change
   	const handleEmail = (e) => {
     	setEmail(e.target.value);
+    	setError((error) =>{
+    		return {
+				...error,
+				email: "",
+			}
+    	})
     	setSubmitted(false);
   	};
   
 	// Handling the password change
 	const handlePassword = (e) => {
 		setPassword(e.target.value);
+		setError((error) => {
+    		return {
+				...error,
+				password: "",
+			}
+    	})
 		setSubmitted(false);
 	};
 
 	// Handling the password2 change
 	const handlePassword2 = (e) => {
 		setPassword2(e.target.value);
+		setError((error) =>{
+    		return {
+				...error,
+				password2: "",
+			}
+    	})
 		setSubmitted(false);
 	};
 
 	// Handling the form submission
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (username === '' || display_name === '' || email === '' || password === '' || password2 === '') {
-			setError(true);
+		if (username === '' || email === '' || password === '' || password2 === '') {
+			const usernameErr = username === '' ? ("Username cannot be blank") : ("")
+			const emailErr = email === '' ? ("Email cannot be blank") : ("")
+			const passwordErr =  password === '' ? ("Password cannot be blank") : ("")
+ 			const password2Err = password2 === '' ? ("Confirm password cannot be blank") : ("")
+			const errors = {
+				username: usernameErr,
+ 				email: emailErr,
+ 				password: passwordErr,
+ 				password2: password2Err
+			}
+			updateError(errors)
 		} else {
 			setSubmitted(true);
-			setError(false);
+			const errors = {
+				username: "",
+ 				email: "",
+ 				password: "",
+ 				password2: ""
+			}
+			updateError(errors)
 
 			const csrftoken = document.cookie.split('; ').find(row => row.startsWith('csrftoken')).split('=')[1]
 			// POST User registration details to accounts/register API
@@ -68,27 +113,52 @@ const RegisterForm = () =>{
 					"email": email
 				})
 			})
-			console.log(res.json())
+
+			console.log(res)
+			const data = await res.json()
+			console.log(data)
+
+			if(res.ok){
+				const success = data["details"]
+				console.log(success)
+			} else{
+				const errors = data["errors"]
+				updateError(errors)
+				console.log(errors)
+				console.log(error)
+			}
 		}
   	};
 
 	// Showing success message
-	const successMessage = () => {
-		return (
-			<div className="success" style={{display: submitted ? '' : 'none'}} >
-				<h1>User {username} successfully registered!!</h1>
-			</div>
-		);
-	};
+	// const successMessage = () => {
+	// 	return (
+	// 		<div className="success" style={{display: submitted ? '' : 'none'}} >
+	// 			<h1>User {username} successfully registered!!</h1>
+	// 		</div>
+	// 	);
+	// };
 
+	const updateError = (errors) => {
+		setError((error) => {
+			return {
+				...error,
+				username: errors["username"],
+				email: errors["email"],
+ 				password: errors["password"],
+ 				password2: errors["password"]
+
+			}
+		})
+	}
 	// Showing error message if error is true
-	const errorMessage = () => {
-		return (
-			<div className="error" style={{display: error ? '' : 'none'}} >
-				<h1>Please enter all the fields</h1>
-			</div>
-		);
-	};
+	// const errorMessage = () => {
+	// 	return (
+	// 		<div className="error" style={{display: error ? '' : 'none'}} >
+	// 			<h1>Please enter all the fields</h1>
+	// 		</div>
+	// 	);
+	// };
 
 	return (
 		<div className="register-form">
@@ -96,26 +166,44 @@ const RegisterForm = () =>{
 				<h1>Register an account</h1>
 			</div>
 
-			<div className="messages">
-        		{errorMessage()}
-        		{successMessage()}
-      		</div>
+			{/* <div className="messages"> */}
+   {/*      		{errorMessage()} */}
+   {/*      		{successMessage()} */}
+   {/*    		</div> */}
 
 			<form>
-				<label className="label">Username</label>
-				<input className="input" onChange={handleUsername} value={username} type="text" required/>
+				<div className="form-entry">
+					<label className="label">Username</label>
+					<input className={error.username !== "" ? ("input error") : ("input")} 
+						onChange={handleUsername} value={username} type="text" required/>
+					{error.username !== "" ? (<div role="alert" className="alert"><span>{error.username}</span></div>) : ("")}
+				</div>
 
-				<label className="label">Display Name</label>
-				<input className="input" onChange={handleDisplayName} value={display_name} type="text" required/>
+				<div className="form-entry">
+					<label className="label">Display Name</label>
+					<input className="input" onChange={handleDisplayName} value={display_name} type="text" required/>
+				</div>
 
-				<label className="label">Email</label>
-				<input className="input" onChange={handleEmail} value={email} type="email" required/>
+				<div className="form-entry">
+					<label className="label">Email</label>
+					<input className={error.email !== "" ? ("input error") : ("input")}
+						onChange={handleEmail} value={email} type="email" required/>
+					{error.email !== "" ? (<div role="alert" className="alert"><span>{error.email}</span></div>) : ("")}
+				</div>
 
-				<label className="label">Password</label>
-				<input className="input" onChange={handlePassword} value={password} type="password" required/>
+				<div className="form-entry">
+					<label className="label">Password</label>
+					<input className={error.password !== "" ? ("input error") : ("input")}
+						onChange={handlePassword} value={password} type="password" required/>
+					{error.password !== "" ? (<div role="alert" className="alert"><span>{error.password}</span></div>) : ("")}
+				</div>
 
-				<label className="label">Confirm Password</label>
-				<input className="input" onChange={handlePassword2} value={password2} type="password" required/>
+				<div className="form-entry">
+					<label className="label">Confirm Password</label>
+					<input className={error.password2 !== "" ? ("input error") : ("input")}
+						onChange={handlePassword2} value={password2} type="password" required/>
+					{error.password2 !== "" ? (<div role="alert" className="alert"><span>{error.password2}</span></div>) : ("")}
+				</div>
 
 				<button onClick={handleSubmit} className="btn-submit" type="submit">Create account</button>
 
