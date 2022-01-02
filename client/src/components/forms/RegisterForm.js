@@ -8,15 +8,13 @@ const RegisterForm = () =>{
 	const [display_name, setDisplayName] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const [password2, setPassword2] = useState('')
 
 	// States for checking the errors
 	const [submitted, setSubmitted] = useState(false);
  	const [error, setError] = useState({
  		username: "",
  		email: "",
- 		password: "",
- 		password2: ""
+ 		password: ""
  	});
 
 	// Handling the username change
@@ -61,31 +59,17 @@ const RegisterForm = () =>{
 		setSubmitted(false);
 	};
 
-	// Handling the password2 change
-	const handlePassword2 = (e) => {
-		setPassword2(e.target.value);
-		setError((error) =>{
-    		return {
-				...error,
-				password2: "",
-			}
-    	})
-		setSubmitted(false);
-	};
-
 	// Handling the form submission
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (username === '' || email === '' || password === '' || password2 === '') {
+		if (username === '' || email === '' || password === '') {
 			const usernameErr = username === '' ? ("Username cannot be blank") : ("")
 			const emailErr = email === '' ? ("Email cannot be blank") : ("")
 			const passwordErr =  password === '' ? ("Password cannot be blank") : ("")
- 			const password2Err = password2 === '' ? ("Confirm password cannot be blank") : ("")
 			const errors = {
 				username: usernameErr,
  				email: emailErr,
- 				password: passwordErr,
- 				password2: password2Err
+ 				password: passwordErr
 			}
 			updateError(errors)
 		} else {
@@ -93,8 +77,7 @@ const RegisterForm = () =>{
 			const errors = {
 				username: "",
  				email: "",
- 				password: "",
- 				password2: ""
+ 				password: ""
 			}
 			updateError(errors)
 
@@ -145,20 +128,10 @@ const RegisterForm = () =>{
 				...error,
 				username: errors["username"],
 				email: errors["email"],
- 				password: errors["password"],
- 				password2: errors["password"]
-
+ 				password: errors["password"]
 			}
 		})
 	}
-	// Showing error message if error is true
-	// const errorMessage = () => {
-	// 	return (
-	// 		<div className="error" style={{display: error ? '' : 'none'}} >
-	// 			<h1>Please enter all the fields</h1>
-	// 		</div>
-	// 	);
-	// };
 
 	return (
 		<div className="register-form">
@@ -182,22 +155,15 @@ const RegisterForm = () =>{
 				<div className="form-entry">
 					<label className="label">Email</label>
 					<input className={error.email !== "" ? ("input error") : ("input")}
-						onChange={handleEmail} value={email} type="email" required/>
+						autocomplete="email" onChange={handleEmail} value={email} type="email" required/>
 					{error.email !== "" ? (<div role="alert" className="alert"><span>{error.email}</span></div>) : ("")}
 				</div>
 
 				<div className="form-entry">
 					<label className="label">Password</label>
 					<input className={error.password !== "" ? ("input error") : ("input")}
-						onChange={handlePassword} value={password} type="password" required/>
+						autocomplete="new-password" onChange={handlePassword} value={password} type="password" required/>
 					{error.password !== "" ? (<div role="alert" className="alert"><span>{error.password}</span></div>) : ("")}
-				</div>
-
-				<div className="form-entry">
-					<label className="label">Confirm Password</label>
-					<input className={error.password2 !== "" ? ("input error") : ("input")}
-						onChange={handlePassword2} value={password2} type="password" required/>
-					{error.password2 !== "" ? (<div role="alert" className="alert"><span>{error.password2}</span></div>) : ("")}
 				</div>
 
 				<button onClick={handleSubmit} className="btn-submit" type="submit">Create account</button>
