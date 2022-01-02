@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from .models import UserProfile
 
 # REGISTER VIEW
@@ -57,6 +57,10 @@ class RegisterUser(APIView):
 				password=password
 			)
 			user.save()
+
+			# Add to group
+			group = Group.objects.get(name="User Accounts")
+			user.groups.add(group)
 
 			# Create UserProfile model
 			user_profile = UserProfile.objects.create(
