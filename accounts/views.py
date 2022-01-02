@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 
+from django.contrib.auth.models import User
 from .models import UserProfile
 
 # REGISTER VIEW
@@ -28,14 +29,14 @@ class RegisterUser(APIView):
 					}}
 
 		# Validate username
-		if UserProfile.objects.filter(username=username).exists():
+		if User.objects.filter(username=username).exists():
 			items = []
 			items.append("An account with this username already exists.")
 			messages['errors']["username"] = items
 			no_of_errors += 1
 
 		# Validate email
-		if UserProfile.objects.filter(email=email).exists():
+		if User.objects.filter(email=email).exists():
 			items = []
 			items.append("An account with this email already exists.")
 			messages['errors']["email"] = items
@@ -49,17 +50,25 @@ class RegisterUser(APIView):
 		# Create a UserProfile entry
 		try:
 			password = str(password)
-			print(type(password))
+			# Create User model
+			user = User.objects.create(
+				username=username, 
+				email=email, 
+				password=password
+			)
+			user.save()
+
+			# Create UserProfile model
 			user_profile = UserProfile.objects.create(
-					username = username,
-					display_name = display_name,
-					email = email,
-					# Fix below
-					# password = password			
-				)
+				user = user,
+				display_name = display_name
+				# username = username,
+				# email = email
+			)
 			user_profile.save()
+
 			messages['details'] = 'Account successfully created'
 			return Response(messages, status=status.HTTP_200_OK)
 		except Exception as e:
 			messages['errors'] = str(e)
-			return Response(messages, status=status.HTTP_400_BAD_REQUEST)
+			return Response(messages, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

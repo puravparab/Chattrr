@@ -166,11 +166,6 @@ const RegisterForm = () =>{
 				<h1>Register an account</h1>
 			</div>
 
-			{/* <div className="messages"> */}
-   {/*      		{errorMessage()} */}
-   {/*      		{successMessage()} */}
-   {/*    		</div> */}
-
 			<form>
 				<div className="form-entry">
 					<label className="label">Username</label>
