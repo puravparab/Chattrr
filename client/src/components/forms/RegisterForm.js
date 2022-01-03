@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import '../../styles/components/registerform.css'
+import { useState } from 'react';
+import '../../styles/components/registerform.css';
+import alertRed from '../../assets/icons/alert_red.svg';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -114,15 +115,6 @@ const RegisterForm = () =>{
 		}
   	};
 
-	// Showing success message
-	// const successMessage = () => {
-	// 	return (
-	// 		<div className="success" style={{display: submitted ? '' : 'none'}} >
-	// 			<h1>User {username} successfully registered!!</h1>
-	// 		</div>
-	// 	);
-	// };
-
 	const updateError = (errors) => {
 		setError((error) => {
 			return {
@@ -132,6 +124,15 @@ const RegisterForm = () =>{
  				password: errors["password"]
 			}
 		})
+	}
+
+	const inputErrors = (error) => {
+		if(error["username"] === "" && error["email"] === "" && error["password"] === ""){
+			console.log("success")
+			return false
+		}else{
+			return true
+		}
 	}
 
 	return (
@@ -145,26 +146,32 @@ const RegisterForm = () =>{
 					<label className="label">Username</label>
 					<input className={error.username !== "" ? ("input error") : ("input")} 
 						onChange={handleUsername} value={username} type="text" required/>
-					{error.username !== "" ? (<div role="alert" className="alert"><span>{error.username}</span></div>) : ("")}
+					{error.username !== "" ? (<div role="alert" className="alert">
+												<img src={alertRed} alt="alert" width="20" height="20"/>
+												<span>{error.username}</span></div>) : ("")}
 				</div>
 
 				<div className="form-entry">
 					<label className="label">Display Name</label>
-					<input className="input" onChange={handleDisplayName} value={display_name} type="text" required/>
+					<input className="input" onChange={handleDisplayName} value={display_name} type="text" />
 				</div>
 
 				<div className="form-entry">
 					<label className="label">Email</label>
 					<input className={error.email !== "" ? ("input error") : ("input")}
 						autocomplete="email" onChange={handleEmail} value={email} type="email" required/>
-					{error.email !== "" ? (<div role="alert" className="alert"><span>{error.email}</span></div>) : ("")}
+					{error.email !== "" ? (<div role="alert" className="alert">
+												<img src={alertRed} alt="alert" width="20" height="20"/>
+												<span>{error.email}</span></div>) : ("")}
 				</div>
 
 				<div className="form-entry">
 					<label className="label">Password</label>
 					<input className={error.password !== "" ? ("input error") : ("input")}
 						autocomplete="new-password" onChange={handlePassword} value={password} type="password" required/>
-					{error.password !== "" ? (<div role="alert" className="alert"><span>{error.password}</span></div>) : ("")}
+					{error.password !== "" ? (<div role="alert" className="alert">
+												<img src={alertRed} alt="alert" width="20" height="20"/>
+												<span>{error.password}</span></div>) : ("")}
 				</div>
 
 				<button onClick={handleSubmit} className="btn-submit" type="submit">Create account</button>

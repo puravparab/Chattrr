@@ -20,7 +20,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px 0px;
+  gap: 12px 0px;
   width: 95%;
 }
 .App .register-form .form .form-entry{
@@ -49,7 +49,15 @@
 .App .register-form .form .form-entry .error{
   border:1px solid #ff0000;
 }
+
 .App .register-form .form .form-entry .alert{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0 5px;
+
+}
+.App .register-form .form .form-entry .alert span{
   color: red;
   font-size: 12px;
 }
