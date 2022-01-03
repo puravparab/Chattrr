@@ -14,33 +14,5 @@ body {
 
 .App .title{
   font-size: 40px;
-}
-.App .register-form{
-  display: flex;
-  flex-direction: column;
-}
-
-.App .register-form form{
-  display: flex;
-  flex-direction: column;
-  gap: 5px 0px;
-}
-
-.App .register-form form .form-entry{
-  display: flex;
-  flex-direction: column;
-}
-
-.App .register-form form .form-entry .input{
-  margin-bottom: 10px;
-  padding: 8px 12px 8px 12px;
-}
-
-.App .register-form form .form-entry .error{
-  border:1px solid #ff0000
-}
-
-.App .register-form form .form-entry .alert{
-  color: red;
-  font-size: 12px;
+  color: #3C4257
 }

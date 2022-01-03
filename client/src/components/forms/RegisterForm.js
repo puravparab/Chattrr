@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import '../../styles/components/registerform.css'
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -135,11 +136,11 @@ const RegisterForm = () =>{
 
 	return (
 		<div className="register-form">
-			<div>
-				<h1>Register an account</h1>
+			<div className="title">
+				<h1>Register your account</h1>
 			</div>
 
-			<form>
+			<form className="form">
 				<div className="form-entry">
 					<label className="label">Username</label>
 					<input className={error.username !== "" ? ("input error") : ("input")} 
@@ -167,9 +168,10 @@ const RegisterForm = () =>{
 				</div>
 
 				<button onClick={handleSubmit} className="btn-submit" type="submit">Create account</button>
-
-				<div className="btn-sign-in"><span>Have an account? <a href="#">Sign in</a></span></div>
 			</form>
+			
+			<div className="sign-in"><span>Have an account? <a href="#">Sign in</a></span></div>
+			
 		</div>
 	)
 }
