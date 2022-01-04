@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import validator from 'validator'
 import '../../styles/components/registerform.css';
 import alertRed from '../../assets/icons/alert_red.svg';
 
@@ -11,54 +12,56 @@ const RegisterForm = () =>{
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
-	// States for checking the errors
-	const [submitted, setSubmitted] = useState(false);
- 	const [error, setError] = useState({
- 		username: "",
- 		email: "",
- 		password: ""
- 	});
+	// States for logging errors
+	const [error, setError] = useState({
+		username: "",
+		email: "",
+		password: ""
+	});
 
 	// Handling the username change
 	const handleUsername = (e) => {
 		setUsername(e.target.value);
 		setError((error) => {
-    		return {
-				...error,
-				username: "",
-			}
-    	})
-		setSubmitted(false);
-  	};
+			return {...error,username: ""}
+		})
+	};
 
-  	// Handling the display name change
- 	const handleDisplayName = (e) => {
-    	setDisplayName(e.target.value);
-    	setSubmitted(false);
-  	};
+	// Handling the display name change
+	const handleDisplayName = (e) => {
+		setDisplayName(e.target.value);
+	};
   
-  	// Handling the email change
-  	const handleEmail = (e) => {
-    	setEmail(e.target.value);
-    	setError((error) =>{
-    		return {
-				...error,
-				email: "",
-			}
-    	})
-    	setSubmitted(false);
-  	};
-  
+	// Handling the email change
+	const handleEmail = (e) => {
+		setEmail(e.target.value);
+		// Validate email
+		if(emailValidation(e.target.value)){
+			setError((error) =>{
+				return {...error, email: ""}
+			})
+		}else{
+			setError((error) =>{
+				return {...error, email: "Enter a valid email"}
+			})
+		}
+	};
+  	
+  	// Email validation function
+  	const emailValidation = (email) =>{
+  		if(email === "" || validator.isEmail(email)){
+  			return true
+  		} else if(email !== "" && !validator.isEmail(email)){
+            return false;
+        } 
+    }
+
 	// Handling the password change
 	const handlePassword = (e) => {
 		setPassword(e.target.value);
 		setError((error) => {
-    		return {
-				...error,
-				password: "",
-			}
-    	})
-		setSubmitted(false);
+			return {...error, password: ""}
+		})
 	};
 
 	// Handling the form submission
@@ -70,16 +73,15 @@ const RegisterForm = () =>{
 			const passwordErr =  password === '' ? ("Password cannot be blank") : ("")
 			const errors = {
 				username: usernameErr,
- 				email: emailErr,
- 				password: passwordErr
+				email: emailErr,
+				password: passwordErr
 			}
 			updateError(errors)
 		} else {
-			setSubmitted(true);
 			const errors = {
 				username: "",
- 				email: "",
- 				password: ""
+				email: "",
+				password: ""
 			}
 			updateError(errors)
 
@@ -113,7 +115,7 @@ const RegisterForm = () =>{
 				console.log(error)
 			}
 		}
-  	};
+	};
 
 	const updateError = (errors) => {
 		setError((error) => {
@@ -121,18 +123,9 @@ const RegisterForm = () =>{
 				...error,
 				username: errors["username"],
 				email: errors["email"],
- 				password: errors["password"]
+				password: errors["password"]
 			}
 		})
-	}
-
-	const inputErrors = (error) => {
-		if(error["username"] === "" && error["email"] === "" && error["password"] === ""){
-			console.log("success")
-			return false
-		}else{
-			return true
-		}
 	}
 
 	return (
