@@ -8,16 +8,17 @@ from rest_framework.decorators import api_view, parser_classes
 from django.contrib.auth.models import User
 from .models import Blurt
 from accounts.models import UserProfile
+from .serializers import BlurtSerializer
 
 # Create a blurt
-@api_view(["GET"])
+@api_view(["POST"])
 @parser_classes([JSONParser])
 def createBlurt(request, format=None):
-	if request.method == "GET":
+	if request.method == "POST":
 		# Process payload
 		content = request.data.get("content")
 		author = request.data.get("author")
-
+		print(request.headers)
 		# Validate content
 		if len(content) > 250:
 			return Response({"error": "Length of Blurt exceed"}, status=status.HTTP_400_BAD_REQUEST)
@@ -38,6 +39,15 @@ def createBlurt(request, format=None):
 				author = user_profile[0]
 			)
 			blurt.save()
-			return Response({"message": "Blurt created succesfully"}, status=status.HTTP_200_OK)
+			return Response({"detail": "Blurt created succesfully"}, status=status.HTTP_200_OK)
 		except Exception as e:
 			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+# List all Blurts
+@api_view(["GET"])
+@parser_classes([JSONParser])
+def blurt_list(request, **kwargs):
+	if request.method == "GET":
+		blurts = Blurt.objects.all()
+		serializer = BlurtSerializer(blurts, many=True)
+		return Response(serializer.data, status=status.HTTP_200_OK)

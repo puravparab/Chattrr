@@ -19,5 +19,6 @@ from .views import *
 app_name = 'blurts'
 
 urlpatterns = [
-    path('create', createBlurt, name='blurt-create')
+    path('create', createBlurt, name='blurt-create'),
+    path('list', blurt_list, name='blurt-list')
 ]
