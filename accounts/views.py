@@ -4,9 +4,11 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
+from rest_framework.decorators import api_view, parser_classes
 
 from django.contrib.auth.models import User, Group
 from .models import UserProfile
+from .serializers import UserProfileSerializer
 
 # REGISTER VIEW
 class registerUser(APIView):
@@ -76,3 +78,21 @@ class registerUser(APIView):
 		except Exception as e:
 			messages['errors'] = str(e)
 			return Response(messages, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+# GET user by username
+@api_view(["GET"])
+@parser_classes([JSONParser])
+def user_profile_detail(request, username):
+	if request.method == "GET":
+		user = User.objects.filter(username=username)
+		if not user.exists():
+			return Response({"errors": f'username({username}) does not exist'}, status=status.HTTP_404_NOT_FOUND)	
+		else:
+			user_profile = UserProfile.objects.filter(user=user[0])
+			if not user_profile.exists():
+				return Response({"errors": f'User Profile for username({username}) does not exist'}, status=status.HTTP_404_NOT_FOUND)
+			else:
+				user_profile = user_profile[0]
+
+		serializer = UserProfileSerializer(user_profile)
+		return Response(serializer.data, status=status.HTTP_200_OK)

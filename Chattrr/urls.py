@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+from accounts.views import user_profile_detail
+
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
@@ -27,4 +29,6 @@ urlpatterns = [
     # Backend
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('blurt/', include('blurts.urls', namespace='blurts')),
+
+    path('<str:username>', user_profile_detail, name='username-detail'),
 ]

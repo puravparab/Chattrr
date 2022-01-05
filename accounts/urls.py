@@ -19,5 +19,6 @@ from .views import *
 app_name = 'accounts'
 
 urlpatterns = [
-    path('register', registerUser.as_view(), name='account-register')
+    path('register', registerUser.as_view(), name='account-register'),
+    path('<str:username>', user_profile_detail, name='accounts-detail')
 ]
