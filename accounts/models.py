@@ -11,4 +11,4 @@ class UserProfile(models.Model):
 	# email = models.EmailField(unique=True, null=True, blank=False)
 
 	def __str__(self):
-		return (f'@{self.user.username}')
+		return (f'{self.user.username}')
