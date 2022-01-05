@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # Created Apps
-    'accounts.apps.AccountsConfig'
+    'accounts.apps.AccountsConfig',
+    'blurts.apps.BlurtsConfig'
 ]
 
 MIDDLEWARE = [
