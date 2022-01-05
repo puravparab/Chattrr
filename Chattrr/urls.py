@@ -26,4 +26,5 @@ urlpatterns = [
 
     # Backend
     path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('blurt/', include('blurts.urls', namespace='blurts')),
 ]

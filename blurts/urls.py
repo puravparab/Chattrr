@@ -1,4 +1,4 @@
-"""accounts URL Configuration
+"""blurts URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -16,8 +16,8 @@ Including another URLconf
 from django.urls import path
 from .views import *
 
-app_name = 'accounts'
+app_name = 'blurts'
 
 urlpatterns = [
-    path('register', registerUser.as_view(), name='account-register')
+    path('create', createBlurt, name='blurt-create')
 ]

@@ -9,7 +9,7 @@ from django.contrib.auth.models import User, Group
 from .models import UserProfile
 
 # REGISTER VIEW
-class RegisterUser(APIView):
+class registerUser(APIView):
 	parser_classes = [JSONParser]
 
 	def post(self, request):
