@@ -8,6 +8,8 @@ from rest_framework.decorators import api_view, parser_classes
 
 from django.contrib.auth.models import User, Group
 from .models import UserProfile
+from blurts.models import Blurt
+from blurts.serializers import BlurtSerializer
 from .serializers import UserProfileSerializer
 
 # REGISTER VIEW
@@ -96,3 +98,46 @@ def user_profile_detail(request, username):
 
 		serializer = UserProfileSerializer(user_profile)
 		return Response(serializer.data, status=status.HTTP_200_OK)
+
+# GET all Blurts by username and blurt id
+@api_view(["GET"])
+@parser_classes([JSONParser])
+def user_blurt_list(request, username):
+	if request.method == "GET":
+		params = request.GET.dict()
+		blurt_id = params.get("id")
+
+		user = User.objects.filter(username=username)
+		if not user.exists():
+			return Response({"errors": f'username({username}) does not exist'}, status=status.HTTP_404_NOT_FOUND)	
+		else:
+			user_profile = UserProfile.objects.filter(user=user[0])
+			if not user_profile.exists():
+				return Response({"errors": f'User Profile for username({username}) does not exist'}, status=status.HTTP_404_NOT_FOUND)
+			else:
+				user_profile = user_profile[0]
+
+		if blurt_id != None:
+			try:
+				blurts = Blurt.objects.filter(id=blurt_id, author=user_profile)
+				if not blurts.exists():
+					return Response({"errors": f'Blurt Id-{blurt_id} cannot be found for username({username})'}, status=status.HTTP_404_NOT_FOUND)
+				else:
+					blurts = blurts[0]
+					serializer = BlurtSerializer(blurts)
+					return Response(serializer.data, status=status.HTTP_200_OK)
+			except Exception as e:
+				return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
+
+		else:
+			try:
+				blurts = Blurt.objects.filter(author=user_profile)
+				if not blurts.exists():
+					return Response({"errors": f'Blurts for username({username}) cannot be found.'}, status=status.HTTP_404_NOT_FOUND)
+				else:
+					serializer = BlurtSerializer(blurts, many=True)
+					return Response(serializer.data, status=status.HTTP_200_OK)
+			except Exception as e:
+				return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
+
+		return Response({}, status=status.HTTP_200_OK)

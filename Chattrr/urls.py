@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from accounts.views import user_profile_detail
+from accounts.views import user_profile_detail, user_blurt_list
 
 urlpatterns = [
     # Admin
@@ -30,5 +30,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('blurt/', include('blurts.urls', namespace='blurts')),
 
-    path('<str:username>', user_profile_detail, name='username-detail'),
+    path('<str:username>', user_profile_detail, name='user-profile-detail'),
+    path('<str:username>/blurts', user_blurt_list, name='user-blurts-list'),
 ]

@@ -43,10 +43,10 @@ def createBlurt(request, format=None):
 		except Exception as e:
 			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-# List all Blurts
+# GET all Blurts
 @api_view(["GET"])
 @parser_classes([JSONParser])
-def blurt_list(request, **kwargs):
+def blurt_list(request):
 	if request.method == "GET":
 		blurts = Blurt.objects.all()
 		serializer = BlurtSerializer(blurts, many=True)
