@@ -17,19 +17,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from accounts.views import user_profile_detail, user_blurt_list
+from accounts.views import user_profile_detail, user_blurts
 
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
 
-    # Frontend
+    # Client (Frontend) Endpoint
     path('', TemplateView.as_view(template_name='index.html')),
 
-    # Backend
+    # Internal App Endpoints
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('blurt/', include('blurts.urls', namespace='blurts')),
 
-    path('<str:username>', user_profile_detail, name='user-profile-detail'),
-    path('<str:username>/blurts', user_blurt_list, name='user-blurts-list'),
+    # API Endpoints
+    path('api/<str:username>', user_profile_detail, name='user-profile-detail'),
+    path('api/<str:username>/blurts', user_blurts, name='user-blurts'),
 ]

@@ -102,7 +102,7 @@ def user_profile_detail(request, username):
 # GET all Blurts by username and blurt id
 @api_view(["GET"])
 @parser_classes([JSONParser])
-def user_blurt_list(request, username):
+def user_blurts(request, username):
 	if request.method == "GET":
 		params = request.GET.dict()
 		blurt_id = params.get("id")
