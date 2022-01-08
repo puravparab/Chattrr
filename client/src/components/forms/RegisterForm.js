@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import validator from 'validator'
-import '../../styles/components/registerform.css';
+import '../../styles/components/forms/registerform.css';
 import alertRed from '../../assets/icons/alert_red.svg';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
