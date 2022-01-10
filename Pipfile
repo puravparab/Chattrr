@@ -9,6 +9,7 @@ python-dotenv = "*"
 whitenoise = "*"
 djangorestframework = "*"
 requests = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 

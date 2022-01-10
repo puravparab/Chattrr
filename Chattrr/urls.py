@@ -17,6 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 from accounts.views import user_profile_detail, user_blurts
 
 urlpatterns = [
@@ -31,6 +36,9 @@ urlpatterns = [
     path('blurt/', include('blurts.urls', namespace='blurts')),
 
     # API Endpoints
-    path('api/<str:username>', user_profile_detail, name='user-profile-detail'),
-    path('api/<str:username>/blurts', user_blurts, name='user-blurts'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('api/user/<str:username>', user_profile_detail, name='user-profile-detail'),
+    path('api/user/<str:username>/blurts', user_blurts, name='user-blurts'),
 ]
