@@ -18,6 +18,7 @@ function App() {
 			<Routes>
 				<Route path='/register' element={<Register />} />
 				<Route path='/login' element={<LogIn />} />
+				<Route path='/' element={<LogIn />} />
 				<Route path='*' element={<Error404Page />} />
 			</Routes>
 		</div>

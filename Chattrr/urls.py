@@ -28,9 +28,6 @@ urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
 
-    # Client (Frontend) Endpoint
-    path('', TemplateView.as_view(template_name='index.html')),
-
     # Internal App Endpoints
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('blurt/', include('blurts.urls', namespace='blurts')),
@@ -41,4 +38,11 @@ urlpatterns = [
 
     path('api/user/<str:username>', user_profile_detail, name='user-profile-detail'),
     path('api/user/<str:username>/blurts', user_blurts, name='user-blurts'),
+
+    # Client (Frontend) Endpoint
+    path('', TemplateView.as_view(template_name='index.html')),
+
+    # TODO: Find better solution than below
+    path('register', TemplateView.as_view(template_name='index.html')),
+    path('login', TemplateView.as_view(template_name='index.html')),
 ]
