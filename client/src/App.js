@@ -6,7 +6,6 @@ import LogIn from "./pages/LogIn"
 import Error404Page from "./pages/Error404Page"
 
 // TODO: Fix url refresh
-// TODO: Add an error page
 function App() {
 	return (
 		<div className="App">

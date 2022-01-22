@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view, parser_classes
+from requests import post
 
 from django.contrib.auth.models import User, Group
 from .models import UserProfile
@@ -76,7 +77,22 @@ class registerUser(APIView):
 			user_profile.save()
 
 			messages['details'] = 'Account successfully created'
-			return Response(messages, status=status.HTTP_200_OK)
+
+			# Get authentication tokens
+			ROOT_URL = request.build_absolute_uri('/')
+			tokens = post((f'{ROOT_URL}api/token/'),
+				json={
+					'username': username,
+					'password': data.get("password")
+				},
+				headers={
+					'content-type': 'application/json'
+				})
+			
+			if tokens.ok:
+				messages["tokens"] = tokens.json()
+				return Response(messages, status=status.HTTP_200_OK)
+
 		except Exception as e:
 			messages['errors'] = str(e)
 			return Response(messages, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
