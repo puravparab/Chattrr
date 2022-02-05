@@ -14,6 +14,7 @@ from blurts.serializers import BlurtSerializer
 from .serializers import UserProfileSerializer
 
 # REGISTER VIEW
+# TODO: Email Verification through email
 class registerUser(APIView):
 	parser_classes = [JSONParser]
 
@@ -88,7 +89,7 @@ class registerUser(APIView):
 				headers={
 					'content-type': 'application/json'
 				})
-			
+
 			if tokens.ok:
 				messages["tokens"] = tokens.json()
 				return Response(messages, status=status.HTTP_200_OK)

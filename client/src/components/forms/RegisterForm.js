@@ -107,6 +107,11 @@ const RegisterForm = () =>{
 
 			if(res.ok){
 				const success = data["details"]
+				const access_token = data["tokens"]["access"]
+				const refresh_token = data["tokens"]["refresh"]
+				// Add tokens to cookies
+				document.cookie = "at=" + access_token + "; samesite=lax"
+				document.cookie = "rt=" + refresh_token + "; samesite=lax"
 				console.log(success)
 			} else{
 				const errors = data["errors"]
