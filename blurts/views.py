@@ -18,7 +18,7 @@ from .serializers import BlurtSerializer
 def createBlurt(request, format=None):
 	# Process payload
 	content = request.data.get("content")
-	author = request.data.get("author")
+	author = request.user
 	# Validate content
 	if len(content) > 250:
 		return Response({"error": "Length of Blurt exceed"}, status=status.HTTP_400_BAD_REQUEST)
