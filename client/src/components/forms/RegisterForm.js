@@ -85,13 +85,14 @@ const RegisterForm = () =>{
 			}
 			updateError(errors)
 
-			const csrftoken = document.cookie.split('; ').find(row => row.startsWith('csrftoken')).split('=')[1]
+			// const csrftoken = document.cookie.split('; ').find(row => row.startsWith('csrftoken')).split('=')[1]
+			
 			// POST User registration details to accounts/register API
 			const res = await fetch(ROOT_URL + '/accounts/register', {
 				method: 'POST',
 				headers: {
-					'Content-type': 'application/json',
-					'X-CSRFToken': csrftoken
+					'Content-type': 'application/json'
+					// 'X-CSRFToken': csrftoken
 				},
 				body: JSON.stringify({
 					"username": username,
