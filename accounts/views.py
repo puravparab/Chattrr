@@ -98,6 +98,13 @@ class registerUser(APIView):
 			messages['errors'] = str(e)
 			return Response(messages, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+# # LOG IN USER::
+# class loginuser(APIView):
+# 	parser_classes = [JSONParser]
+
+# 	def post(Self, request):
+# 		return Response({}, status=status.HTTP_200_OK)
+
 # GET user by username
 @api_view(["GET"])
 @parser_classes([JSONParser])
