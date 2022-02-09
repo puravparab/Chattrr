@@ -8,4 +8,7 @@ class Blurt(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 	def __str__(self):
-		return (f'blurt #{self.id} - @{self.author.user.username}')
+		try:
+			return (f'blurt #{self.id} - @{self.author.user.username}')
+		except:
+			return (f'blurt #{self.id} - @NULL')
