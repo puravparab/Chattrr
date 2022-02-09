@@ -93,6 +93,8 @@ class registerUser(APIView):
 			if tokens.ok:
 				messages["tokens"] = tokens.json()
 				return Response(messages, status=status.HTTP_200_OK)
+			else:
+				return Response({"errors":tokens.json()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 		except Exception as e:
 			messages['errors'] = str(e)
@@ -101,9 +103,30 @@ class registerUser(APIView):
 # LOG IN USER::
 class loginuser(APIView):
 	parser_classes = [JSONParser]
-
 	def post(Self, request):
-		return Response({}, status=status.HTTP_200_OK)
+		data = request.data
+		username = data.get("username")
+		email = data.get("email")
+		password = data.get("password")
+
+		ROOT_URL = request.build_absolute_uri('/')
+		try:
+			tokens = post((f'{ROOT_URL}api/token/'),
+				json={
+					'username': username,
+					'password': data.get("password")
+				},
+				headers={
+					'content-type': 'application/json'
+				})
+			if tokens.ok:
+				return Response(tokens.json(), status=status.HTTP_200_OK)
+			else:
+				return Response({"errors":tokens.json()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+		except Exception as e:
+			return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+		
 
 # GET user by username
 @api_view(["GET"])
