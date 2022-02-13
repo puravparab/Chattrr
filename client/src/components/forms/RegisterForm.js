@@ -176,7 +176,7 @@ const RegisterForm = () =>{
 				<button onClick={handleSubmit} className="btn-submit" type="submit">Create account</button>
 			</form>
 			
-			<div className="sign-in"><span>Have an account? <a href="#">Sign in</a></span></div>
+			<div className="sign-in"><span>Have an account? <a href="/login">Sign in</a></span></div>
 			
 		</div>
 	)
