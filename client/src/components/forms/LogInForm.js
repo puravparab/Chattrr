@@ -1,7 +1,62 @@
 import { useState } from 'react';
 import '../../styles/components/forms/loginform.css';
 
+const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
+
 const LogInForm = () => {
+	const [username, setUsername] = useState('')
+	const [password, setPassword] = useState('')
+
+	const [error, setError] = useState('')
+
+	// Handling the username change
+	const handleUsername = (e) => {
+		setUsername(e.target.value);
+		setError("")
+	};
+
+	// Handling the password change
+	const handlePassword = (e) => {
+		setPassword(e.target.value);
+		setError("")
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		if (username === '' || password === ''){
+			setError("Incorrect username or password") 
+		}
+		else{
+			// POST User login details to accounts/login API
+			const res = await fetch(ROOT_URL + '/accounts/login', {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json'
+				},
+				body: JSON.stringify({
+					"username": username,
+					"password": password
+				})
+			})
+			console.log(res)
+			const data = await res.json()
+			console.log(data)
+
+			if(res.ok){
+				const access_token = data["access"]
+				const refresh_token = data["refresh"]
+				// Add tokens to cookies
+				document.cookie = "at=" + access_token + "; samesite=lax"
+				document.cookie = "rt=" + refresh_token + "; samesite=lax"
+			} else{
+				// const errors = data["errors"]
+				// console.log(errors)
+				setError("Incorrect username or password")
+				console.log("Incorrect username or password")
+			}
+		}
+	}
+
 	return (
 		<div className="login-form">
 			<div className="title">
@@ -11,15 +66,15 @@ const LogInForm = () => {
 			<form className="form">
 				<div className="form-entry">
 					<label className="label">Username</label>
-					<input className="input" />
+					<input className="input" onChange={handleUsername} value={username} type="text" required/>
 				</div>
 
 				<div className="form-entry">
 					<label className="label">password</label>
-					<input className="input" />
+					<input className="input" onChange={handlePassword} value={password} type="password" required/>
 				</div>
 
-				<button onClick="" className="btn-submit" type="submit">Log In</button>
+				<button onClick={handleSubmit} className="btn-submit" type="submit">Log In</button>
 			</form>
 
 			<div className="sign-up"><span>Dont have an account? <a href="/register">Sign up</a></span></div>
