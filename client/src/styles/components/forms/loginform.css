@@ -44,22 +44,16 @@
   transition: border 0.1s;
 }
 
-
 /* If there is any errors with user input */
-.App .login-form .form .form-entry .error{
-  border:1px solid #ff0000;
-}
-
-.App .login-form .form .form-entry .alert{
+.App .login-form .form .alert{
   display: flex;
   flex-direction: row;
-  align-items: center;
   gap: 0 5px;
 
 }
-.App .login-form .form .form-entry .alert span{
+.App .login-form .form .alert span{
   color: red;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 /* Create account button */

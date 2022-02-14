@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../../styles/components/forms/loginform.css';
+import alertRed from '../../assets/icons/alert_red.svg';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -12,13 +13,11 @@ const LogInForm = () => {
 	// Handling the username change
 	const handleUsername = (e) => {
 		setUsername(e.target.value);
-		setError("")
 	};
 
 	// Handling the password change
 	const handlePassword = (e) => {
 		setPassword(e.target.value);
-		setError("")
 	};
 
 	const handleSubmit = async (e) => {
@@ -73,6 +72,11 @@ const LogInForm = () => {
 					<label className="label">password</label>
 					<input className="input" onChange={handlePassword} value={password} type="password" required/>
 				</div>
+
+				{error !== "" ? (<div role="alert" className="alert">
+									<img src={alertRed} alt="alert" width="20" height="20" />
+									<span>{error}</span>
+								</div>) : ("")}
 
 				<button onClick={handleSubmit} className="btn-submit" type="submit">Log In</button>
 			</form>
