@@ -8,13 +8,13 @@ import Error404Page from "./pages/Error404Page"
 
 // TODO: Fix url refresh
 function App() {
-	// const [tokens, setTokens] = useState({
-	// 	access_token: '',
-	// 	refresh_token: ''
-	// }
+	const [tokens, setTokens] = useState({
+		access_token: 'sh',
+		refresh_token: 's'
+	})
 	
 	// TODO: fix Auth token usage
-	const [isAuth, setIsAuth] = useState(false)
+	const [isAuth, setIsAuth] = useState(true)
 
 	return (
 		<div className="App">
@@ -27,8 +27,8 @@ function App() {
 				<Route exact path='/register' element={<Register />} />
 				<Route exact path='/login' element={<LogIn />} />
 				{ isAuth ? 
-					<Route path='/' element={<HomePage />} /> : 
-					<Route path='/' element={<Navigate replact to='/login' />} />
+					<Route path='/' element={<HomePage access_token={tokens.access_token}  refresh_token={tokens.refresh_token} />} /> : 
+					<Route path='/' element={<Navigate replace to='/login' />} />
 				}
 				<Route path='*' element={<Error404Page />} />
 			</Routes>
