@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate} from 'react-router-dom'
+// import { Navigate } from 'react-router-dom'
 import '../../styles/components/forms/loginform.css';
 import alertRed from '../../assets/icons/alert_red.svg';
 
@@ -10,7 +10,6 @@ const LogInForm = () => {
 	const [password, setPassword] = useState('')
 
 	const [error, setError] = useState('')
-	const [submitted, setSubmitted] = useState(false)
 
 	// Handling the username change
 	const handleUsername = (e) => {
@@ -22,14 +21,19 @@ const LogInForm = () => {
 		setPassword(e.target.value);
 	};
 
+	// Redirect to homepage
+	const redirect = () =>{
+		window.location.replace('/');
+	}
+
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		if (username === '' || password === ''){
-			setSubmitted(false)
 			setError("Incorrect username or password") 
 		}
 		else{
 			// POST User login details to accounts/login API
+			setError("")
 			const res = await fetch(ROOT_URL + '/accounts/login', {
 				method: 'POST',
 				headers: {
@@ -50,22 +54,16 @@ const LogInForm = () => {
 				// Add tokens to cookies
 				document.cookie = "at=" + access_token + "; samesite=lax"
 				document.cookie = "rt=" + refresh_token + "; samesite=lax"
-				setSubmitted(true)
+				redirect()
 			} else{
 				// const errors = data["errors"]
 				// console.log(errors)
 				setError("Incorrect username or password")
 				console.log("Incorrect username or password")
-				setSubmitted(false)
 			}
 		}
 	}
 
-	if (submitted) {
-		return (
-			<Navigate to='/' />
-		)
-	}
 	return (
 		<div className="login-form">
 			<div className="title">
