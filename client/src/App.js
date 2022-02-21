@@ -12,9 +12,28 @@ function App() {
 		access_token: 'sh',
 		refresh_token: 's'
 	})
-	
+
+	const isAuthenticated = () => {
+		try{
+			let access_token = document.cookie.split('; ').find(row => row.startsWith('at')).split('=')[1]
+			let refresh_token = document.cookie.split('; ').find(row => row.startsWith('rt')).split('=')[1]
+
+			setTokens((tokens) =>{
+				return {
+					...tokens,
+					access_token: access_token,
+					refresh_token: refresh_token
+				}
+			})
+			return true
+		} catch(e){
+			console.log(e)
+			return false
+		}
+	}
+
 	// TODO: fix Auth token usage
-	const [isAuth, setIsAuth] = useState(true)
+	const [isAuth, setIsAuth] = useState(isAuthenticated)
 
 	return (
 		<div className="App">
