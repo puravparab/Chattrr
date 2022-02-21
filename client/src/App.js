@@ -9,8 +9,8 @@ import Error404Page from "./pages/Error404Page"
 // TODO: Fix url refresh
 function App() {
 	const [tokens, setTokens] = useState({
-		access_token: 'sh',
-		refresh_token: 's'
+		access_token: '',
+		refresh_token: ''
 	})
 
 	const isAuthenticated = () => {
