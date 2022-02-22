@@ -64,6 +64,9 @@ const RegisterForm = () =>{
 		})
 	};
 
+	const redirect = () => {
+		window.location.replace('/');
+	}
 	// Handling the form submission
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -114,6 +117,7 @@ const RegisterForm = () =>{
 				document.cookie = "at=" + access_token + "; samesite=lax"
 				document.cookie = "rt=" + refresh_token + "; samesite=lax"
 				console.log(success)
+				redirect()
 			} else{
 				const errors = data["errors"]
 				updateError(errors)

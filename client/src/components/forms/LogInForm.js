@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import '../../styles/components/forms/loginform.css';
 import alertRed from '../../assets/icons/alert_red.svg';
 
@@ -22,7 +22,7 @@ const LogInForm = () => {
 	};
 
 	// Redirect to homepage
-	const redirect = () =>{
+	const redirect = () => {
 		window.location.replace('/');
 	}
 
