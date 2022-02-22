@@ -34,7 +34,6 @@ function App() {
 
 	// TODO: fix Auth token usage
 	const [isAuth, setIsAuth] = useState(isAuthenticated)
-
 	return (
 		<div className="App">
 			<h1 className="title">Chattrr</h1>
@@ -43,8 +42,8 @@ function App() {
 				<Link to="/login">Log In</Link>
 			</div>
 			<Routes>
-				<Route exact path='/register' element={<Register />} />
-				<Route exact path='/login' element={<LogIn />} />
+				<Route path='/register' element={<Register isAuth={isAuth} />} />
+				<Route path='/login' element={<LogIn isAuth={isAuth} />} />
 				{ isAuth ? 
 					<Route path='/' element={<HomePage access_token={tokens.access_token}  refresh_token={tokens.refresh_token} />} /> : 
 					<Route path='/' element={<Navigate replace to='/login' />} />
