@@ -4,7 +4,8 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
-from rest_framework.decorators import api_view, parser_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, parser_classes, permission_classes
 from requests import post
 
 from django.contrib.auth.models import User, Group
@@ -127,6 +128,13 @@ class loginuser(APIView):
 			return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 		
+# Validate Authentication Aceess Token:
+@api_view(["GET"])
+@parser_classes([JSONParser])
+@permission_classes([IsAuthenticated])
+def token_validate(request):
+	if request.method == "GET":
+		return Response({"detail": "Given access token is valid"}, status=status.HTTP_200_OK)
 
 # GET user by username
 @api_view(["GET"])
