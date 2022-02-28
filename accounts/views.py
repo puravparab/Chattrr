@@ -14,6 +14,10 @@ from blurts.models import Blurt
 from blurts.serializers import BlurtSerializer
 from .serializers import UserProfileSerializer
 
+import os
+from dotenv import load_dotenv
+load_dotenv(override=True)
+
 # REGISTER VIEW
 # TODO: Email Verification through email
 class registerUser(APIView):
@@ -93,6 +97,8 @@ class registerUser(APIView):
 
 			if tokens.ok:
 				messages["tokens"] = tokens.json()
+				messages["expiry"] = {'at_tk_expiry': os.getenv('ACCESS_TOKEN_LIFETIME'),
+										'rt_tk_expiry': os.getenv('REFRESH_TOKEN_LIFETIME')}
 				return Response(messages, status=status.HTTP_200_OK)
 			else:
 				return Response({"errors":tokens.json()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -121,11 +127,14 @@ class loginuser(APIView):
 					'content-type': 'application/json'
 				})
 			if tokens.ok:
-				return Response(tokens.json(), status=status.HTTP_200_OK)
+				return Response({'tokens': tokens.json(),
+								 'expiry': {'at_tk_expiry': os.getenv('ACCESS_TOKEN_LIFETIME'),
+								 			'rt_tk_expiry': os.getenv('REFRESH_TOKEN_LIFETIME')}
+								}, status=status.HTTP_200_OK)
 			else:
 				return Response({"errors":tokens.json()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 		except Exception as e:
-			return Response({}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 		
 # Validate Authentication Aceess Token:
