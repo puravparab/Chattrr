@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Routes, Route, Link, Navigate} from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Routes, Route, Link, Navigate } from 'react-router-dom'
 // import PrivateRoute from './utilities/PrivateRoute.js'
 import HomePage from "./pages/HomePage"
 import Register from "./pages/Register"
@@ -8,15 +8,14 @@ import Error404Page from "./pages/Error404Page"
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
-// TODO: Fix url refresh
 function App() {
+	const [isAuth, setIsAuth] = useState(null)
 	const [tokens, setTokens] = useState({
 		access_token: '',
 		refresh_token: ''
 	})
 
 	// const validateToken = async (access_token) => {
-	// 	console.log(access_token)
 	// 	try{
 	// 		console.log(access_token)
 	// 		const res = await fetch(ROOT_URL + '/accounts/token/validate', {
@@ -45,6 +44,7 @@ function App() {
 		try{
 			let access_token = document.cookie.split('; ').find(row => row.startsWith('at')).split('=')[1]
 			let refresh_token = document.cookie.split('; ').find(row => row.startsWith('rt')).split('=')[1]
+			console.log(access_token)
 			setTokens((tokens) =>{
 				return {
 					...tokens,
@@ -52,15 +52,16 @@ function App() {
 					refresh_token: refresh_token
 				}
 			})
-			return true
-			// validateToken(tokens.access_token)
+			setIsAuth(true)
 		} catch(e){
 			console.log(e)
-			return false
+			setIsAuth(false)
 		}
 	}
 
-	const [isAuth, setIsAuth] = useState(isAuthenticated)
+	if(isAuth === null){
+		isAuthenticated()
+	}
 
 	return (
 		<div className="App">
@@ -70,12 +71,14 @@ function App() {
 				<Link to="/login">Log In</Link>
 			</div>
 			<Routes>
-				<Route path='/register' element={<Register isAuth={isAuth} />} />
-				<Route path='/login' element={<LogIn isAuth={isAuth} />} />
-				{ isAuth ? 
-					<Route path='/' element={<HomePage access_token={tokens.access_token}  refresh_token={tokens.refresh_token} />} /> : 
-					<Route path='/' element={<Navigate replace to='/login' />} />
-				}
+				<Route exact path='/register' element={<Register isAuth={isAuth} />} />
+				<Route exact path='/login' element={<LogIn isAuth={isAuth} />} />
+				<Route 
+					path='/' 
+					element={ isAuth ? 
+								<HomePage access_token={tokens.access_token}  refresh_token={tokens.refresh_token} /> 
+								: <Navigate to='/login' isAuth={isAuth} /> } />
+				
 				<Route path='*' element={<Error404Page />} />
 			</Routes>
 		</div>

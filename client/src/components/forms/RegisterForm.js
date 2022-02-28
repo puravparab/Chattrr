@@ -180,6 +180,7 @@ const RegisterForm = () =>{
 				<button onClick={handleSubmit} className="btn-submit" type="submit">Create account</button>
 			</form>
 			
+			{/* Replace a tags */}
 			<div className="sign-in"><span>Have an account? <a href="/login">Sign in</a></span></div>
 			
 		</div>

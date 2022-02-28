@@ -89,6 +89,7 @@ const LogInForm = () => {
 				<button onClick={handleSubmit} className="btn-submit" type="submit">Log In</button>
 			</form>
 
+			{/* Replace a tags */}
 			<div className="sign-up"><span>Dont have an account? <a href="/register">Sign up</a></span></div>
 		</div>
 	);
