@@ -113,9 +113,20 @@ const RegisterForm = () =>{
 				const success = data["details"]
 				const access_token = data["tokens"]["access"]
 				const refresh_token = data["tokens"]["refresh"]
+				const at_expiry = data["expiry"]["at_tk_expiry"]
+				const rt_expiry = data["expiry"]["rt_tk_expiry"]
+
+				// token expiry into date time format
+				var at_date = new Date();
+				at_date.setTime(at_date.getTime() + (parseInt(at_expiry) * 1000))
+
+				var rt_date = new Date();
+				rt_date.setTime(rt_date.getTime() + (parseInt(rt_expiry) * 1000))
+
 				// Add tokens to cookies
-				document.cookie = "at=" + access_token + "; samesite=lax"
-				document.cookie = "rt=" + refresh_token + "; samesite=lax"
+				document.cookie = "at=" + access_token + ";expires=" + at_date.toUTCString() + "; samesite=lax"
+				document.cookie = "rt=" + refresh_token + ";expires=" + rt_date.toUTCString() + "; samesite=lax"
+				
 				console.log(success)
 				redirect()
 			} else{
