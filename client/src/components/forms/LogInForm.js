@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../../styles/components/forms/loginform.css';
 import alertRed from '../../assets/icons/alert_red.svg';
 
@@ -8,7 +8,6 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 const LogInForm = () => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
-
 	const [error, setError] = useState('')
 
 	// Handling the username change
@@ -100,7 +99,7 @@ const LogInForm = () => {
 			</form>
 
 			{/* Replace a tags */}
-			<div className="sign-up"><span>Dont have an account? <a href="/register">Sign up</a></span></div>
+			<div className="sign-up"><span>Dont have an account? <Link to='/register'>Sign up</Link></span></div>
 		</div>
 	);
 }

@@ -43,6 +43,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
 
     # TODO: Find better solution than below
+    path('home', TemplateView.as_view(template_name='index.html')),
     path('register', TemplateView.as_view(template_name='index.html')),
     path('login', TemplateView.as_view(template_name='index.html')),
 ]

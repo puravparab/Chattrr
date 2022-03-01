@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
 import validator from 'validator'
 import '../../styles/components/forms/registerform.css';
 import alertRed from '../../assets/icons/alert_red.svg';
@@ -126,7 +127,7 @@ const RegisterForm = () =>{
 				// Add tokens to cookies
 				document.cookie = "at=" + access_token + ";expires=" + at_date.toUTCString() + "; samesite=lax"
 				document.cookie = "rt=" + refresh_token + ";expires=" + rt_date.toUTCString() + "; samesite=lax"
-				
+
 				console.log(success)
 				redirect()
 			} else{
@@ -191,8 +192,7 @@ const RegisterForm = () =>{
 				<button onClick={handleSubmit} className="btn-submit" type="submit">Create account</button>
 			</form>
 			
-			{/* Replace a tags */}
-			<div className="sign-in"><span>Have an account? <a href="/login">Sign in</a></span></div>
+			<div className="sign-in"><span>Have an account? <Link to='/login'>Sign in</Link></span></div>
 			
 		</div>
 	)

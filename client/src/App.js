@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Routes, Route, Link, Navigate } from 'react-router-dom'
 // import PrivateRoute from './utilities/PrivateRoute.js'
 import HomePage from "./pages/HomePage"
@@ -6,38 +6,12 @@ import Register from "./pages/Register"
 import LogIn from "./pages/LogIn"
 import Error404Page from "./pages/Error404Page"
 
-const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
-
 function App() {
 	const [isAuth, setIsAuth] = useState(null)
 	const [tokens, setTokens] = useState({
 		access_token: '',
 		refresh_token: ''
 	})
-
-	// const validateToken = async (access_token) => {
-	// 	try{
-	// 		console.log(access_token)
-	// 		const res = await fetch(ROOT_URL + '/accounts/token/validate', {
-	// 			method: 'POST',
-	// 			headers: {
-	// 				'Authorization': `Bearer ${access_token}`
-	// 			}
-	// 		})
-	// 		const data = await res.json()
-	// 		if(res.ok){
-	// 			console.log(data)
-	// 			return true
-	// 		}
-	// 		else{
-	// 			console.log(data)
-	// 			return false
-	// 		}
-	// 	} catch(e){
-	// 		console.log(e)
-	// 		return false
-	// 	}
-	// }
 
 	const isAuthenticated = () => {
 		// Get auth tokens from cookies
@@ -71,6 +45,7 @@ function App() {
 				<Link to="/login">Log In</Link>
 			</div>
 			<Routes>
+				<Route exact path='/home' element={<Navigate replace to='/' />} />
 				<Route exact path='/register' element={<Register isAuth={isAuth} />} />
 				<Route exact path='/login' element={<LogIn isAuth={isAuth} />} />
 				<Route 
