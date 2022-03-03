@@ -13,9 +13,10 @@ function App() {
 	const [accessToken, setAccessToken] = useState('')
 	const [refreshToken, setRefreshToken] = useState('')
 
+	// Update valid Refresh token if Access token is invalid
 	const updateAcessToken = async (refresh_token) => {
 		try{
-			const res = await fetch(ROOT_URL + '/api/token/refresh', {
+			const res = await fetch(ROOT_URL + '/api/token/refresh/', {
 				method: 'POST',
 				headers: {
 					'Content-type': 'application/json'
@@ -48,6 +49,7 @@ function App() {
 				document.cookie = "rt=" + refresh_token + ";expires=" + rt_date.toUTCString() + "; samesite=lax"
 				window.location.replace('/')
 			} else{
+				// Refresh token invalid
 				console.log(data)
 				setIsAuth(false)
 			}
@@ -65,12 +67,14 @@ function App() {
 			setAccessToken(access_token)
 			setIsAuth(true)
 		} catch(e){
+			// Access token invalid
 			console.log(e)
 			try{
 				let refresh_token = document.cookie.split('; ').find(row => row.startsWith('rt')).split('=')[1]
 				setRefreshToken(refresh_token)
 				updateAcessToken(refresh_token)
 			} catch(e){
+				// Refresh token invalid
 				console.log(e)
 				setIsAuth(false)
 			}
