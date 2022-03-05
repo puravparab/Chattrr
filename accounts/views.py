@@ -137,13 +137,33 @@ class loginuser(APIView):
 			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 		
-# Validate Authentication Aceess Token:
-@api_view(["GET"])
+# Get a new access and refresh token:
+@api_view(["POST"])
 @parser_classes([JSONParser])
-@permission_classes([IsAuthenticated])
-def token_validate(request):
-	if request.method == "GET":
-		return Response({"detail": "Given access token is valid"}, status=status.HTTP_200_OK)
+def token_refresh(request):
+	if request.method == "POST":
+		refresh_token = request.data.get("refresh_token")
+		ROOT_URL = request.build_absolute_uri('/')
+		try:
+			tokens = post((f'{ROOT_URL}api/token/refresh/'),
+				json={
+					'refresh': refresh_token
+				},
+				headers={
+					'content-type': 'application/json'
+				})
+			if tokens.ok:
+				tokens = tokens.json()
+				return Response({'tokens': {'access_token': tokens['access'],
+											'refresh_token': tokens['refresh']},
+								 'expiry': {'at_tk_expiry': os.getenv('ACCESS_TOKEN_LIFETIME'),
+								 			'rt_tk_expiry': os.getenv('REFRESH_TOKEN_LIFETIME')}
+								}, status=status.HTTP_200_OK)
+			else:
+				print("asda")
+				return Response({"errors":tokens.json()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+		except Exception as e:
+			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # GET user by username
 @api_view(["GET"])
