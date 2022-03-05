@@ -138,11 +138,10 @@ class loginuser(APIView):
 
 		
 # Get a new access and refresh token:
-@api_view(["POST"])
-@parser_classes([JSONParser])
-def token_refresh(request):
-	if request.method == "POST":
-		refresh_token = request.data.get("refresh_token")
+@api_view(["GET"])
+def token_refresh(request, rt):
+	if request.method == "GET":
+		refresh_token = rt
 		ROOT_URL = request.build_absolute_uri('/')
 		try:
 			tokens = post((f'{ROOT_URL}api/token/refresh/'),
@@ -160,7 +159,6 @@ def token_refresh(request):
 								 			'rt_tk_expiry': os.getenv('REFRESH_TOKEN_LIFETIME')}
 								}, status=status.HTTP_200_OK)
 			else:
-				print("asda")
 				return Response({"errors":tokens.json()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 		except Exception as e:
 			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)

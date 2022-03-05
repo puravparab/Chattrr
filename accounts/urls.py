@@ -21,8 +21,7 @@ app_name = 'accounts'
 urlpatterns = [
     path('register', registerUser.as_view(), name='account-register'),
     path('login', loginuser.as_view(), name='account-login'),
-    path('token/refresh', token_refresh, name='accounts-token-refresh'),
-
+    path('token/refresh/<str:rt>', token_refresh, name='accounts-token-refresh'),
     path('<str:username>', user_profile_detail, name='accounts-detail'),
     path('<str:username>/blurts', user_blurts, name='accounts-blurts')
 ]

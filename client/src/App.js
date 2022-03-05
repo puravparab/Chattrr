@@ -16,14 +16,8 @@ function App() {
 	// Update valid Refresh token if Access token is invalid
 	const updateAcessToken = async (refresh_token) => {
 		try{
-			const res = await fetch(ROOT_URL + '/accounts/token/refresh/', {
-				method: 'POST',
-				headers: {
-					'Content-type': 'application/json'
-				},
-				body: JSON.stringify({
-					"refresh_token": refresh_token
-				})
+			const res = await fetch(ROOT_URL + '/accounts/token/refresh/' + refresh_token, {
+				method: 'GET'
 			})
 
 			console.log(res)
@@ -31,8 +25,8 @@ function App() {
 			console.log(data)
 
 			if(res.ok){
-				const access_token = data["token"]["access_token"]
-				const refresh_token = data["token"]["refresh_token"]
+				const access_token = data["tokens"]["access_token"]
+				const refresh_token = data["tokens"]["refresh_token"]
 				const at_expiry = data["expiry"]["at_tk_expiry"]
 				const rt_expiry = data["expiry"]["rt_tk_expiry"]
 
