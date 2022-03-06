@@ -18,10 +18,10 @@ function App() {
 	return (
 		<div className="App">
 			<h1 className="title">Chattrr</h1>
-			<div>
-				<Link to="/register">Register</Link> |{" "}
-				<Link to="/login">Log In</Link>
-			</div>
+			{/* <div> */}
+			{/* 	<Link to="/register">Register</Link> |{" "} */}
+			{/* 	<Link to="/login">Log In</Link> */}
+			{/* </div> */}
 			<Routes>
 				<Route exact path='/home' element={<Navigate replace to='/' />} />
 				<Route exact path='/register' element={<Register isAuth={isAuth} />} />
@@ -32,6 +32,10 @@ function App() {
 								<HomePage /> 
 								: <Navigate to='/login' isAuth={isAuth} /> } />
 				
+				{/* Test Routes */}
+				<Route exact path='home/test' element={<HomePage /> } />
+
+				{/* Other */}
 				<Route path='*' element={<Error404Page />} />
 			</Routes>
 		</div>
