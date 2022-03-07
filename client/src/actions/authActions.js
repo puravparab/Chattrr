@@ -50,20 +50,22 @@ export const getToken = (token_type) => {
 		}
 	} catch(e){
 		console.log(e)
+		throw e
 	}
 };
 
 export const isAuthenticated = () => {
 	// Get auth tokens from cookies
 	try{
-		let access_token = document.cookie.split('; ').find(row => row.startsWith('at')).split('=')[1]
+		const access_token = getToken('at')
 		console.log(access_token)
 		return true
 	} catch(e){
 		// Access token invalid
 		console.log(e)
 		try{
-			let refresh_token = document.cookie.split('; ').find(row => row.startsWith('rt')).split('=')[1]
+			const refresh_token = getToken('rt')
+			console.log(refresh_token)
 			updateAcessToken(refresh_token)
 		} catch(e){
 			// Refresh token invalid

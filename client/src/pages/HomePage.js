@@ -6,8 +6,9 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 const HomePage = () => {
 	const [accessToken, setAccessToken] = useState(() => {
 		try{
-			const accessToken = getToken('at')
-			return accessToken
+			const access_token = getToken('at')
+			console.log(access_token)
+			return access_token
 		} catch(e){
 			console.log(e)
 			const res = isAuthenticated()
@@ -17,8 +18,9 @@ const HomePage = () => {
 	})
 	const [refreshToken, setRefreshToken] = useState(() => {
 		try{
-			const refreshToken = getToken('rt')
-			return refreshToken
+			const refresh_token = getToken('rt')
+			console.log(refresh_token)
+			return refresh_token
 		} catch(e){
 			console.log(e)
 			window.location.replace('/')
