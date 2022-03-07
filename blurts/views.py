@@ -48,6 +48,6 @@ def createBlurt(request, format=None):
 @parser_classes([JSONParser])
 def blurt_list(request):
 	if request.method == "GET":
-		blurts = Blurt.objects.all()
+		blurts = Blurt.objects.filter(author__isnull=False, content__isnull=False)
 		serializer = BlurtSerializer(blurts, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
