@@ -1,8 +1,30 @@
 import { useState } from 'react'
+import { getToken, isAuthenticated } from  "../actions/authActions.js"
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
 const HomePage = () => {
+	const [accessToken, setAccessToken] = useState(() => {
+		try{
+			const accessToken = getToken('at')
+			return accessToken
+		} catch(e){
+			console.log(e)
+			const res = isAuthenticated()
+			console.log(res)
+			window.location.replace('/')
+		}
+	})
+	const [refreshToken, setRefreshToken] = useState(() => {
+		try{
+			const refreshToken = getToken('rt')
+			return refreshToken
+		} catch(e){
+			console.log(e)
+			window.location.replace('/')
+		}
+	})
+
 	const [blurt, setBlurt] = useState('')
 
 	const handleBlurt = (e) =>{
@@ -17,7 +39,7 @@ const HomePage = () => {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json',
-				'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ2NTMxNzQ1LCJpYXQiOjE2NDY1MjQ1NDUsImp0aSI6Ijc5NWZlYjMyMDNmNjRlODY4OThjODVhMThkZGI1ZTM5IiwidXNlcl9pZCI6MzF9.RQDSIVYACrjwkN2-p18iUZ6cHGtvip-EqcULtQ6uhbA"
+				'Authorization': "Bearer " + accessToken
 			},
 			body: JSON.stringify({
 				"content": blurt

@@ -37,7 +37,21 @@ const updateAcessToken = async (refresh_token) => {
 		console.log(e)
 		return false
 	}
-}
+};
+
+export const getToken = (token_type) => {
+	try{
+		if(token_type === 'at'){
+			let access_token = document.cookie.split('; ').find(row => row.startsWith('at')).split('=')[1]
+			return access_token
+		} else if (token_type === 'rt'){
+			let refresh_token = document.cookie.split('; ').find(row => row.startsWith('rt')).split('=')[1]
+			return refresh_token
+		}
+	} catch(e){
+		console.log(e)
+	}
+};
 
 export const isAuthenticated = () => {
 	// Get auth tokens from cookies
@@ -57,4 +71,5 @@ export const isAuthenticated = () => {
 			return false
 		}
 	}
-}
+};
+
