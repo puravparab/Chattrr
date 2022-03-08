@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import BlurtCard from "./cards/BlurtCard"
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -27,9 +28,10 @@ const Feed = () => {
 
 		if (res.ok){
 				const BlurtList = await data.map((blurtItem) =>{
-					return <div>
-								<p>{blurtItem.content} - {blurtItem.username}</p>  
-							</div>;
+					return <BlurtCard 
+								username={blurtItem.username} 
+								content={blurtItem.content} 
+								created_at={blurtItem.created_at} />
 				})
 				console.log(BlurtList)
 				setBlurtList(BlurtList)

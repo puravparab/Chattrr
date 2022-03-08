@@ -31,7 +31,6 @@ const HomePage = () => {
 
 	return (
 		<div>
-			<h1>Home Page</h1>
 			<PostBlurtForm accessToken={accessToken} />
 			<Feed />
 		</div>
