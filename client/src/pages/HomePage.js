@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
+import Feed from "../components/Feed"
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -28,18 +29,6 @@ const HomePage = () => {
 	})
 
 	const [blurt, setBlurt] = useState('')
-	const [BlurtList, setBlurtList] = useState('')
-
-	useEffect(() => {
-		//Attempt to retreive data
-		try {
-			getBlurtList()
-		}
-		// TODO: Test This
-		catch (e) {
-			console.log(e)
-		}
-	}, [])
 
 	const handleBlurt = (e) =>{
 		setBlurt(e.target.value)
@@ -65,33 +54,9 @@ const HomePage = () => {
 		console.log(data)
 	}
 
-	const getBlurtList = async () =>{
-		const res = await fetch(ROOT_URL + '/blurt/list' ,{
-			method: 'GET'
-		})
-
-		console.log(res)
-		const data = await res.json()
-		console.log(data)
-
-		if (res.ok){
-				const BlurtList = await data.map((blurtItem) =>{
-					return <div>
-								<p>{blurtItem.content} - {blurtItem.username}</p>  
-							</div>;
-				})
-				console.log(BlurtList)
-				setBlurtList(BlurtList)
-		} else{
-			console.log("blurts loading fail")
-			setBlurtList( <h1>FAIL</h1>)
-		}
-	}
-
 	return (
 		<div>
 			<h1>Home Page</h1>
-
 			<div>
 				<form>
 					<h3>Create Blurt</h3>
@@ -99,11 +64,7 @@ const HomePage = () => {
 					<button onClick={createBlurt} type="submit"> Blurt Out</button>
 				</form>
 			</div>
-
-			<div>
-				<h3>Feed</h3>
-				<div>{BlurtList}</div>
-			</div>
+			<Feed />
 		</div>
 	);
 }
