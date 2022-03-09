@@ -30,6 +30,7 @@ const Feed = () => {
 				const BlurtList = await data.map((blurtItem) =>{
 					return <BlurtCard 
 								username={blurtItem.username} 
+								display_name={blurtItem.display_name}
 								content={blurtItem.content} 
 								created_at={blurtItem.created_at} />
 				})

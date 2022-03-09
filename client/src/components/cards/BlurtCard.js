@@ -5,6 +5,7 @@ const BlurtCard = (props) => {
 			</div>
 			<div className="blurt-body">
 				<div className="blurt-body-header">
+					<div><p>{props.display_name}</p></div>
 					<div><p>@{props.username}</p></div>
 					<div><p>{props.created_at}</p></div>
 				</div>
