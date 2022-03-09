@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import '../../styles/components/forms/postblurtform.css';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -30,11 +31,13 @@ const PostBlurtForm = ({ accessToken }) =>{
 	}
 
 	return (
-		<div>
-			<form>
+		<div className="post-blurt-container">
+			<form className="form">
 				<h3>Create Blurt</h3>
 				<input onChange={handleBlurt} required/>
-				<button onClick={createBlurt} type="submit"> Blurt Out</button>
+				<div className="footer">
+					<button onClick={createBlurt} type="submit"> Blurt Out</button>
+				</div>
 			</form>
 		</div>
 	);

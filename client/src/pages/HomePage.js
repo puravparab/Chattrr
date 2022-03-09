@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
 import Feed from "../components/Feed"
 import PostBlurtForm from "../components/forms/PostBlurtForm"
+import '../styles/pages/homepage.css';
 
 // const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -30,7 +31,7 @@ const HomePage = () => {
 	})
 
 	return (
-		<div>
+		<div className="home-container">
 			<PostBlurtForm accessToken={accessToken} />
 			<Feed />
 		</div>

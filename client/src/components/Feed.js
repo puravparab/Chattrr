@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import BlurtCard from "./cards/BlurtCard"
+import '../styles/components/feed.css';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -44,7 +45,7 @@ const Feed = () => {
 	}
 
 	return (
-		<div>
+		<div className="feed-container">
 			<h3>Feed</h3>
 			{BlurtList}
 		</div>

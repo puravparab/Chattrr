@@ -1,0 +1,9 @@
+/* Styles for BlurtCard.js */
+.feed-container{
+	display: flex;
+    flex-direction: column;
+}
+
+.feed-container h3{
+	text-align: center;
+}

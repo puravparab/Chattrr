@@ -1,3 +1,5 @@
+import '../../styles/components/cards/blurtcard.css';
+
 const BlurtCard = (props) => {
 	return (
 		<div className="blurt-card">

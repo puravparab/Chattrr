@@ -1,0 +1,18 @@
+/* Styles for BlurtCard.js */
+.post-blurt-container{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.post-blurt-container .form{
+	display: flex;
+	flex-direction: column;
+	gap: 20px 0px;
+}
+
+.post-blurt-container .form .footer{
+	display: flex;
+	justify-content: flex-end;
+}

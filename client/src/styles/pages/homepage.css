@@ -1,0 +1,6 @@
+/* Styles for HomePage.js */
+.home-container{
+	display: flex;
+    flex-direction: column;
+    gap: 20px 0px;
+}
