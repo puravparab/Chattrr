@@ -1,16 +1,22 @@
 /* Styles for BlurtCard.js */
 .blurt-card{
 	display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 10px 8px 8px 12px;
-    border-top: 2px solid rgb(56, 68, 77);
-    border-bottom: 2px solid rgb(56, 68, 77);
+	flex-direction: row;
+	justify-content: flex-start;
+	padding: 10px 8px 8px 12px;
+	border-top: 2px solid rgb(56, 68, 77);
+	border-bottom: 2px solid rgb(56, 68, 77);
+}
+
+.blurt-card:hover{
+    background-color: rgb(37, 42, 55);
+    cursor: pointer;
+    transition: 0.4s;
 }
 
 .blurt-card .blurt-body{
 	display: flex;
-    flex-direction: column;
+	flex-direction: column;
 }
 
 .blurt-card .blurt-body .blurt-body-header{
@@ -23,6 +29,9 @@
     margin: 0px;
 }
 
+.blurt-card .blurt-body .blurt-body-header .display-name{
+    font-weight: bold;
+}
 .blurt-card .blurt-body .blurt-body-header .username{
     color: rgb(189, 189, 189);
 }

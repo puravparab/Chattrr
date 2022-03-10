@@ -1,5 +1,6 @@
 import '../../styles/components/cards/blurtcard.css';
 
+// TODO: Timestamp incorrect for posts less than a day old in transition periods
 const BlurtCard = (props) => {
 	const splitISO = (ISODateTime) =>{
 		const dateTime = (ISODateTime.split("Z"))[0].split("T")

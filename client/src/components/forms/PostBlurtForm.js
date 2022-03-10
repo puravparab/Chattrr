@@ -37,7 +37,7 @@ const PostBlurtForm = ({ accessToken }) =>{
 	return (
 		<div className="post-blurt-container">
 			<form className="form">
-				<input onChange={handleBlurt} required/>
+				<input onChange={handleBlurt} placeholder="What's on your mind?" required/>
 				<div className="footer">
 					<button onClick={createBlurt} type="submit"> Blurt Out</button>
 				</div>
