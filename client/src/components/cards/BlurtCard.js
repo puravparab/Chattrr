@@ -6,8 +6,10 @@ const BlurtCard = (props) => {
 
 		// Parse date
 		const date = dateTime[0].split("-")
+		const year = date[0]
 		const month = date[1]
-		const dateTimeStr = (new Date(ISODateTime)).toDateString().split(" ")
+		const day = date[2]
+		const monthList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 		// Parse time
 		const time = dateTime[1].split(":")
@@ -15,23 +17,21 @@ const BlurtCard = (props) => {
 		const minute = time[1]
 		const seconds = time[2]
 
-		return [[dateTimeStr[3], month, dateTimeStr[1], dateTimeStr[2], dateTimeStr[0]],
+		return [[year, month, monthList[month - 1], day],
 				[hour, minute, seconds]]
 	}
 
 	const dateDifference = (postDate) =>{
-		// console.log("rawdate:" + postDate)
-		const postDateStr = (new Date(postDate)).toDateString()
-		// console.log(postDateStr)
+		console.log("rawdate:" + postDate)
 
 		const currentTimeISO = (new Date()).toISOString()
-		// console.log("current time:" + currentTimeISO)
+		console.log("current time:" + currentTimeISO)
 
 		const currDateTime = splitISO(currentTimeISO)
 		const postDateTime = splitISO(postDate)
 
-		// console.log("c: " + currDateTime)
-		// console.log("p: " + postDateTime)
+		console.log("c: " + currDateTime)
+		console.log("p: " + postDateTime)
 
 		const yearDiff = currDateTime[0][0] - postDateTime[0][0]
 		// If post is older than a year
