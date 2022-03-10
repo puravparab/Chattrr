@@ -5,7 +5,10 @@ import LogInForm from "../components/forms/LogInForm"
 const LogIn = ({isAuth}) => {
 	if(isAuth){ return <Navigate to='/' />}
 	return (
-		<LogInForm />
+		<>
+			<h1 className="title">Chattrr</h1>
+			<LogInForm />
+		</>	
 	);
 }
 

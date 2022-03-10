@@ -5,7 +5,10 @@ import RegisterForm from "../components/forms/RegisterForm"
 const Register = ({isAuth}) => {
 	if(isAuth){ return <Navigate to='/' />}
 	return (
-		<RegisterForm />
+		<>
+			<h1 className="title">Chattrr</h1>
+			<RegisterForm />
+		</>
 	);
 }
 

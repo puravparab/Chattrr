@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
 import Feed from "../components/Feed"
 import PostBlurtForm from "../components/forms/PostBlurtForm"
@@ -32,9 +33,14 @@ const HomePage = () => {
 
 	return (
 		<div className="home">
+			<div className="title">
+				<h1>Chattrr</h1>
+			</div>
 			<div className="home-container">
-				<PostBlurtForm accessToken={accessToken} />
-				<Feed />
+				<div className="home-container-center">
+					<PostBlurtForm accessToken={accessToken} />
+					<Feed />
+				</div>
 			</div>
 		</div>
 	);

@@ -17,7 +17,6 @@ function App() {
 
 	return (
 		<div className="App">
-			<h1 className="title">Chattrr</h1>
 			{/* <div> */}
 			{/* 	<Link to="/register">Register</Link> |{" "} */}
 			{/* 	<Link to="/login">Log In</Link> */}
