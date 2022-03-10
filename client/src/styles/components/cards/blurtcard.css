@@ -4,7 +4,8 @@
     flex-direction: row;
     justify-content: flex-start;
     padding: 10px 8px 8px 12px;
-    border: 2px solid black
+    border-top: 2px solid rgb(56, 68, 77);
+    border-bottom: 2px solid rgb(56, 68, 77);
 }
 
 .blurt-card .blurt-body{
@@ -20,6 +21,13 @@
 
 .blurt-card .blurt-body .blurt-body-header p{
     margin: 0px;
+}
+
+.blurt-card .blurt-body .blurt-body-header .username{
+    color: rgb(189, 189, 189);
+}
+.blurt-card .blurt-body .blurt-body-header .timestamp{
+    color: rgb(189, 189, 189);
 }
 
 .blurt-card .blurt-body .blurt-content{

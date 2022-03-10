@@ -8,8 +8,10 @@ body {
 .App{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  gap: 20px 0px;
+  height: 100vh;
 }
 
 .App .title{

@@ -46,7 +46,6 @@ const Feed = () => {
 
 	return (
 		<div className="feed-container">
-			<h3>Feed</h3>
 			{BlurtList}
 		</div>
 	)

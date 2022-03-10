@@ -2,8 +2,9 @@
 .feed-container{
 	display: flex;
     flex-direction: column;
+    color: white;
 }
 
-.feed-container h3{
+/*.feed-container h3{
 	text-align: center;
-}
+}*/

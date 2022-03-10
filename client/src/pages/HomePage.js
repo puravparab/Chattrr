@@ -31,9 +31,11 @@ const HomePage = () => {
 	})
 
 	return (
-		<div className="home-container">
-			<PostBlurtForm accessToken={accessToken} />
-			<Feed />
+		<div className="home">
+			<div className="home-container">
+				<PostBlurtForm accessToken={accessToken} />
+				<Feed />
+			</div>
 		</div>
 	);
 }
