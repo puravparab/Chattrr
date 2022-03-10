@@ -79,9 +79,9 @@ const BlurtCard = (props) => {
 			</div>
 			<div className="blurt-body">
 				<div className="blurt-body-header">
-					<div><p>{props.display_name}</p></div>
-					<div><p>@{props.username}</p></div>
-					<div><p>{dateDifference(props.created_at)}</p></div>
+					<div className="display-name"><p>{props.display_name}</p></div>
+					<div className="username"><p>@{props.username}</p></div>
+					<div className="timestamp"><p>{dateDifference(props.created_at)}</p></div>
 				</div>
 				<div className="blurt-content"><p>{props.content}</p></div>
 			</div>
