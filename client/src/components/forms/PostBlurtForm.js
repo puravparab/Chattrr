@@ -3,6 +3,10 @@ import '../../styles/components/forms/postblurtform.css';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
+// TODO: Allow variety of text inputs
+// TODO: prohibit submit on enter btn click
+// TODO: Character limit warning
+
 const PostBlurtForm = ({ accessToken }) =>{
 	const [blurt, setBlurt] = useState('')
 
@@ -33,7 +37,6 @@ const PostBlurtForm = ({ accessToken }) =>{
 	return (
 		<div className="post-blurt-container">
 			<form className="form">
-				<h3>Create Blurt</h3>
 				<input onChange={handleBlurt} required/>
 				<div className="footer">
 					<button onClick={createBlurt} type="submit"> Blurt Out</button>

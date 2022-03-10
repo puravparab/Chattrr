@@ -22,16 +22,16 @@ const BlurtCard = (props) => {
 	}
 
 	const dateDifference = (postDate) =>{
-		console.log("rawdate:" + postDate)
+		// console.log("rawdate:" + postDate)
 
 		const currentTimeISO = (new Date()).toISOString()
-		console.log("current time:" + currentTimeISO)
+		// console.log("current time:" + currentTimeISO)
 
 		const currDateTime = splitISO(currentTimeISO)
 		const postDateTime = splitISO(postDate)
 
-		console.log("c: " + currDateTime)
-		console.log("p: " + postDateTime)
+		// console.log("c: " + currDateTime)
+		// console.log("p: " + postDateTime)
 
 		const yearDiff = currDateTime[0][0] - postDateTime[0][0]
 		// If post is older than a year
