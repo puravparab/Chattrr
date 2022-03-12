@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { isAuthenticated } from  "../../actions/authActions.js"
 import '../../styles/components/forms/postblurtform.css';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
+// TODO: Fix Auth check before fetch
 // TODO: Allow variety of text inputs
 // TODO: prohibit submit on enter btn click
 // TODO: Character limit warning
@@ -32,6 +34,15 @@ const PostBlurtForm = ({ accessToken }) =>{
 		console.log(res)
 		const data = await res.json()
 		console.log(data)
+
+		if (res.ok) {
+			console.log("ok")
+		}else{
+			if(res.status === 401){
+				console.log("accessToken invalid")
+				res = isAuthenticated()
+			}
+		}	
 	}
 
 	return (
