@@ -1,4 +1,6 @@
 import '../../styles/components/cards/blurtcard.css';
+import heartGreyOutline from '../../assets/icons/heart_grey_outline.svg';
+import heartRed from '../../assets/icons/heart_red.svg';
 
 // TODO: Timestamp incorrect for posts less than a day old in transition periods
 const BlurtCard = (props) => {
@@ -78,13 +80,20 @@ const BlurtCard = (props) => {
 		<div className="blurt-card">
 			<div className="pfp-container">
 			</div>
-			<div className="blurt-body">
-				<div className="blurt-body-header">
-					<div className="display-name"><p>{props.display_name}</p></div>
-					<div className="username"><p>@{props.username}</p></div>
-					<div className="timestamp"><p>{dateDifference(props.created_at)}</p></div>
+			<div className="blurt-container-right">
+				<div className="blurt-body">
+					<div className="blurt-body-header">
+						<div className="display-name"><p>{props.display_name}</p></div>
+						<div className="username"><p>@{props.username}</p></div>
+						<div className="timestamp"><p>{dateDifference(props.created_at)}</p></div>
+					</div>
+					<div className="blurt-content"><p>{props.content}</p></div>
 				</div>
-				<div className="blurt-content"><p>{props.content}</p></div>
+				<div className="blurt-footer">
+						<div className="blurt-likes">
+							<img src={heartGreyOutline} width="22" height="22"/>
+						</div>
+				</div>
 			</div>
 		</div>
 	)

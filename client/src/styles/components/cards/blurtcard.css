@@ -3,7 +3,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	padding: 10px 8px 8px 12px;
+	padding: 10px 12px 8px 12px;
 	border-top: 2px solid rgb(56, 68, 77);
 	border-bottom: 2px solid rgb(56, 68, 77);
 }
@@ -14,9 +14,16 @@
     transition: 0.4s;
 }
 
+.blurt-card .blurt-container-right{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
 .blurt-card .blurt-body{
 	display: flex;
 	flex-direction: column;
+	width: fit-content;
 }
 
 .blurt-card .blurt-body .blurt-body-header{
@@ -44,4 +51,15 @@
 }
 .blurt-card .blurt-body .blurt-content p{ 
     margin: 0px;
+}
+
+.blurt-card .blurt-footer{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.blurt-card .blurt-footer .blurt-likes{
+	display: flex;
+	flex-direction: row;
 }
