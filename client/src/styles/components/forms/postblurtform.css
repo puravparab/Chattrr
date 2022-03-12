@@ -23,7 +23,7 @@
 	background-color: rgb(13, 19, 33);
 	outline: none;
 	border: none;
-	padding: 5px 0px 10px 0px;
+	padding: 15px 0px 10px 0px;
 }
 
 .post-blurt-container .form input:focus{
@@ -42,6 +42,13 @@
 	font-size: 15px;
 	font-weight: bold;
 	border: none;
-	border-radius: 10px;
+	border-radius: 16px;
+	color: white;
+	background: rgb(142, 120, 255);
 	cursor: pointer;
+}
+
+.post-blurt-container .form .footer button:hover{
+	background: rgb(132, 107, 255);
+	transition: 0.4s;
 }
