@@ -12,3 +12,12 @@ class Blurt(models.Model):
 			return (f'blurt #{self.id} - @{self.author.user.username}')
 		except:
 			return (f'blurt #{self.id} - @NULL')
+
+# Blurt Likes
+class BlurtLike(models.Model):
+	blurt= models.ForeignKey(Blurt, null=True, on_delete=models.CASCADE)
+	user_profile = models.ForeignKey(UserProfile, null=True, on_delete=models.DO_NOTHING)
+	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+	class Meta:
+		unique_together = ('blurt_id', 'user_profile')
