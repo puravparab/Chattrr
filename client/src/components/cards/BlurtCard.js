@@ -113,6 +113,40 @@ const BlurtCard = (props) => {
 			}
 	}
 
+	const updateLike = async (blurt_id, accessToken) => {
+		const res = await fetch(ROOT_URL + '/blurt/like/' + blurt_id,{
+			method: "POST",
+			headers: {
+				'Content-type': 'application/json',
+				'Authorization': "Bearer " + accessToken
+			}
+		})
+		const data = await res.json()
+		if(res.ok){
+			return true
+		}else{
+			return false
+		}
+	}
+
+	const changeLikeBtn = async (e) => {
+		e.preventDefault()
+		// If blurt is liked
+		if (likeBtn === heartGreyOutline){
+			const res = updateLike(props.id, props.accessToken)
+			if (res){
+				setLikeBtn(heartRed)
+			}
+		} 
+		//  If blurt is unliked
+		else if (likeBtn === heartRed){
+			const res = updateLike(props.id, props.accessToken)
+			if (res){
+				setLikeBtn(heartGreyOutline)
+			}
+		}
+	}
+
 	return (
 		<div className="blurt-card">
 			<div className="pfp-container">
@@ -128,7 +162,7 @@ const BlurtCard = (props) => {
 				</div>
 				<div className="blurt-footer">
 					<div className="blurt-likes">
-						<img src={likeBtn} width="22" height="22"/>
+						<img src={likeBtn} onClick={changeLikeBtn} width="22" height="22"/>
 						{/* {determineLike(props.id)} */}
 					</div>
 				</div>
