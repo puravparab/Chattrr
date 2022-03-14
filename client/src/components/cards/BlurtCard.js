@@ -1,9 +1,25 @@
+import { useState, useEffect } from 'react'
 import '../../styles/components/cards/blurtcard.css';
 import heartGreyOutline from '../../assets/icons/heart_grey_outline.svg';
 import heartRed from '../../assets/icons/heart_red.svg';
 
+const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
+
 // TODO: Timestamp incorrect for posts less than a day old in transition periods
 const BlurtCard = (props) => {
+	const [likeBtn, setLikeBtn] = useState('')
+
+	useEffect(()=>{
+		//Attempt to retreive data
+		try {
+			determineLike(props.id, props.accessToken)
+		}
+		// TODO: Test This
+		catch (e) {
+			console.log(e)
+		}
+	}, [])
+
 	const splitISO = (ISODateTime) =>{
 		const dateTime = (ISODateTime.split("Z"))[0].split("T")
 
@@ -76,6 +92,27 @@ const BlurtCard = (props) => {
 		}
 	}
 
+	const determineLike = async (blurt_id, accessToken) => {
+			const res = await fetch(ROOT_URL + '/blurt/like/' + blurt_id, {
+				method: "GET",
+				headers: {
+					'Authorization': "Bearer " + accessToken
+				}
+			})
+
+			const data = await res.json()
+
+			if (res.ok){
+				if(data["liked"] === "true"){
+					setLikeBtn(heartRed)
+				}else{
+					setLikeBtn(heartGreyOutline)
+				}
+			} else{
+				console.log("cant retrieve like status")
+			}
+	}
+
 	return (
 		<div className="blurt-card">
 			<div className="pfp-container">
@@ -90,9 +127,10 @@ const BlurtCard = (props) => {
 					<div className="blurt-content"><p>{props.content}</p></div>
 				</div>
 				<div className="blurt-footer">
-						<div className="blurt-likes">
-							<img src={heartGreyOutline} width="22" height="22"/>
-						</div>
+					<div className="blurt-likes">
+						<img src={likeBtn} width="22" height="22"/>
+						{/* {determineLike(props.id)} */}
+					</div>
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,7 @@ import '../styles/components/feed.css';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
-const Feed = () => {
+const Feed = ({ accessToken }) => {
 	const [BlurtList, setBlurtList] = useState('')
 
 	useEffect(() => {
@@ -29,11 +29,13 @@ const Feed = () => {
 
 		if (res.ok){
 				const BlurtList = await data.map((blurtItem) =>{
-					return <BlurtCard 
+					return <BlurtCard
+								id={blurtItem.id}
 								username={blurtItem.username} 
 								display_name={blurtItem.display_name}
 								content={blurtItem.content} 
-								created_at={blurtItem.created_at} />
+								created_at={blurtItem.created_at} 
+								accessToken={accessToken} />
 				})
 				console.log(BlurtList)
 				setBlurtList(BlurtList)

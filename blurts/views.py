@@ -53,11 +53,40 @@ def blurt_list(request):
 		serializer = BlurtSerializer(blurts, many=True)
 		return Response(serializer.data, status=status.HTTP_200_OK)
 
-@api_view(["POST"])
-@parser_classes([JSONParser])
-@permission_classes([IsAuthenticated])
-def like_blurt(request, blurt_id):
-	if(request.method == "POST"):
+# Blurt likes views
+class like_blurt(APIView):
+	permission_classes = [IsAuthenticated]
+	parser_classes = [JSONParser]
+
+	# return all likes for a blurt
+	def get(self, request, blurt_id):
+		user = request.user
+		user_list = User.objects.filter(username=user)
+		if not user_list.exists():
+			return Response({'error': "user does not exist"}, status=status.HTTP_401_UNAUTHORIZED)
+		else:
+			user_profile = UserProfile.objects.filter(user=user_list[0])
+			if not user_profile.exists():
+				return Response({'error': "user does not exist"}, status=status.HTTP_401_UNAUTHORIZED)
+
+		blurt = Blurt.objects.filter(id=blurt_id)
+		if not blurt.exists():
+			return Response({'error': 'Blurt does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+
+		try:
+			blurt_like = BlurtLike.objects.filter(
+					blurt = blurt[0],
+					user_profile = user_profile[0]
+				)
+			if not blurt_like.exists():
+				return Response({"Detail": "user has not liked this blurt", 'liked': "false"}, status=status.HTTP_200_OK)
+			else:
+				return Response({"Detail": "user has liked this blurt", 'liked': "true"}, status=status.HTTP_200_OK)
+		except Exception as e:
+				return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+	# Let user like a blurt
+	def post(self, request, blurt_id):
 		# Find User in database
 		user = request.user
 		user_list = User.objects.filter(username=user)
