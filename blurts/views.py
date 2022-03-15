@@ -135,6 +135,7 @@ def blurt_likes_list(request, blurt_id):
 			serializer = BlurtLikeSerializer(blurtLikes, many=True)
 			data = {
 				'likes': serializer.data,
+				'blurt_id': blurt_id,
 				'no_of_likes': blurtLikes.count()
 			}
 			return Response(data, status=status.HTTP_200_OK)

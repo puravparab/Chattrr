@@ -8,11 +8,13 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 // TODO: Timestamp incorrect for posts less than a day old in transition periods
 const BlurtCard = (props) => {
 	const [likeBtn, setLikeBtn] = useState('')
+	const [likesNum, setLikesNum] = useState('')
 
 	useEffect(()=>{
 		//Attempt to retreive data
 		try {
 			determineLike(props.id, props.accessToken)
+			getLikeNum()
 		}
 		// TODO: Test This
 		catch (e) {
@@ -113,6 +115,18 @@ const BlurtCard = (props) => {
 			}
 	}
 
+	const getLikeNum = async () => {
+		const res = await fetch(ROOT_URL + '/blurt/like/' + props.id  + '/list', {
+			method: 'GET'
+		})
+		const data = await res.json()
+		if(res.ok){
+			setLikesNum(data["no_of_likes"])
+		}else{
+			setLikesNum(0)
+		}
+	}
+
 	const updateLike = async (blurt_id, accessToken) => {
 		const res = await fetch(ROOT_URL + '/blurt/like/' + blurt_id,{
 			method: "POST",
@@ -163,7 +177,7 @@ const BlurtCard = (props) => {
 				<div className="blurt-footer">
 					<div className="blurt-likes">
 						<img src={likeBtn} onClick={changeLikeBtn} width="22" height="22"/>
-						{/* {determineLike(props.id)} */}
+						<span>{likesNum}</span>
 					</div>
 				</div>
 			</div>
