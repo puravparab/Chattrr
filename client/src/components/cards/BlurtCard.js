@@ -121,9 +121,13 @@ const BlurtCard = (props) => {
 		})
 		const data = await res.json()
 		if(res.ok){
-			setLikesNum(data["no_of_likes"])
+			if(data["no_of_likes"] === 0){
+				setLikesNum('')
+			}else{
+				setLikesNum(data["no_of_likes"])
+			}
 		}else{
-			setLikesNum(0)
+			setLikesNum('')
 		}
 	}
 
@@ -150,6 +154,7 @@ const BlurtCard = (props) => {
 			const res = updateLike(props.id, props.accessToken)
 			if (res){
 				setLikeBtn(heartRed)
+				setLikesNum(likesNum + 1)
 			}
 		} 
 		//  If blurt is unliked
@@ -157,6 +162,7 @@ const BlurtCard = (props) => {
 			const res = updateLike(props.id, props.accessToken)
 			if (res){
 				setLikeBtn(heartGreyOutline)
+				setLikesNum(likesNum - 1)
 			}
 		}
 	}
