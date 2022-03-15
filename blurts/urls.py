@@ -21,5 +21,6 @@ app_name = 'blurts'
 urlpatterns = [
     path('create', createBlurt, name='blurt-create'),
     path('list', blurt_list, name='blurt-list'),
-    path('like/<int:blurt_id>', like_blurt.as_view(), name='blurt-like')
+    path('like/<int:blurt_id>', like_blurt.as_view(), name='blurt-like'),
+    path('like/<int:blurt_id>/list', blurt_likes_list, name='blurt-like-list')
 ]

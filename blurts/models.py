@@ -16,7 +16,7 @@ class Blurt(models.Model):
 # Blurt Likes
 class BlurtLike(models.Model):
 	blurt= models.ForeignKey(Blurt, null=True, on_delete=models.CASCADE)
-	user_profile = models.ForeignKey(UserProfile, null=True, on_delete=models.DO_NOTHING)
+	user_profile = models.ForeignKey(UserProfile, null=True, on_delete=models.CASCADE)
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 	class Meta:

@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view, parser_classes, permission_class
 from django.contrib.auth.models import User
 from .models import Blurt, BlurtLike
 from accounts.models import UserProfile
-from .serializers import BlurtSerializer
+from .serializers import BlurtSerializer, BlurtLikeSerializer
 
 # TODO: Refactor
 # Create a blurt
@@ -117,3 +117,24 @@ class like_blurt(APIView):
 				return Response({"Detail": "BLurt succesfully unliked"}, status=status.HTTP_200_OK)
 			except Exception as e:
 				return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(["GET"])
+# Get all likes of a specific blurt
+def blurt_likes_list(request, blurt_id):
+	if request.method == "GET":
+		# Find Blurt in database
+		blurt = Blurt.objects.filter(id=blurt_id)
+		if not blurt.exists():
+			return Response({'error': 'Blurt does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+
+		blurtLikes = BlurtLike.objects.filter(blurt=blurt[0])
+
+		if not blurtLikes:
+			return Response({'blurt_id': blurt_id, 'no_of_likes': 0}, status=status.HTTP_200_OK)
+		else:
+			serializer = BlurtLikeSerializer(blurtLikes, many=True)
+			data = {
+				'likes': serializer.data,
+				'no_of_likes': blurtLikes.count()
+			}
+			return Response(data, status=status.HTTP_200_OK)
