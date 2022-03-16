@@ -51,7 +51,14 @@ const PostBlurtForm = ({ accessToken }) =>{
 			<form className="form">
 				<input onChange={handleBlurt} placeholder="What's on your mind?" required/>
 				<div className="footer">
-					<button onClick={createBlurt} type="submit"> Blurt Out</button>
+					{blurt.trim().length !== 0 ? 
+						<button	onClick={createBlurt} type="submit"> Blurt Out</button> :
+						<button onClick={(e)=>{
+											e.preventDefault()
+											setBlurt('')}
+										} 
+							className="inactive" type="submit">Blurt Out</button>
+					}
 				</div>
 			</form>
 		</div>

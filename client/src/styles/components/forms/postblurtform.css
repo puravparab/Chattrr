@@ -52,3 +52,14 @@
 	background: rgb(132, 107, 255);
 	transition: 0.4s;
 }
+
+.post-blurt-container .form .footer .inactive{
+	background: rgb(106, 77, 255);
+	color: rgb(189, 189, 189);
+	cursor: auto;
+}
+
+.post-blurt-container .form .footer .inactive:hover{
+	background: rgb(106, 77, 255);
+	color: rgb(189, 189, 189);
+}
