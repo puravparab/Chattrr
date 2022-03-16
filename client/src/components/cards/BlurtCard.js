@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { getToken, isAuthenticated } from  "../../actions/authActions.js"
 import '../../styles/components/cards/blurtcard.css';
 import heartGreyOutline from '../../assets/icons/heart_grey_outline.svg';
 import heartRed from '../../assets/icons/heart_red.svg';
@@ -9,11 +10,27 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 const BlurtCard = (props) => {
 	const [likeBtn, setLikeBtn] = useState('')
 	const [likesNum, setLikesNum] = useState('')
+	const [accessToken, setAccessToken] = useState(props.accessToken)
+
+	// Check if access token is valid
+	const authCheck = () => {
+		try{
+			const access_token = getToken('at')
+			console.log(access_token)
+			setAccessToken(access_token)
+		} catch(e){
+			console.log(e)
+			const res = isAuthenticated()
+			if(res === false){
+				window.location.replace('/')
+			}
+		}
+	}
 
 	useEffect(()=>{
 		//Attempt to retreive data
 		try {
-			determineLike(props.id, props.accessToken)
+			determineLike(props.id, accessToken)
 			getLikeNum()
 		}
 		// TODO: Test This
@@ -94,16 +111,15 @@ const BlurtCard = (props) => {
 		}
 	}
 
-	const determineLike = async (blurt_id, accessToken) => {
+	// Determin if logged user has liked a blurt
+	const determineLike = async (blurt_id) => {
 			const res = await fetch(ROOT_URL + '/blurt/like/' + blurt_id, {
 				method: "GET",
 				headers: {
 					'Authorization': "Bearer " + accessToken
 				}
 			})
-
 			const data = await res.json()
-
 			if (res.ok){
 				if(data["liked"] === "true"){
 					setLikeBtn(heartRed)
@@ -115,6 +131,7 @@ const BlurtCard = (props) => {
 			}
 	}
 
+	// Get number of likes on this blurt
 	const getLikeNum = async () => {
 		const res = await fetch(ROOT_URL + '/blurt/like/' + props.id  + '/list', {
 			method: 'GET'
@@ -131,7 +148,8 @@ const BlurtCard = (props) => {
 		}
 	}
 
-	const updateLike = async (blurt_id, accessToken) => {
+	// Add or remove like on a blurt from the database
+	const updateLike = async (blurt_id) => {
 		const res = await fetch(ROOT_URL + '/blurt/like/' + blurt_id,{
 			method: "POST",
 			headers: {
@@ -139,7 +157,7 @@ const BlurtCard = (props) => {
 				'Authorization': "Bearer " + accessToken
 			}
 		})
-		const data = await res.json()
+		// const data = await res.json()
 		if(res.ok){
 			return true
 		}else{
@@ -147,11 +165,13 @@ const BlurtCard = (props) => {
 		}
 	}
 
+	// Change like btn icon
 	const changeLikeBtn = async (e) => {
 		e.preventDefault()
+		authCheck()
 		// If blurt is liked
 		if (likeBtn === heartGreyOutline){
-			const res = updateLike(props.id, props.accessToken)
+			const res = updateLike(props.id, accessToken)
 			if (res){
 				setLikeBtn(heartRed)
 				setLikesNum(likesNum + 1)
@@ -159,7 +179,7 @@ const BlurtCard = (props) => {
 		} 
 		//  If blurt is unliked
 		else if (likeBtn === heartRed){
-			const res = updateLike(props.id, props.accessToken)
+			const res = updateLike(props.id, accessToken)
 			if (res){
 				setLikeBtn(heartGreyOutline)
 				setLikesNum(likesNum - 1)

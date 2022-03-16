@@ -1,5 +1,21 @@
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
+// Get access and refresh token from cokkies if they exist
+export const getToken = (token_type) => {
+	try{
+		if(token_type === 'at'){
+			let access_token = document.cookie.split('; ').find(row => row.startsWith('at')).split('=')[1]
+			return access_token
+		} else if (token_type === 'rt'){
+			let refresh_token = document.cookie.split('; ').find(row => row.startsWith('rt')).split('=')[1]
+			return refresh_token
+		}
+	} catch(e){
+		console.log(e)
+		throw e
+	}
+};
+
 // Update valid Refresh token if Access token is invalid
 const updateAcessToken = async (refresh_token) => {
 	try{
@@ -39,21 +55,7 @@ const updateAcessToken = async (refresh_token) => {
 	}
 };
 
-export const getToken = (token_type) => {
-	try{
-		if(token_type === 'at'){
-			let access_token = document.cookie.split('; ').find(row => row.startsWith('at')).split('=')[1]
-			return access_token
-		} else if (token_type === 'rt'){
-			let refresh_token = document.cookie.split('; ').find(row => row.startsWith('rt')).split('=')[1]
-			return refresh_token
-		}
-	} catch(e){
-		console.log(e)
-		throw e
-	}
-};
-
+// Get tokens from cookies or update cookies if they do not exist
 export const isAuthenticated = () => {
 	// Get auth tokens from cookies
 	try{

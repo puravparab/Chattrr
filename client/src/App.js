@@ -17,10 +17,6 @@ function App() {
 
 	return (
 		<div className="App">
-			{/* <div> */}
-			{/* 	<Link to="/register">Register</Link> |{" "} */}
-			{/* 	<Link to="/login">Log In</Link> */}
-			{/* </div> */}
 			<Routes>
 				<Route exact path='/home' element={<Navigate replace to='/' />} />
 				<Route exact path='/register' element={<Register isAuth={isAuth} />} />

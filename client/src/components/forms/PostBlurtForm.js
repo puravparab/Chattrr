@@ -16,6 +16,7 @@ const PostBlurtForm = ({ accessToken }) =>{
 		setBlurt(e.target.value)
 	}
 
+	// Send request to create a blurt
 	const createBlurt = async (e) => {
 		e.preventDefault()
 		console.log(blurt)
@@ -40,7 +41,7 @@ const PostBlurtForm = ({ accessToken }) =>{
 		}else{
 			if(res.status === 401){
 				console.log("accessToken invalid")
-				res = isAuthenticated()
+				const res = isAuthenticated()
 			}
 		}	
 	}
