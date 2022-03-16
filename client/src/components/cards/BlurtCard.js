@@ -16,7 +16,6 @@ const BlurtCard = (props) => {
 	const authCheck = () => {
 		try{
 			const access_token = getToken('at')
-			console.log(access_token)
 			setAccessToken(access_token)
 		} catch(e){
 			console.log(e)
