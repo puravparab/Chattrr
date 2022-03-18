@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Blurt, BlurtLike
+from .models import Blurt, BlurtLike, BlurtComment
 
 class BlurtSerializer(serializers.ModelSerializer):
 	username = serializers.CharField(source='author.user.username')
@@ -16,3 +16,10 @@ class BlurtLikeSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = BlurtLike
 		fields = ('id', 'blurt_id', 'username', 'created_at')
+
+class BlurtCommentSerializer(serializers.ModelSerializer):
+	author = serializers.CharField(source='author.user.username')
+	blurt_id = serializers.IntegerField(source='blurt.id')
+	class Meta:
+		model = BlurtComment
+		fields = ('id', 'blurt_id', 'author', 'content', 'created_at')

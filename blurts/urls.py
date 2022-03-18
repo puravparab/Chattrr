@@ -28,5 +28,6 @@ urlpatterns = [
     path('like/<int:blurt_id>/list', blurt_likes_list, name='blurt-like-list'),
 
     # Blurt Comment
-    path('comment/<int:blurt_id>', blurt_comment.as_view(), name='blurt-comment')
+    path('comment/<int:blurt_id>', blurt_comment.as_view(), name='blurt-comment'),
+    path('comment/<int:blurt_id>/list', blurt_comment_list, name='blurt-comment-list')
 ]
