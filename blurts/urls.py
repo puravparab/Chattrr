@@ -19,8 +19,14 @@ from .views import *
 app_name = 'blurts'
 
 urlpatterns = [
+    # Blurt
     path('create', createBlurt, name='blurt-create'),
     path('list', blurt_list, name='blurt-list'),
+
+    # Blurt Like
     path('like/<int:blurt_id>', like_blurt.as_view(), name='blurt-like'),
-    path('like/<int:blurt_id>/list', blurt_likes_list, name='blurt-like-list')
+    path('like/<int:blurt_id>/list', blurt_likes_list, name='blurt-like-list'),
+
+    # Blurt Comment
+    path('comment/<int:blurt_id>', blurt_comment.as_view(), name='blurt-comment')
 ]
