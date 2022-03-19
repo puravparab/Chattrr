@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom"
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
+import BlurtComment from "../components/cards/BlurtComment.js"
 import '../styles/pages/homepage.css';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
@@ -41,7 +42,16 @@ const Blurt = () => {
 		console.log(data)
 
   		if (res.ok){
-  			setBlurtComments(data)
+  			const BlurtComments = await data.comments.map((blurtComment) => {
+  				return <BlurtComment 
+  							id={blurtComment.id}
+  							blurt_id={blurtComment.blurt_id}
+  							author={blurtComment.author}
+  							content={blurtComment.content}
+  							created_at={blurtComment.created_at}
+  							accessToken={accessToken} />
+  			})
+  			setBlurtComments(BlurtComments)
   		}else{
   			console.log("Blurt does not have any comments")
   		}
@@ -55,7 +65,7 @@ const Blurt = () => {
 				<h1>Chattrr</h1>
 			</div>
 			<div user-blurt-page>
-				<h1>USER: {params.username} - {params.id}</h1>
+				{blurtComments}
 			</div>
 			
 		</div>
