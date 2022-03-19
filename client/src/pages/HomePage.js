@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
 import Feed from "../components/Feed"
 import PostBlurtForm from "../components/forms/PostBlurtForm"
 import '../styles/pages/homepage.css';
 
-// const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
-
 const HomePage = () => {
+	let navigate = useNavigate();
 	// Get Access Token
 	const [accessToken] = useState(() => {
 		try{
@@ -23,7 +23,9 @@ const HomePage = () => {
 
 	return (
 		<div className="home">
-			<div className="title">
+			<div className="title" onClick={()=> {
+				navigate("/")
+			}}>
 				<h1>Chattrr</h1>
 			</div>
 			<div className="home-container">

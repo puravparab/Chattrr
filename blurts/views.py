@@ -44,6 +44,7 @@ def createBlurt(request, format=None):
 	except Exception as e:
 		return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+# TODO: Add more data to API call
 # GET all Blurts
 @api_view(["GET"])
 @parser_classes([JSONParser])

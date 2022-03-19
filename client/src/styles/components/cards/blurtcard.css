@@ -23,7 +23,7 @@
 .blurt-card .blurt-body{
 	display: flex;
 	flex-direction: column;
-	width: fit-content;
+	width: 100%;
 }
 
 .blurt-card .blurt-body .blurt-body-header{

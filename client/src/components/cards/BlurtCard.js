@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getToken, isAuthenticated } from  "../../actions/authActions.js"
 import { dateDifference } from "../../utilities/time.js"
 import '../../styles/components/cards/blurtcard.css';
@@ -12,6 +13,8 @@ const BlurtCard = (props) => {
 	const [likeBtn, setLikeBtn] = useState('')
 	const [likesNum, setLikesNum] = useState('')
 	const [accessToken, setAccessToken] = useState(props.accessToken)
+
+	let navigate = useNavigate();
 
 	// Check if access token is valid
 	const authCheck = () => {
@@ -116,11 +119,13 @@ const BlurtCard = (props) => {
 	}
 
 	return (
-		<div className="blurt-card">
+		<div className="blurt-card" >
 			<div className="pfp-container">
 			</div>
 			<div className="blurt-container-right">
-				<div className="blurt-body">
+				<div className="blurt-body" onClick={()=>{
+					navigate(`/user/${props.username}/status/${props.id}`);
+				}}>
 					<div className="blurt-body-header">
 						<div className="display-name"><p>{props.display_name}</p></div>
 						<div className="username"><p>@{props.username}</p></div>
