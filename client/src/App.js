@@ -4,6 +4,7 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import HomePage from "./pages/HomePage"
 import Register from "./pages/Register"
 import LogIn from "./pages/LogIn"
+import UserComment from "./pages/UserComment"
 import Error404Page from "./pages/Error404Page"
 import { isAuthenticated } from  "./actions/authActions.js"
 
@@ -18,17 +19,18 @@ function App() {
 	return (
 		<div className="App">
 			<Routes>
-				<Route exact path='/home' element={<Navigate replace to='/' />} />
+				<Route exact path='/' element={<Navigate replace to='/home' />} />
 				<Route exact path='/register' element={<Register isAuth={isAuth} />} />
 				<Route exact path='/login' element={<LogIn isAuth={isAuth} />} />
+
 				<Route 
-					path='/' 
+					path='/home' 
 					element={ isAuth ? 
 								<HomePage /> 
-								: <Navigate to='/login' isAuth={isAuth} /> } />
-				
-				{/* Test Routes */}
-				<Route exact path='home/test' element={<HomePage /> } />
+								: <Navigate to='/login' isAuth={isAuth} /> } >
+				</Route>
+
+				<Route path='user/:id' element={<UserComment />} />
 
 				{/* Other */}
 				<Route path='*' element={<Error404Page />} />

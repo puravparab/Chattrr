@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
 import Feed from "../components/Feed"
 import PostBlurtForm from "../components/forms/PostBlurtForm"
