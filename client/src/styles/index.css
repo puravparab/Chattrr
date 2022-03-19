@@ -11,7 +11,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   gap: 20px 0px;
-  height: 100vh;
+  min-height: 100%;
 }
 
 .App .title h1{
