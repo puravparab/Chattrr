@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
 import BlurtCard from "../components/cards/BlurtCard.js"
 import BlurtComment from "../components/cards/BlurtComment.js"
+import PostCommentForm from "../components/forms/PostCommentForm.js"
 import '../styles/pages/homepage.css';
 import '../styles/pages/blurt.css';
 
@@ -94,6 +95,9 @@ const Blurt = () => {
 				<div className="blurt-container-center">
 					<div className="blurt-container">
 						{Blurt}
+					</div>
+					<div className="post-comment-container">
+						<PostCommentForm accessToken={accessToken} blurt_id={params.id} />
 					</div>
 					<div className="comments-container">
 						{blurtComments}

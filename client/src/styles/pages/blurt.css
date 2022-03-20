@@ -23,6 +23,14 @@
 	padding: 10px 12px 15px 12px;
 }
 
+.post-comment-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding: 10px 10px;
+	width: 80%;
+}
+
 .comments-container{
 	display: flex;
 	flex-direction: column;
