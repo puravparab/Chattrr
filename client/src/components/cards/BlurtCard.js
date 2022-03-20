@@ -136,7 +136,7 @@ const BlurtCard = (props) => {
 				<div className="blurt-footer">
 					<div className="blurt-likes">
 						<img src={likeBtn} onClick={changeLikeBtn} alt="like-btn" width="22" height="22"/>
-						<span>{likesNum}</span>
+						<span className={likeBtn === heartRed ? "red" : "default"}>{likesNum}</span>
 					</div>
 				</div>
 			</div>

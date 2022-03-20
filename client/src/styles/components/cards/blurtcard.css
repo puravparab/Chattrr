@@ -64,5 +64,13 @@
 .blurt-card .blurt-footer .blurt-likes{
 	display: flex;
 	flex-direction: row;
-	gap: 0 15px
+	gap: 0 10px
+}
+
+.blurt-card .blurt-footer .blurt-likes:hover{
+	color: rgb(192, 57, 43);
+}
+
+.blurt-card .blurt-footer .blurt-likes .red{
+	color: rgb(192, 57, 43);
 }
