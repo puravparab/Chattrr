@@ -1,6 +1,8 @@
+import '../../styles/components/cards/blurtcomment.css';
+
 const BlurtComment = (props) => {
 	return (
-		<div>
+		<div className="comments-card">
 			{props.content}
 		</div>
 	)

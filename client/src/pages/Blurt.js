@@ -4,6 +4,7 @@ import { getToken, isAuthenticated } from  "../actions/authActions.js"
 import BlurtCard from "../components/cards/BlurtCard.js"
 import BlurtComment from "../components/cards/BlurtComment.js"
 import '../styles/pages/homepage.css';
+import '../styles/pages/blurt.css';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -89,8 +90,8 @@ const Blurt = () => {
 			}}>
 				<h1>Chattrr</h1>
 			</div>
-			<div className="home-container">
-				<div className="home-container-center">
+			<div className="blurt-page-container">
+				<div className="blurt-container-center">
 					<div className="blurt-container">
 						{Blurt}
 					</div>
