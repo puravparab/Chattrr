@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom"
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
+import BlurtCard from "../components/cards/BlurtCard.js"
 import BlurtComment from "../components/cards/BlurtComment.js"
 import '../styles/pages/homepage.css';
 
@@ -22,10 +23,12 @@ const Blurt = () => {
 		}
 	})
 
+	const [Blurt, setBlurt] = useState('')
 	const [blurtComments, setBlurtComments] = useState('')
 
 	useEffect(()=>{
 		try{
+			getBlurt(params.id, params.username)
 			getBlurtComments(params.id)
 		}
 		catch(e){
@@ -33,6 +36,28 @@ const Blurt = () => {
 		}
 	}, [])
   	
+  	// Get Blurt Details
+  	const getBlurt = async (blurt_id, username) => {
+ 		const res = await fetch(ROOT_URL + '/blurt/' + blurt_id, {
+ 			method: "GET"
+ 		})
+ 		const data = await res.json()
+ 		console.log(data)
+ 		if(res.ok){
+ 			const Blurt = <BlurtCard
+							id={blurt_id}
+							username={username} 
+							display_name={data[0].display_name}
+							content={data[0].content} 
+							created_at={data[0].created_at} 
+							accessToken={accessToken} />
+			setBlurt(Blurt)
+ 		}else{
+ 			console.log("Blurt does not exist")
+ 		}
+  	}
+
+  	// Get List of comments
   	const getBlurtComments = async (blurt_id) => {
   		const res = await fetch(ROOT_URL + '/blurt/comment/' + blurt_id.toString() + '/list', {
   			method: 'GET'
@@ -64,8 +89,15 @@ const Blurt = () => {
 			}}>
 				<h1>Chattrr</h1>
 			</div>
-			<div user-blurt-page>
-				{blurtComments}
+			<div className="home-container">
+				<div className="home-container-center">
+					<div className="blurt-container">
+						{Blurt}
+					</div>
+					<div className="comments-container">
+						{blurtComments}
+					</div>
+				</div>
 			</div>
 			
 		</div>
