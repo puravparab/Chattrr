@@ -1,4 +1,68 @@
 /* Styles for BlurtComment.js */
-.comments-card{
-	
+.comment-card{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	padding: 10px 15px 10px 15px;
+	border-top: 2px solid rgb(56, 68, 77);
+	border-bottom: 2px solid rgb(56, 68, 77);
+	color: white;
+}
+
+.comment-card:hover{
+	background-color: rgb(37, 42, 55);
+	cursor: pointer;
+	transition: 0.4s;
+}
+
+.comment-card .comment-container-right{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.comment-card .comment-container-right .comment-body{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.comment-card .comment-container-right .comment-body .comment-body-header{
+	display: flex;
+	flex-direction: row;
+	gap: 0px 20px;
+}
+.comment-card .comment-container-right .comment-body .comment-body-header p{
+	margin: 0px
+}
+
+.comment-card .comment-container-right .comment-body .comment-body-header .display_name{
+	font-weight: bold;
+}
+.comment-card .comment-container-right .comment-body .comment-body-header .username{
+	color: rgb(189, 189, 189);
+}
+.comment-card .comment-container-right .comment-body .comment-body-header .timestamp{
+	color: rgb(189, 189, 189);
+}
+
+.comment-card .comment-container-right .comment-body .comment-content{
+	padding: 5px 0 0 0;
+}
+
+.comment-card .comment-container-right .comment-body .comment-content p{
+	margin: 0px;
+}
+
+.comment-card .comment-container-right .comment-footer{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	padding: 10px 0 0 0;
+}
+
+.comment-card .comment-container-right .comment-footer .comment-likes{
+	display: flex;
+	flex-direction: row;
+	gap: 0 15px;
 }

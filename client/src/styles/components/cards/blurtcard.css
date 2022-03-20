@@ -10,9 +10,9 @@
 }
 
 .blurt-card:hover{
-    background-color: rgb(37, 42, 55);
-    cursor: pointer;
-    transition: 0.4s;
+	background-color: rgb(37, 42, 55);
+	cursor: pointer;
+	transition: 0.4s;
 }
 
 .blurt-card .blurt-container-right{
@@ -29,8 +29,8 @@
 
 .blurt-card .blurt-body .blurt-body-header{
 	display: flex;
-    flex-direction: row;
-    gap: 0px 20px;
+	flex-direction: row;
+	gap: 0px 20px;
 }
 
 .blurt-card .blurt-body .blurt-body-header p{

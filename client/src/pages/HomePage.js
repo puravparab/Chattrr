@@ -23,10 +23,10 @@ const HomePage = () => {
 
 	return (
 		<div className="home">
-			<div className="title" onClick={()=> {
-				navigate("/")
-			}}>
-				<h1>Chattrr</h1>
+			<div className="title">
+				<h1 onClick={()=> {
+					navigate("/")
+				}}>Chattrr</h1>
 			</div>
 			<div className="home-container">
 				<div className="home-container-center">

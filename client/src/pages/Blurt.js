@@ -72,7 +72,7 @@ const Blurt = () => {
   				return <BlurtComment 
   							id={blurtComment.id}
   							blurt_id={blurtComment.blurt_id}
-  							author={blurtComment.author}
+  							username={blurtComment.author}
   							content={blurtComment.content}
   							created_at={blurtComment.created_at}
   							accessToken={accessToken} />
@@ -85,10 +85,10 @@ const Blurt = () => {
 
 	return (
 		<div className="home" >
-			<div className="title" onClick={()=> {
-				navigate("/")
-			}}>
-				<h1>Chattrr</h1>
+			<div className="title">
+				<h1 onClick={()=> {
+					navigate("/")
+				}}>Chattrr</h1>
 			</div>
 			<div className="blurt-page-container">
 				<div className="blurt-container-center">
