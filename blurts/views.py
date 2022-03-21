@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view, parser_classes, permission_class
 from django.contrib.auth.models import User
 from .models import Blurt, BlurtLike, BlurtComment, BlurtCommentLike
 from accounts.models import UserProfile
-from .serializers import BlurtSerializer, BlurtLikeSerializer, BlurtCommentSerializer
+from .serializers import BlurtSerializer, BlurtLikeSerializer, BlurtCommentSerializer, BlurtCommentLikeSerializer
 
 # TODO: Refactor
 # Create a blurt
@@ -247,3 +247,23 @@ def blurt_comment_like(request, blurt_comment_id):
 				return Response({"Detail": "BLurt comment succesfully unliked"}, status=status.HTTP_200_OK)
 			except Exception as e:
 				return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+# Get all likes on a comment
+@api_view(["GET"])
+def blurt_comment_like_list(request, blurt_comment_id):
+	if request.method == "GET":
+		blurtComment = BlurtComment.objects.filter(id=blurt_comment_id)
+		if not blurtComment.exists():
+			return Response({'error': 'Blurt Comment does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
+
+		blurtCommentLike = BlurtCommentLike.objects.filter(blurt_comment=blurtComment[0])
+		if not blurtCommentLike.exists():
+			return Response({'detail': 'Blurt comment does not have any likes.', 'no_of_likes': 0}, status=status.HTTP_200_OK)
+		else:
+			serializer = BlurtCommentLikeSerializer(blurtCommentLike, many=True)
+			data = {
+				'likes': serializer.data,
+				'blurt_comment_id': blurt_comment_id,
+				'no_of_likes': blurtCommentLike.count()
+			}
+			return Response(data, status=status.HTTP_200_OK)

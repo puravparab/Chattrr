@@ -61,7 +61,7 @@ const Blurt = () => {
 
   	// Get List of comments
   	const getBlurtComments = async (blurt_id) => {
-  		const res = await fetch(ROOT_URL + '/blurt/comment/' + blurt_id.toString() + '/list', {
+  		const res = await fetch(ROOT_URL + '/blurt/comment/' + blurt_id + '/list', {
   			method: 'GET'
   		})
 
