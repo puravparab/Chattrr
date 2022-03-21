@@ -196,10 +196,22 @@ class blurt_comment(APIView):
 @api_view(["GET"])
 def blurt_comment_list(request, blurt_id):
 	if request.method == "GET":
+		# Get User
+		user = request.user
+		user_list = User.objects.filter(username=user)
+		if user_list.exists():
+			user_profile = UserProfile.objects.filter(user=user_list[0])
+			if not user_profile.exists():
+				user_profile = None
+		else:
+			user_profile = None
+
+		# Get Blurt
 		blurt = Blurt.objects.filter(id=blurt_id)
 		if not blurt.exists():
 			return Response({'error': 'Blurt does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
 
+		# Get Comment
 		blurtComment = BlurtComment.objects.filter(blurt=blurt[0])
 		if not blurtComment.exists():
 			return Response({'detail': 'Blurt does not have any comments.', 'no_of_comments': 0}, status=status.HTTP_200_OK)
@@ -218,12 +230,24 @@ def blurt_comment_list(request, blurt_id):
 					like_data = {'detail': 'Blurt comment does not have any likes.', 'blurt_comment_id': blurt_comment_id, 'no_of_likes': 0}
 				else:
 					like_serializer = BlurtCommentLikeSerializer(blurtCommentLike, many=True)
+
+					# Check if user has liked this comment
+					if user_profile != None:
+						userLike = BlurtCommentLike.objects.filter(user_profile=user_profile[0], blurt_comment=blurtComment[0])
+						if not userLike.exists():
+							userLike = False
+						else:
+							userLike = True
+					else:
+						userLike = False
+
 					like_data = {
 						'likes': like_serializer.data,
 						'blurt_comment_id': blurt_comment_id,
-						'no_of_likes': blurtCommentLike.count()
+						'no_of_likes': blurtCommentLike.count(),
+						'has_user_liked': userLike
 					}
-				serializer.data[i]["like_detail"] = like_data
+				serializer.data[i]["likes_detail"] = like_data
 
 			data = {
 				'comments': serializer.data,

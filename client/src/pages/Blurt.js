@@ -62,7 +62,11 @@ const Blurt = () => {
   	// Get List of comments
   	const getBlurtComments = async (blurt_id) => {
   		const res = await fetch(ROOT_URL + '/blurt/comment/' + blurt_id + '/list', {
-  			method: 'GET'
+  			method: 'GET',
+  			headers: {
+				'Content-type': 'application/json',
+				'Authorization': "Bearer " + accessToken
+			}
   		})
 
 		const data = await res.json()
@@ -76,6 +80,7 @@ const Blurt = () => {
   							username={blurtComment.author}
   							content={blurtComment.content}
   							created_at={blurtComment.created_at}
+  							likes_detail={blurtComment.likes_detail}
   							accessToken={accessToken} />
   			})
   			setBlurtComments(BlurtComments)
