@@ -205,10 +205,30 @@ def blurt_comment_list(request, blurt_id):
 			return Response({'detail': 'Blurt does not have any comments.', 'no_of_comments': 0}, status=status.HTTP_200_OK)
 		else:
 			serializer = BlurtCommentSerializer(blurtComment, many=True)
+
+			# Get Likes on Comments
+			no_of_comments = blurtComment.count()
+			for i in range(0, no_of_comments):
+				like_data = {}
+				# Get the comment
+				blurt_comment_id = serializer.data[i]["id"]
+				blurtComment = BlurtComment.objects.filter(id=blurt_comment_id)
+				blurtCommentLike = BlurtCommentLike.objects.filter(blurt_comment = blurtComment[0])
+				if not blurtCommentLike.exists():
+					like_data = {'detail': 'Blurt comment does not have any likes.', 'blurt_comment_id': blurt_comment_id, 'no_of_likes': 0}
+				else:
+					like_serializer = BlurtCommentLikeSerializer(blurtCommentLike, many=True)
+					like_data = {
+						'likes': like_serializer.data,
+						'blurt_comment_id': blurt_comment_id,
+						'no_of_likes': blurtCommentLike.count()
+					}
+				serializer.data[i]["like_detail"] = like_data
+
 			data = {
 				'comments': serializer.data,
 				'blurt_id': blurt_id,
-				'no_of_comments': blurtComment.count()
+				'no_of_comments': no_of_comments
 			}
 			return Response(data, status=status.HTTP_200_OK)
 
@@ -258,7 +278,7 @@ def blurt_comment_like_list(request, blurt_comment_id):
 
 		blurtCommentLike = BlurtCommentLike.objects.filter(blurt_comment=blurtComment[0])
 		if not blurtCommentLike.exists():
-			return Response({'detail': 'Blurt comment does not have any likes.', 'no_of_likes': 0}, status=status.HTTP_200_OK)
+			return Response({'detail': 'Blurt comment does not have any likes.', 'blurt_comment_id': blurt_comment_id, 'no_of_likes': 0}, status=status.HTTP_200_OK)
 		else:
 			serializer = BlurtCommentLikeSerializer(blurtCommentLike, many=True)
 			data = {
