@@ -1,6 +1,12 @@
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { getToken, isAuthenticated } from  "../../actions/authActions.js"
 import { dateDifference } from "../../utilities/time.js"
 import '../../styles/components/cards/blurtcomment.css';
 import heartGreyOutline from '../../assets/icons/heart_grey_outline.svg';
+import heartRed from '../../assets/icons/heart_red.svg';
+
+const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
 const BlurtComment = (props) => {
 

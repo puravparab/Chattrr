@@ -33,7 +33,7 @@ const BlurtCard = (props) => {
 	useEffect(()=>{
 		//Attempt to retreive data
 		try {
-			determineLike(props.id, accessToken)
+			determineLike(props.id)
 			getLikeNum()
 		}
 		// TODO: Test This
@@ -102,7 +102,7 @@ const BlurtCard = (props) => {
 		authCheck()
 		// If blurt is liked
 		if (likeBtn === heartGreyOutline){
-			const res = updateLike(props.id, accessToken)
+			const res = await updateLike(props.id)
 			if (res){
 				setLikeBtn(heartRed)
 				setLikesNum(likesNum + 1)
@@ -110,7 +110,7 @@ const BlurtCard = (props) => {
 		} 
 		//  If blurt is unliked
 		else if (likeBtn === heartRed){
-			const res = updateLike(props.id, accessToken)
+			const res = await updateLike(props.id)
 			if (res){
 				setLikeBtn(heartGreyOutline)
 				setLikesNum(likesNum - 1)
