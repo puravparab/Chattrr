@@ -30,5 +30,8 @@ urlpatterns = [
 
     # Blurt Comment
     path('comment/<int:blurt_id>', blurt_comment.as_view(), name='blurt-comment'),
-    path('comment/<int:blurt_id>/list', blurt_comment_list, name='blurt-comment-list')
+    path('comment/<int:blurt_id>/list', blurt_comment_list, name='blurt-comment-list'),
+
+    # Blurt Comment Like:
+    path('comment/<int:blurt_comment_id>/like', blurt_comment_like, name='blurt-comment-like')
 ]

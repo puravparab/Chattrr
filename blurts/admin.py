@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Blurt, BlurtLike, BlurtComment
+from .models import Blurt, BlurtLike, BlurtComment, BlurtCommentLike
 
 @admin.register(Blurt)
 class Blurt(admin.ModelAdmin):
@@ -15,3 +15,8 @@ class BlurtLikes(admin.ModelAdmin):
 class BlurtComment(admin.ModelAdmin):
 	list_display = ('id', 'blurt', 'author', 'content', 'created_at')
 	fields = ['blurt', 'author', 'content']
+
+@admin.register(BlurtCommentLike)
+class BlurtCommentLikes(admin.ModelAdmin):
+	list_display = ('id', 'blurt_comment', 'user_profile', 'created_at')
+	fields = ['blurt_comment', 'user_profile']

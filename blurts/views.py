@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, parser_classes, permission_classes
 
 from django.contrib.auth.models import User
-from .models import Blurt, BlurtLike, BlurtComment
+from .models import Blurt, BlurtLike, BlurtComment, BlurtCommentLike
 from accounts.models import UserProfile
 from .serializers import BlurtSerializer, BlurtLikeSerializer, BlurtCommentSerializer
 
@@ -211,3 +211,39 @@ def blurt_comment_list(request, blurt_id):
 				'no_of_comments': blurtComment.count()
 			}
 			return Response(data, status=status.HTTP_200_OK)
+
+# Like a comment
+@api_view(["POST"])
+@parser_classes([JSONParser])
+@permission_classes([IsAuthenticated])
+def blurt_comment_like(request, blurt_comment_id):
+	if request.method == "POST":
+		user = request.user
+		user_list = User.objects.filter(username=user)
+		if not user_list.exists():
+			return Response({'error': "user does not exist"}, status=status.HTTP_401_UNAUTHORIZED)
+		else:
+			user_profile = UserProfile.objects.filter(user=user_list[0])
+			if not user_profile.exists():
+				return Response({'error': "user does not exist"}, status=status.HTTP_401_UNAUTHORIZED)
+
+		# Find Blurt in database
+		blurtComment = BlurtComment.objects.filter(id=blurt_comment_id)
+		if not blurtComment.exists():
+			return Response({'error': 'Blurt comment does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+		
+		try:
+			blurt_comment_like = BlurtCommentLike.objects.create(
+					blurt_comment = blurtComment[0],
+					user_profile = user_profile[0]
+				)
+			blurt_comment_like.save()
+			return Response({"Detail": "Blurt comment succesfully liked"}, status=status.HTTP_200_OK)
+		except:
+			try:
+				# If blurt_like entry exists then delete entry from database
+				blurt_comment_like = BlurtCommentLike.objects.filter(blurt_comment=blurtComment[0], user_profile=user_profile[0])
+				blurt_comment_like.delete()
+				return Response({"Detail": "BLurt comment succesfully unliked"}, status=status.HTTP_200_OK)
+			except Exception as e:
+				return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)

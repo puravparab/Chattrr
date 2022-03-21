@@ -28,3 +28,11 @@ class BlurtComment(models.Model):
 	content = models.TextField(null=True, blank=False)
 	author = models.ForeignKey(UserProfile, null=True, on_delete=models.SET_NULL)
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+class BlurtCommentLike(models.Model):
+	blurt_comment = models.ForeignKey(BlurtComment, null=True, on_delete=models.CASCADE)
+	user_profile = models.ForeignKey(UserProfile, null=True, on_delete=models.CASCADE)
+	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+	class Meta:
+		unique_together = ('blurt_comment', 'user_profile')
