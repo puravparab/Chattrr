@@ -61,9 +61,46 @@ def blurt_detail(request, blurt_id):
 @parser_classes([JSONParser])
 def blurt_list(request):
 	if request.method == "GET":
+		# Get Blurts
 		blurts = Blurt.objects.filter(author__isnull=False, content__isnull=False).exclude(content="")
 		serializer = BlurtSerializer(blurts, many=True)
-		return Response(serializer.data, status=status.HTTP_200_OK)
+
+		# Iterate through each blurt
+		no_of_blurts = blurts.count()
+		for i in range(0, no_of_blurts):
+			blurt_id = serializer.data[i]["id"]
+			blurt = Blurt.objects.filter(id=blurt_id)
+			if blurt.exists():
+				# Get likes for each blurt
+				blurtLikes = BlurtLike.objects.filter(blurt=blurt[0])
+				if blurtLikes.exists():
+					like_serializer = BlurtLikeSerializer(blurtLikes, many=True)
+					like_data = like_serializer.data
+					like_data = {
+						"likes": like_serializer.data,
+						"blurt_id": blurt_id,
+						"no_of_likes": blurtLikes.count()
+					}
+				else:
+					like_data = {
+						'error': 'Blurt does not have any likes', 
+						'blurt_id': blurt_id, 
+						'no_of_likes': 0
+					}
+				serializer.data[i]["likes_detail"] = like_data
+
+				# Get Comments for each blurt
+				blurtComments = BlurtComment.objects.filter(blurt=blurt[0])
+				if blurtComments.exists():
+					serializer.data[i]["no_of_comments"] = blurtComments.count()
+				else:
+					serializer.data[i]["no_of_comments"] = 0
+
+		data = {
+			'blurts': serializer.data,
+			'no_of_blurts': blurts.count()
+		}
+		return Response(data, status=status.HTTP_200_OK)
 
 # Blurt likes views
 class like_blurt(APIView):
