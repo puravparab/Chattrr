@@ -28,13 +28,15 @@ const Feed = ({ accessToken }) => {
 		console.log(data)
 
 		if (res.ok){
-				const BlurtList = await data.map((blurtItem) =>{
+				const BlurtList = await data.blurts.map((blurtItem) =>{
 					return <BlurtCard
 								id={blurtItem.id}
 								username={blurtItem.username} 
 								display_name={blurtItem.display_name}
 								content={blurtItem.content} 
 								created_at={blurtItem.created_at} 
+								likes_detail={blurtItem.likes_detail}
+								no_of_comments={blurtItem.no_of_comments}
 								accessToken={accessToken} />
 				})
 				console.log(BlurtList)

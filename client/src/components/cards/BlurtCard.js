@@ -63,19 +63,11 @@ const BlurtCard = (props) => {
 	}
 
 	// Get number of likes on this blurt
-	const getLikeNum = async () => {
-		const res = await fetch(ROOT_URL + '/blurt/like/' + props.id  + '/list', {
-			method: 'GET'
-		})
-		const data = await res.json()
-		if(res.ok){
-			if(data["no_of_likes"] === 0){
-				setLikesNum('')
-			}else{
-				setLikesNum(data["no_of_likes"])
-			}
-		}else{
+	const getLikeNum = () => {
+		if(props.likes_detail.no_of_likes === 0){
 			setLikesNum('')
+		}else{
+			setLikesNum(props.likes_detail.no_of_likes )
 		}
 	}
 
