@@ -13,6 +13,12 @@ const PostBlurtForm = ({ accessToken }) =>{
 	const [blurt, setBlurt] = useState('')
 
 	const handleBlurt = (e) =>{
+		// Auto resize textarea
+		const height = e.target.scrollHeight; 
+		const rowHeight = 22; 
+		const trows = Math.floor(height / rowHeight) - 1; 
+		e.target.style.height = (22 * trows) + 'px'
+		// Update blurt value
 		setBlurt(e.target.value)
 	}
 
@@ -49,7 +55,7 @@ const PostBlurtForm = ({ accessToken }) =>{
 	return (
 		<div className="post-blurt-container">
 			<form className="form">
-				<input onChange={handleBlurt} placeholder="What's on your mind?" required/>
+				<textarea onChange={handleBlurt} placeholder="What's on your mind?" maxlength="250" wrap="hard" required/>
 				<div className="footer">
 					{blurt.trim().length !== 0 ? 
 						<button	onClick={createBlurt} type="submit"> Blurt Out</button> :

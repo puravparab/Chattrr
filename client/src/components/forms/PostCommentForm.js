@@ -13,6 +13,12 @@ const PostCommentForm = ({ accessToken, blurt_id}) => {
 	const [comment, setComment] = useState('')
 
 	const handleComment = (e) =>{
+		// Auto resize textarea
+		const height = e.target.scrollHeight; 
+		const rowHeight = 22; 
+		const trows = Math.floor(height / rowHeight) - 1; 
+		e.target.style.height = (22 * trows) + 'px'
+		// Update blurt value
 		setComment(e.target.value)
 	}
 
@@ -48,7 +54,7 @@ const PostCommentForm = ({ accessToken, blurt_id}) => {
 	return(
 		<div className="post-comment">
 			<form className="form">
-				<input onChange={handleComment} placeholder="Reply..." required/>
+				<textarea onChange={handleComment} placeholder="Reply..." maxlength="250" wrap="hard" required/>
 				<div className="footer">
 					{comment.trim().length !== 0 ? 
 						<button	onClick={createComment} type="submit">Post</button> :

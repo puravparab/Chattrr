@@ -53,6 +53,7 @@
 .blurt-card .blurt-body .blurt-content p{ 
     margin: 0px;
     font-size: 18px;
+    overflow-wrap: break-word;
 }
 
 .blurt-card .blurt-footer{
