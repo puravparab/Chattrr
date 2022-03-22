@@ -52,8 +52,26 @@ def createBlurt(request, format=None):
 def blurt_detail(request, blurt_id):
 	if request.method == "GET":
 		blurts = Blurt.objects.filter(author__isnull=False, id=blurt_id, content__isnull=False).exclude(content="")
-		serializer = BlurtSerializer(blurts, many=True)
-		return Response(serializer.data, status=status.HTTP_200_OK)
+		if blurts.exists():
+			serializer = BlurtSerializer(blurts, many=True)
+
+			# Get Likes for each blurt
+			blurtLikes = BlurtLike.objects.filter(blurt=blurts[0])
+			if blurtLikes.exists():
+				serializer.data[0]["no_of_likes"] = blurtLikes.count()
+			else:
+				serializer.data[0]["no_of_likes"] = 0
+
+			# Get Comments for each blurt
+			blurtComments = BlurtComment.objects.filter(blurt=blurts[0])
+			if blurtComments.exists():
+				serializer.data[0]["no_of_comments"] = blurtComments.count()
+			else:
+				serializer.data[0]["no_of_comments"] = 0
+
+			return Response(serializer.data, status=status.HTTP_200_OK)
+		else:
+			return Response({"error": "blurt does not exist"}, status=status.HTTP_400_BAD_REQUEST)
 
 # TODO: Add more data to API call
 # GET all Blurts
