@@ -52,6 +52,8 @@ const Blurt = () => {
 							display_name={data[0].display_name}
 							content={data[0].content} 
 							created_at={data[0].created_at} 
+							no_of_likes={data[0].no_of_likes}
+							no_of_comments={data[0].no_of_comments}
 							accessToken={accessToken} />
 			setBlurt(Blurt)
  		}else{

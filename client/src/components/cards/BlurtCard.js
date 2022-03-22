@@ -64,10 +64,10 @@ const BlurtCard = (props) => {
 
 	// Get number of likes on this blurt
 	const getLikeNum = () => {
-		if(props.likes_detail.no_of_likes === 0){
+		if(props.no_of_likes === 0){
 			setLikesNum('')
 		}else{
-			setLikesNum(props.likes_detail.no_of_likes )
+			setLikesNum(props.no_of_likes)
 		}
 	}
 
