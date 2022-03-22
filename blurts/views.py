@@ -51,6 +51,16 @@ def createBlurt(request, format=None):
 @parser_classes([JSONParser])
 def blurt_detail(request, blurt_id):
 	if request.method == "GET":
+		# Get User
+		user = request.user
+		user_list = User.objects.filter(username=user)
+		if user_list.exists():
+			user_profile = UserProfile.objects.filter(user=user_list[0])
+			if not user_profile.exists():
+				user_profile = None
+		else:
+			user_profile = None
+
 		blurts = Blurt.objects.filter(author__isnull=False, id=blurt_id, content__isnull=False).exclude(content="")
 		if blurts.exists():
 			serializer = BlurtSerializer(blurts, many=True)
@@ -58,9 +68,23 @@ def blurt_detail(request, blurt_id):
 			# Get Likes for each blurt
 			blurtLikes = BlurtLike.objects.filter(blurt=blurts[0])
 			if blurtLikes.exists():
-				serializer.data[0]["no_of_likes"] = blurtLikes.count()
+				# Check if user has liked this comment
+				if user_profile != None:
+					userLike = BlurtLike.objects.filter(user_profile=user_profile[0], blurt=blurts[0])
+					if not userLike.exists():
+						userLike = False
+					else:
+						userLike = True
+				else:
+					userLike = False
+
+				serializer.data[0]["likes_detail"] = {
+					"no_of_likes": blurtLikes.count(),
+					"has_user_liked": userLike}
 			else:
-				serializer.data[0]["no_of_likes"] = 0
+				serializer.data[0]["likes_detail"] = {
+					"no_of_likes": 0,
+					"has_user_liked": False}
 
 			# Get Comments for each blurt
 			blurtComments = BlurtComment.objects.filter(blurt=blurts[0])
@@ -79,6 +103,16 @@ def blurt_detail(request, blurt_id):
 @parser_classes([JSONParser])
 def blurt_list(request):
 	if request.method == "GET":
+		# Get User
+		user = request.user
+		user_list = User.objects.filter(username=user)
+		if user_list.exists():
+			user_profile = UserProfile.objects.filter(user=user_list[0])
+			if not user_profile.exists():
+				user_profile = None
+		else:
+			user_profile = None
+
 		# Get Blurts
 		blurts = Blurt.objects.filter(author__isnull=False, content__isnull=False).exclude(content="")
 		serializer = BlurtSerializer(blurts, many=True)
@@ -92,18 +126,30 @@ def blurt_list(request):
 				# Get likes for each blurt
 				blurtLikes = BlurtLike.objects.filter(blurt=blurt[0])
 				if blurtLikes.exists():
+					# Check if user has liked this comment
+					if user_profile != None:
+						userLike = BlurtLike.objects.filter(user_profile=user_profile[0], blurt=blurt[0])
+						if not userLike.exists():
+							userLike = False
+						else:
+							userLike = True
+					else:
+						userLike = False
+
 					like_serializer = BlurtLikeSerializer(blurtLikes, many=True)
 					like_data = like_serializer.data
 					like_data = {
 						"likes": like_serializer.data,
 						"blurt_id": blurt_id,
-						"no_of_likes": blurtLikes.count()
+						"no_of_likes": blurtLikes.count(),
+						"has_user_liked": userLike
 					}
 				else:
 					like_data = {
 						'error': 'Blurt does not have any likes', 
 						'blurt_id': blurt_id, 
-						'no_of_likes': 0
+						'no_of_likes': 0,
+						"has_user_liked": False
 					}
 				serializer.data[i]["likes_detail"] = like_data
 

@@ -33,7 +33,7 @@ const BlurtCard = (props) => {
 	useEffect(()=>{
 		//Attempt to retreive data
 		try {
-			determineLike(props.id)
+			determineLike()
 			getLikeNum()
 		}
 		// TODO: Test This
@@ -43,31 +43,21 @@ const BlurtCard = (props) => {
 	}, [])
 
 	// Determine if logged user has liked a blurt
-	const determineLike = async (blurt_id) => {
-			const res = await fetch(ROOT_URL + '/blurt/like/' + blurt_id, {
-				method: "GET",
-				headers: {
-					'Authorization': "Bearer " + accessToken
-				}
-			})
-			const data = await res.json()
-			if (res.ok){
-				if(data["liked"] === "true"){
-					setLikeBtn(heartRed)
-				}else{
-					setLikeBtn(heartGreyOutline)
-				}
-			} else{
-				console.log("cant retrieve like status")
-			}
+	const determineLike = () => {
+		if (props.likes_detail.has_user_liked) {
+			setLikeBtn(heartRed)
+		}
+		else{
+			setLikeBtn(heartGreyOutline)
+		}
 	}
 
 	// Get number of likes on this blurt
 	const getLikeNum = () => {
-		if(props.no_of_likes === 0){
+		if(props.likes_detail.no_of_likes === 0){
 			setLikesNum('')
 		}else{
-			setLikesNum(props.no_of_likes)
+			setLikesNum(props.likes_detail.no_of_likes)
 		}
 	}
 

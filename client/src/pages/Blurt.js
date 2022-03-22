@@ -38,10 +38,14 @@ const Blurt = () => {
 		}
 	}, [])
   	
-  	// Get Blurt Details
+  	// Get Blurt Detail
   	const getBlurt = async (blurt_id, username) => {
  		const res = await fetch(ROOT_URL + '/blurt/' + blurt_id, {
- 			method: "GET"
+ 			method: "GET",
+ 			headers: {
+				'Content-type': 'application/json',
+				'Authorization': "Bearer " + accessToken
+			}
  		})
  		const data = await res.json()
  		console.log(data)
@@ -52,7 +56,7 @@ const Blurt = () => {
 							display_name={data[0].display_name}
 							content={data[0].content} 
 							created_at={data[0].created_at} 
-							no_of_likes={data[0].no_of_likes}
+							likes_detail={data[0].likes_detail}
 							no_of_comments={data[0].no_of_comments}
 							accessToken={accessToken} />
 			setBlurt(Blurt)

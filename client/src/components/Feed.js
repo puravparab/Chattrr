@@ -20,7 +20,11 @@ const Feed = ({ accessToken }) => {
 
 	const getBlurtList = async () =>{
 		const res = await fetch(ROOT_URL + '/blurt/list' ,{
-			method: 'GET'
+			method: 'GET',
+			headers: {
+				'Content-type': 'application/json',
+				'Authorization': "Bearer " + accessToken
+			}
 		})
 
 		console.log(res)
@@ -36,7 +40,6 @@ const Feed = ({ accessToken }) => {
 								content={blurtItem.content} 
 								created_at={blurtItem.created_at} 
 								likes_detail={blurtItem.likes_detail}
-								no_of_likes={blurtItem.likes_detail.no_of_likes}
 								no_of_comments={blurtItem.no_of_comments}
 								accessToken={accessToken} />
 				})

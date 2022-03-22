@@ -43,12 +43,12 @@ const BlurtComment = (props) => {
 
 	// Determine if logged user has liked a blurt
 	const determineLike = () => {
-			if (props.likes_detail.has_user_liked) {
-				setLikeBtn(heartRed)
-			}
-			else{
-				setLikeBtn(heartGreyOutline)
-			}
+		if (props.likes_detail.has_user_liked) {
+			setLikeBtn(heartRed)
+		}
+		else{
+			setLikeBtn(heartGreyOutline)
+		}
 	}
 
 
