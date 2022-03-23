@@ -1,4 +1,23 @@
 /* Styles for Blurt.js */
+.home .header{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 550px;
+}
+
+.home .header .title{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%
+}
+
+.home .header img{
+	cursor: pointer;
+}
+
 .home .blurt-page-container{
 	display: flex;
 	flex-direction: row;
@@ -43,6 +62,14 @@
 }
 
 @media screen and (max-width: 600px)  {
+	.home .header{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 100%
+	}
+
 	.home .blurt-container-center{
 	    display: flex;
 	    flex-direction: column;

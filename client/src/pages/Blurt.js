@@ -6,6 +6,7 @@ import BlurtComment from "../components/cards/BlurtComment.js"
 import PostCommentForm from "../components/forms/PostCommentForm.js"
 import '../styles/pages/homepage.css';
 import '../styles/pages/blurt.css';
+import backBtn from '../assets/icons/white_arrow.svg';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -98,10 +99,17 @@ const Blurt = () => {
 
 	return (
 		<div className="home" >
-			<div className="title">
-				<h1 onClick={()=> {
-					navigate("/")
-				}}>Chattrr</h1>
+			
+			<div className="header">
+				<img src={backBtn} alt="back-btn" width="30" height="30"
+					onClick={()=> {
+						navigate(-1)
+					}} />
+				<div className="title">
+					<h1 onClick={()=> {
+						navigate("/")
+					}}>Chattrr</h1>
+				</div>
 			</div>
 			<div className="blurt-page-container">
 				<div className="blurt-container-center">
