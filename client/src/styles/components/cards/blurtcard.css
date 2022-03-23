@@ -7,6 +7,7 @@
 	border-top: 2px solid rgb(56, 68, 77);
 	border-bottom: 2px solid rgb(56, 68, 77);
 	color: white;
+	width: auto;
 }
 
 .blurt-card:hover{
@@ -59,14 +60,24 @@
 .blurt-card .blurt-footer{
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
-	padding: 10px 0 0 80%;
+	justify-content: space-between;
+	padding: 20px 20px 0 10px;
+}
+
+.blurt-card .blurt-footer .blurt-comment-container{
+	color: rgb(142, 142, 142);
+}
+
+.blurt-card .blurt-footer .blurt-comment-container:hover{
+	color: rgb(191, 191, 191);
 }
 
 .blurt-card .blurt-footer .blurt-likes{
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 	gap: 0 10px
+
 }
 
 .blurt-card .blurt-footer .blurt-likes:hover{

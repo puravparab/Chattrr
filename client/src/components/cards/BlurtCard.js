@@ -13,7 +13,7 @@ const BlurtCard = (props) => {
 	const [likeBtn, setLikeBtn] = useState('')
 	const [likesNum, setLikesNum] = useState('')
 	const [accessToken, setAccessToken] = useState(props.accessToken)
-
+	const [comments, setComments] = useState(props.accessToken)
 	let navigate = useNavigate();
 
 	// Check if access token is valid
@@ -35,6 +35,7 @@ const BlurtCard = (props) => {
 		try {
 			determineLike()
 			getLikeNum()
+			renderComments()
 		}
 		// TODO: Test This
 		catch (e) {
@@ -100,6 +101,18 @@ const BlurtCard = (props) => {
 		}
 	}
 
+	const renderComments = () => {
+		if((window.location.href).split('/')[3] === 'home') {
+			if(props.no_of_comments === 0){
+				setComments("View comments")
+			}else{
+				setComments(`View ${props.no_of_comments} comments`)
+			}
+		}else{
+			setComments("")
+		}
+	}
+
 	return (
 		<div className="blurt-card" >
 			<div className="pfp-container">
@@ -116,6 +129,13 @@ const BlurtCard = (props) => {
 					<div className="blurt-content"><p>{props.content}</p></div>
 				</div>
 				<div className="blurt-footer">
+					<div className="blurt-comment-container" onClick={()=>{
+						navigate(`/user/${props.username}/status/${props.id}`);
+					}}>
+						<span>
+							{comments}
+						</span>
+					</div>
 					<div className="blurt-likes">
 						<img src={likeBtn} onClick={changeLikeBtn} alt="like-btn" width="22" height="22"/>
 						<span className={likeBtn === heartRed ? "red" : "default"}>{likesNum}</span>
