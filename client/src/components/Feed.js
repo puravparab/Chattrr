@@ -48,7 +48,7 @@ const Feed = ({ accessToken }) => {
 		} else{
 			console.log("blurts loading fail")
 			// Remove
-			setBlurtList(<h1>FAIL</h1>)
+			setBlurtList(<h1>Error</h1>)
 		}
 	}
 

@@ -4,6 +4,7 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import HomePage from "./pages/HomePage"
 import Register from "./pages/Register"
 import LogIn from "./pages/LogIn"
+import Profile from "./pages/Profile"
 import Blurt from "./pages/Blurt"
 import Error404Page from "./pages/Error404Page"
 import { isAuthenticated } from  "./actions/authActions.js"
@@ -30,6 +31,7 @@ function App() {
 								: <Navigate to='/login' isAuth={isAuth} /> } >
 				</Route>
 
+				<Route exact path='/user' element={<Profile />} />
 				<Route path='user/:username/status/:id' element={<Blurt />} />
 
 				{/* Other */}
