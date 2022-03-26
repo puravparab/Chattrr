@@ -31,7 +31,7 @@ const HomePage = () => {
 			<div className="home-container">
 				<div className="home-container-center">
 					<PostBlurtForm accessToken={accessToken} />
-					<Feed accessToken={accessToken}/>
+					<Feed accessToken={accessToken} renderComment={true} />
 				</div>
 			</div>
 		</div>

@@ -41,7 +41,8 @@ const ProfileFeed = (props) =>{
 								created_at={blurtItem.created_at} 
 								likes_detail={blurtItem.likes_detail}
 								no_of_comments={blurtItem.no_of_comments}
-								accessToken={props.accessToken} />
+								accessToken={props.accessToken} 
+								renderComment={props.renderComment} />
 				})
 				console.log(BlurtList)
 				setBlurtList(BlurtList)

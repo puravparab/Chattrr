@@ -102,7 +102,7 @@ const BlurtCard = (props) => {
 	}
 
 	const renderComments = () => {
-		if((window.location.href).split('/')[3] === 'home') {
+		if(props.renderComment === true) {
 			if(props.no_of_comments === 0){
 				setComments("View comments")
 			}else{

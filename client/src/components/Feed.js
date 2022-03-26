@@ -4,7 +4,7 @@ import '../styles/components/feed.css';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
-const Feed = ({ accessToken }) => {
+const Feed = ({ accessToken, renderComment }) => {
 	const [BlurtList, setBlurtList] = useState('')
 
 	useEffect(() => {
@@ -41,7 +41,8 @@ const Feed = ({ accessToken }) => {
 								created_at={blurtItem.created_at} 
 								likes_detail={blurtItem.likes_detail}
 								no_of_comments={blurtItem.no_of_comments}
-								accessToken={accessToken} />
+								accessToken={accessToken} 
+								renderComment={renderComment} />
 				})
 				console.log(BlurtList)
 				setBlurtList(BlurtList)

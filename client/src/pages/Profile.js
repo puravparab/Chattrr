@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams, useNavigate } from "react-router-dom"
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
 import ProfileFeed from "../components/ProfileFeed"
+import '../styles/pages/profile.css';
 import backBtn from '../assets/icons/white_arrow.svg';
 
 const Profile = () =>{
@@ -36,7 +37,7 @@ const Profile = () =>{
 			</div>
 			<div className="profile-container">
 				<div className="profile-container-center">
-					<ProfileFeed accessToken={accessToken} username={params.username} />
+					<ProfileFeed accessToken={accessToken} username={params.username} renderComment={true} />
 				</div>
 			</div>
 		</div>
