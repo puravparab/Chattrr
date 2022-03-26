@@ -10,9 +10,9 @@ from requests import post
 
 from django.contrib.auth.models import User, Group
 from .models import UserProfile
-from blurts.models import Blurt
-from blurts.serializers import BlurtSerializer
 from .serializers import UserProfileSerializer
+from blurts.models import Blurt, BlurtLike, BlurtComment
+from blurts.serializers import BlurtSerializer, BlurtLikeSerializer
 
 import os
 from dotenv import load_dotenv
@@ -186,40 +186,79 @@ def user_profile_detail(request, username):
 @parser_classes([JSONParser])
 def user_blurts(request, username):
 	if request.method == "GET":
-		params = request.GET.dict()
-		blurt_id = params.get("id")
-
-		user = User.objects.filter(username=username)
-		if not user.exists():
-			return Response({"errors": f'username({username}) does not exist'}, status=status.HTTP_404_NOT_FOUND)	
-		else:
-			user_profile = UserProfile.objects.filter(user=user[0])
+		is_user = False
+		# Get User
+		user = request.user
+		user_list = User.objects.filter(username=user)
+		if user_list.exists():
+			user_profile = UserProfile.objects.filter(user=user_list[0])
 			if not user_profile.exists():
-				return Response({"errors": f'User Profile for username({username}) does not exist'}, status=status.HTTP_404_NOT_FOUND)
-			else:
-				user_profile = user_profile[0]
-
-		if blurt_id != None:
-			try:
-				blurts = Blurt.objects.filter(id=blurt_id, author=user_profile)
-				if not blurts.exists():
-					return Response({"errors": f'Blurt Id-{blurt_id} cannot be found for username({username})'}, status=status.HTTP_404_NOT_FOUND)
-				else:
-					blurts = blurts[0]
-					serializer = BlurtSerializer(blurts)
-					return Response(serializer.data, status=status.HTTP_200_OK)
-			except Exception as e:
-				return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
-
+				user_profile = None
 		else:
-			try:
-				blurts = Blurt.objects.filter(author=user_profile)
-				if not blurts.exists():
-					return Response({"errors": f'Blurts for username({username}) cannot be found.'}, status=status.HTTP_404_NOT_FOUND)
-				else:
-					serializer = BlurtSerializer(blurts, many=True)
-					return Response(serializer.data, status=status.HTTP_200_OK)
-			except Exception as e:
-				return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
+			user_profile = None
 
-		return Response({}, status=status.HTTP_200_OK)
+		# Get Author
+		author_list = User.objects.filter(username=username)
+		if author_list.exists():
+			author_profile = UserProfile.objects.filter(user=author_list[0])
+			if not author_profile.exists():
+				return Response({"error": f'User: {username} not found.', "no_of_blurts": 0, "is_user": is_user}, status=status.HTTP_404_NOT_FOUND)
+		else:
+			return Response({"error": f'User: {username} not found.', "no_of_blurts": 0, "is_user": is_user}, status=status.HTTP_404_NOT_FOUND)
+
+		if(user.username == username):
+			is_user = True
+
+		# Get Blurts
+		blurts = Blurt.objects.filter(author=author_profile[0], content__isnull=False).exclude(content="")
+		serializer = BlurtSerializer(blurts, many=True)
+
+		# Iterate through each blurt
+		no_of_blurts = blurts.count()
+		for i in range(0, no_of_blurts):
+			blurt_id = serializer.data[i]["id"]
+			blurt = Blurt.objects.filter(id=blurt_id)
+			if blurt.exists():
+				# Get likes for each blurt
+				blurtLikes = BlurtLike.objects.filter(blurt=blurt[0])
+				if blurtLikes.exists():
+					# Check if user has liked this comment
+					if user_profile != None:
+						userLike = BlurtLike.objects.filter(user_profile=user_profile[0], blurt=blurt[0])
+						if not userLike.exists():
+							userLike = False
+						else:
+							userLike = True
+					else:
+						userLike = False
+
+					like_serializer = BlurtLikeSerializer(blurtLikes, many=True)
+					like_data = like_serializer.data
+					like_data = {
+						"likes": like_serializer.data,
+						"blurt_id": blurt_id,
+						"no_of_likes": blurtLikes.count(),
+						"has_user_liked": userLike
+					}
+				else:
+					like_data = {
+						'error': 'Blurt does not have any likes', 
+						'blurt_id': blurt_id, 
+						'no_of_likes': 0,
+						"has_user_liked": False
+					}
+				serializer.data[i]["likes_detail"] = like_data
+
+				# Get Comments for each blurt
+				blurtComments = BlurtComment.objects.filter(blurt=blurt[0])
+				if blurtComments.exists():
+					serializer.data[i]["no_of_comments"] = blurtComments.count()
+				else:
+					serializer.data[i]["no_of_comments"] = 0
+
+		data = {
+			'blurts': serializer.data,
+			'no_of_blurts': blurts.count(),
+			'is_user': is_user
+		}
+		return Response(data, status=status.HTTP_200_OK)
