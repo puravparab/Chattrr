@@ -118,15 +118,25 @@ const BlurtCard = (props) => {
 			<div className="pfp-container">
 			</div>
 			<div className="blurt-container-right">
-				<div className="blurt-body" onClick={()=>{
-					navigate(`/user/${props.username}/status/${props.id}`);
-				}}>
+				<div className="blurt-body" >
 					<div className="blurt-body-header">
-						<div className="display-name"><p>{props.display_name}</p></div>
-						<div className="username"><p>@{props.username}</p></div>
+						<div className="display-name" onClick={()=>{
+							navigate(`/user/${props.username}`);
+						}}>
+							<p>{props.display_name}</p>
+						</div>
+
+						<div className="username" onClick={()=>{
+							navigate(`/user/${props.username}`);
+						}}>
+							<p>@{props.username}</p>
+						</div>
+
 						<div className="timestamp"><p>{dateDifference(props.created_at)}</p></div>
 					</div>
-					<div className="blurt-content"><p>{props.content}</p></div>
+					<div className="blurt-content" onClick={()=>{
+						navigate(`/user/${props.username}/status/${props.id}`);
+					}}><p>{props.content}</p></div>
 				</div>
 				<div className="blurt-footer">
 					<div className="blurt-comment-container" onClick={()=>{

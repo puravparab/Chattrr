@@ -107,8 +107,18 @@ const BlurtComment = (props) => {
 			<div className="comment-container-right">
 				<div className="comment-body">
 					<div className="comment-body-header">
-						<div className="display-name"><p>{props.display_name}</p></div>
-						<div className="username"><p>@{props.username}</p></div>
+						<div className="display-name" onClick={()=>{
+							navigate(`../../../../user/${props.username}`);
+						}}>
+							<p>{props.display_name}</p>
+						</div>
+
+						<div className="username" onClick={()=>{
+							navigate(`../../../../user/${props.username}`);
+						}}>
+							<p>@{props.username}</p>
+						</div>
+
 						<div className="timestamp"><p>{dateDifference(props.created_at)}</p></div>
 					</div>
 					<div className="comment-content"><p>{props.content}</p></div>
