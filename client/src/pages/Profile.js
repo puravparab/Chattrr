@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
-import Feed from "../components/Feed"
+import ProfileFeed from "../components/ProfileFeed"
 import backBtn from '../assets/icons/white_arrow.svg';
 
 const Profile = () =>{
+	let params = useParams()
 	let navigate = useNavigate();
 	// Get Access Token
 	const [accessToken] = useState(() => {
@@ -25,7 +26,7 @@ const Profile = () =>{
 			<div className="header">
 				<img src={backBtn} alt="back-btn" width="30" height="30"
 					onClick={()=> {
-						navigate(0)
+						navigate(-1)
 					}} />
 				<div className="title">
 					<h1 onClick={()=> {
@@ -35,6 +36,7 @@ const Profile = () =>{
 			</div>
 			<div className="profile-container">
 				<div className="profile-container-center">
+					<ProfileFeed accessToken={accessToken} username={params.username} />
 				</div>
 			</div>
 		</div>

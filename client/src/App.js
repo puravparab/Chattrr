@@ -31,7 +31,7 @@ function App() {
 								: <Navigate to='/login' isAuth={isAuth} /> } >
 				</Route>
 
-				<Route exact path='/user' element={<Profile />} />
+				<Route exact path='/user/:username' element={<Profile />} />
 				<Route path='user/:username/status/:id' element={<Blurt />} />
 
 				{/* Other */}
