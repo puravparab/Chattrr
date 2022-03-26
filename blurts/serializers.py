@@ -19,9 +19,9 @@ class BlurtLikeSerializer(serializers.ModelSerializer):
 		fields = ('id', 'blurt_id', 'username', 'created_at')
 
 class BlurtCommentSerializer(serializers.ModelSerializer):
-	author = serializers.CharField(source='author.user.username')
+	author = serializers.CharField(source='author.user.username', allow_null=True, default="none")
 	blurt_id = serializers.IntegerField(source='blurt.id')
-	display_name = serializers.CharField(source='author.display_name')
+	display_name = serializers.CharField(source='author.display_name', allow_null=True, default="Deleted User")
 
 	class Meta:
 		model = BlurtComment

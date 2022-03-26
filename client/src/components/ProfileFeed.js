@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import BlurtCard from "./cards/BlurtCard"
 import '../styles/components/feed.css';
 
@@ -6,6 +7,7 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 
 const ProfileFeed = (props) =>{
 	const [BlurtList, setBlurtList] = useState('')
+	let navigate = useNavigate();
 
 	useEffect(() => {
 		//Attempt to retreive data
@@ -48,8 +50,7 @@ const ProfileFeed = (props) =>{
 				setBlurtList(BlurtList)
 		} else{
 			console.log("blurts loading fail")
-			// Remove
-			setBlurtList(<h1>Error</h1>)
+			navigate('../error')
 		}
 	}
 
