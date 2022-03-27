@@ -5,6 +5,7 @@ import { dateDifference } from "../../utilities/time.js"
 import '../../styles/components/cards/blurtcomment.css';
 import heartGreyOutline from '../../assets/icons/heart_grey_outline.svg';
 import heartRed from '../../assets/icons/heart_red.svg';
+import defaultPFP from '../../assets/images/default-pfp.png';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -103,6 +104,9 @@ const BlurtComment = (props) => {
 	return (
 		<div className="comment-card">
 			<div className="pfp-container">
+				<img src={defaultPFP} width="32" height="32" alt={`${props.username}'s profile picture`} onClick={()=>{
+						navigate(`/user/${props.username}`);
+					}}/>
 			</div>
 			<div className="comment-container-right">
 				<div className="comment-body">
