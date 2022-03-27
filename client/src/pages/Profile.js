@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from "react-router-dom"
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
+import ProfileCard from "../components/cards/ProfileCard"
 import ProfileFeed from "../components/ProfileFeed"
 import '../styles/pages/profile.css';
 import backBtn from '../assets/icons/white_arrow.svg';
@@ -37,6 +38,7 @@ const Profile = () =>{
 			</div>
 			<div className="profile-container">
 				<div className="profile-container-center">
+					<ProfileCard />
 					<ProfileFeed accessToken={accessToken} username={params.username} renderComment={true} />
 				</div>
 			</div>
