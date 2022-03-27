@@ -1,0 +1,71 @@
+/* Styles for ProfileCard.js */
+.profile-card{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 0px 20px;
+	padding: 30px 10px 30px 10px;
+	width: 95%;
+}
+
+.profile-card .profile-card-left{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 30%;
+}
+
+.profile-card .profile-card-left img{
+	border-radius: 50%;
+}
+
+.profile-card .profile-card-right{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 10px 0px;
+	width: 70%;
+	color: white;
+}
+
+.profile-card .profile-card-right .profile-header{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.profile-card .profile-card-right .profile-header .header-detail{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.profile-card .profile-card-right .profile-header .header-detail .display-name{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.profile-card .profile-card-right .profile-header .header-detail .username{
+	font-size: 16px;
+	color: rgb(189, 189, 189);
+}
+
+.profile-card .profile-card-right .profile-header .header-detail p{
+	margin: 0px;
+}
+
+.profile-card .profile-card-right .profile-footer{
+	display: flex;
+	flex-direction: row;
+	gap: 0px 20px;
+	color: rgb(189, 189, 189);
+}
+
+.profile-card .profile-card-right .profile-footer p{
+	margin: 0px;
+}
