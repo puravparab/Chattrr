@@ -168,18 +168,36 @@ def token_refresh(request, rt):
 @parser_classes([JSONParser])
 def user_profile_detail(request, username):
 	if request.method == "GET":
-		user = User.objects.filter(username=username)
-		if not user.exists():
-			return Response({"errors": f'username({username}) does not exist'}, status=status.HTTP_404_NOT_FOUND)	
+		user_list = User.objects.filter(username=username)
+		if not user_list.exists():
+			return Response({"errors": f'username: {username} does not exist'}, status=status.HTTP_404_NOT_FOUND)	
 		else:
-			user_profile = UserProfile.objects.filter(user=user[0])
+			user_profile = UserProfile.objects.filter(user=user_list[0])
 			if not user_profile.exists():
-				return Response({"errors": f'User Profile for username({username}) does not exist'}, status=status.HTTP_404_NOT_FOUND)
+				return Response({"errors": f'User Profile for username: {username}  does not exist'}, status=status.HTTP_404_NOT_FOUND)
 			else:
 				user_profile = user_profile[0]
 
+		# Is user requesting their profile?
+		if (username == request.user.username):
+			is_user = True
+		else:
+			is_user = False
+
+		# Get no of Blurts 
+		blurt_list = Blurt.objects.filter(author=user_profile)
+		if not blurt_list.exists():
+			no_of_blurts = 0
+		else:
+			no_of_blurts = blurt_list.count()
+
 		serializer = UserProfileSerializer(user_profile)
-		return Response(serializer.data, status=status.HTTP_200_OK)
+		data = {
+			"user": serializer.data,
+			"is_user": is_user,
+			"no_of_blurts": no_of_blurts
+		}
+		return Response(data, status=status.HTTP_200_OK)
 
 # GET all Blurts by username and blurt id
 @api_view(["GET"])
