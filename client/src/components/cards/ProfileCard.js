@@ -31,6 +31,7 @@ const ProfileCard = (props) => {
 					</div>
 				</div>
 				<div className="profile-body">
+					{props.user.bio}
 				</div>
 				<div className="profile-footer">
 					<p>{props.no_of_blurts} Blurts</p>

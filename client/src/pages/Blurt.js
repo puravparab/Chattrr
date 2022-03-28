@@ -31,7 +31,7 @@ const Blurt = () => {
 
 	useEffect(()=>{
 		try{
-			getBlurt(params.id, params.username)
+			getBlurt(params.id)
 			getBlurtComments(params.id)
 		}
 		catch(e){
@@ -40,7 +40,7 @@ const Blurt = () => {
 	}, [])
   	
   	// Get Blurt Detail
-  	const getBlurt = async (blurt_id, username) => {
+  	const getBlurt = async (blurt_id) => {
  		const res = await fetch(ROOT_URL + '/blurt/' + blurt_id, {
  			method: "GET",
  			headers: {
@@ -53,7 +53,7 @@ const Blurt = () => {
  		if(res.ok){
  			const Blurt = <BlurtCard
 							id={blurt_id}
-							username={username} 
+							username={data[0].username} 
 							display_name={data[0].display_name}
 							content={data[0].content} 
 							created_at={data[0].created_at} 

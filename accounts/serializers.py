@@ -6,4 +6,4 @@ class UserProfileSerializer(serializers.ModelSerializer):
 	email = serializers.EmailField(source='user.email')
 	class Meta:
 		model = UserProfile
-		fields = ('id', 'username', 'display_name', 'email', 'created_at')
+		fields = ('id', 'username', 'display_name', 'bio', 'email', 'created_at')
