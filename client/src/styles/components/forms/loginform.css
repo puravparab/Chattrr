@@ -1,4 +1,11 @@
 /* Styles for Login Form */
+.login {
+ 	background-color: white !important;
+}
+.login .home-header .title h1{
+	color: #3C4257 !important;
+}
+
 .App .login-form{
 	display: flex;
 	flex-direction: column;
@@ -10,92 +17,91 @@
 
 /* Form title */
 .App .login-form .title h1{
-  font-size: 35px;
-  margin-top: 0px;
-  color: #3C4257;
+	font-size: 35px;
+	margin-top: 0px;
+	color: #3C4257;
 }
 
 /* Form body */
 .App .login-form .form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px 0px;
-  width: 95%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px 0px;
+	width: 95%;
 }
 .App .login-form .form .form-entry{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 .App .login-form .form .form-entry label{
-  color: #1A1F36;
-  padding: 0 0 8px 0;
+	color: #1A1F36;
+	padding: 0 0 8px 0;
 }
 .App .login-form .form .form-entry .input{
-  margin-bottom: 10px;
-  padding: 8px 12px 8px 12px;
-  outline: none;
-  border: 2px solid lightgrey;
-  border-radius: 7px
+	margin-bottom: 10px;
+	padding: 8px 12px 8px 12px;
+	outline: none;
+	border: 2px solid lightgrey;
+	border-radius: 7px
 }
 .App .login-form .form .form-entry .input:focus{
-  border: 2px solid lightblue;
-  transition: border 0.1s;
+	border: 2px solid lightblue;
+	transition: border 0.1s;
 }
 
 /* If there is any errors with user input */
 .App .login-form .form .alert{
-  display: flex;
-  flex-direction: row;
-  gap: 0 5px;
-
+	display: flex;
+	flex-direction: row;
+	gap: 0 5px;
 }
 .App .login-form .form .alert span{
-  color: red;
-  font-size: 14px;
+	color: red;
+	font-size: 14px;
 }
 
 /* Create account button */
 .App .login-form .form button{
-  width: 100%;
-  height: 50px;
-  margin: 20px 0 20px 0;
-  background-color: rgba(77, 77, 255, 0.70);
-  color: white;
-  border: none;
-  border-radius: 8px;
+	width: 100%;
+	height: 50px;
+	margin: 20px 0 20px 0;
+	background-color: rgba(77, 77, 255, 0.70);
+	color: white;
+	border: none;
+	border-radius: 8px;
 }
 .App .login-form .form button:hover{
-  cursor: pointer;
-  background-color: rgba(77, 77, 255, 1);
-  transition: background-color 0.1s;
+	cursor: pointer;
+	background-color: rgba(77, 77, 255, 1);
+	transition: background-color 0.1s;
 }
 
 /* Sign in link */
 .App .login-form .sign-up{
-  color: #1A1F36;
+	color: #1A1F36;
 }
 .App .login-form .sign-up a{
-  text-decoration: none;
-  color: rgb(77, 77, 255);
+	text-decoration: none;
+	color: rgb(77, 77, 255);
 }
 .App .login-form .sign-up a:hover{
-  color: rgb(204, 204, 255);
+	color: rgb(204, 204, 255);
 }
 
 /* Screen with less than 530px */
 @media screen and (max-width: 530px){
-  .App .login-form{
-    padding: 56px 20px 56px 20px;
-    width: 80%;
-  }
+	.App .login-form{
+	padding: 56px 20px 56px 20px;
+	width: 80%;
+	}
 
-  .App .login-form .title h1{
-    font-size: 25px;
-  }
+	.App .login-form .title h1{
+	font-size: 25px;
+	}
 
-  .App .login-form .form{
-    width: 100%;
-  }
+	.App .login-form .form{
+	width: 100%;
+	}
 }
