@@ -168,6 +168,9 @@ def token_refresh(request, rt):
 @parser_classes([JSONParser])
 def user_profile_detail(request, username):
 	if request.method == "GET":
+		if(username == "me"):
+			username = request.user.username
+
 		user_list = User.objects.filter(username=username)
 		if not user_list.exists():
 			return Response({"errors": f'username: {username} does not exist'}, status=status.HTTP_404_NOT_FOUND)	

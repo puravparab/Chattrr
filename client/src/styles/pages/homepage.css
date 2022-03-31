@@ -83,9 +83,11 @@
 
 .home .home-header .header-right .link-card .user-detail .display-name{
 	font-weight: bold;
+	font-size: 16px;
 }
 
 .home .home-header .header-right .link-card .user-detail .username{
+	font-size: 14px;
 	color: rgb(189, 189, 189);
 }
 
