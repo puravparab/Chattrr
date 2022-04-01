@@ -6,6 +6,8 @@ import BlurtComment from "../components/cards/BlurtComment.js"
 import PostCommentForm from "../components/forms/PostCommentForm.js"
 import '../styles/pages/homepage.css';
 import '../styles/pages/blurt.css';
+import defaultPFP from '../assets/images/default-pfp.png';
+import moreIcon from '../assets/icons/more_icon_white.svg';
 import backBtn from '../assets/icons/white_arrow.svg';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
@@ -29,8 +31,14 @@ const Blurt = () => {
 	const [Blurt, setBlurt] = useState('')
 	const [blurtComments, setBlurtComments] = useState('')
 
+	const [userDetail, setUserDetail] = useState({
+		username: "",
+		display_name: ""
+	})
+
 	useEffect(()=>{
 		try{
+			getUserDetail()
 			getBlurt(params.id)
 			getBlurtComments(params.id)
 		}
@@ -38,6 +46,25 @@ const Blurt = () => {
 			console.log(e)
 		}
 	}, [])
+
+	const getUserDetail = async () => {
+		const res = await fetch(ROOT_URL + '/accounts/me', {
+			method: 'GET',
+			headers: {
+				'Content-type': 'application/json',
+				'Authorization': "Bearer " + accessToken
+			}
+		})
+		const data = await res.json()
+		if(res.ok){
+			setUserDetail({
+				username: data.user.username,
+				display_name: data.user.display_name
+			})
+		}else{
+			console.log('user detail load failure')
+		}
+	}
   	
   	// Get Blurt Detail
   	const getBlurt = async (blurt_id) => {
@@ -100,16 +127,29 @@ const Blurt = () => {
 
 	return (
 		<div className="home" >
-			
-			<div className="header">
+			<div className="home-header">
+				<div className="header-left">
+				</div>
 				<img src={backBtn} alt="back-btn" width="30" height="30"
 					onClick={()=> {
 						navigate(-1)
-					}} />
+				}} />
 				<div className="title">
 					<h1 onClick={()=> {
 						navigate("/")
 					}}>Chattrr</h1>
+				</div>
+				<div className="header-right">
+					<div className="link-card">
+						<img src={defaultPFP} width="35" height="35" alt={`${userDetail.username}'s profile picture`} onClick={()=>{
+							navigate(`../user/${userDetail.username}`);
+						}}/>
+						<div className="user-detail">
+							<p className="display-name">{userDetail.display_name}</p>
+							<p className="username">@{userDetail.username}</p>
+						</div>
+						<img className="more" src={moreIcon} width="25" height="25" alt="more icon"/>
+					</div>
 				</div>
 			</div>
 			<div className="blurt-page-container">

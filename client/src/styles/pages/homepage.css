@@ -21,6 +21,10 @@
 	width: 100%;
 }
 
+.home .home-header img{
+	cursor: pointer;
+}
+
 .home .home-header .title{
 	display: flex;
 	flex-direction: row;

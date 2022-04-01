@@ -3,8 +3,11 @@ import { useParams, useNavigate } from "react-router-dom"
 import { getToken, isAuthenticated } from  "../actions/authActions.js"
 import ProfileCard from "../components/cards/ProfileCard"
 import ProfileFeed from "../components/ProfileFeed"
+import '../styles/pages/homepage.css';
 import '../styles/pages/profile.css';
+import defaultPFP from '../assets/images/default-pfp.png';
 import backBtn from '../assets/icons/white_arrow.svg';
+import moreIcon from '../assets/icons/more_icon_white.svg';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -25,11 +28,17 @@ const Profile = () =>{
 		}
 	})
 
+	const [userDetail, setUserDetail] = useState({
+		username: "",
+		display_name: ""
+	})
+
 	const [profile, setProfile] = useState('')
 
 	useEffect(() => {
 		//Attempt to retreive data
 		try {
+			getLoggedUserDetail()
 			getUserDetail()
 		}
 		// TODO: Test This
@@ -37,6 +46,25 @@ const Profile = () =>{
 			console.log(e)
 		}
 	}, [])
+
+	const getLoggedUserDetail = async () => {
+		const res = await fetch(ROOT_URL + '/accounts/me', {
+			method: 'GET',
+			headers: {
+				'Content-type': 'application/json',
+				'Authorization': "Bearer " + accessToken
+			}
+		})
+		const data = await res.json()
+		if(res.ok){
+			setUserDetail({
+				username: data.user.username,
+				display_name: data.user.display_name
+			})
+		}else{
+			console.log('user detail load failure')
+		}
+	}
 
 	const getUserDetail = async () => {
 		const res = await fetch(ROOT_URL + '/accounts/' + params.username, {
@@ -60,15 +88,29 @@ const Profile = () =>{
 
 	return (
 		<div className="home">
-			<div className="header">
+			<div className="home-header">
+				<div className="header-left">
+				</div>
 				<img src={backBtn} alt="back-btn" width="30" height="30"
 					onClick={()=> {
 						navigate(-1)
-					}} />
+				}} />
 				<div className="title">
 					<h1 onClick={()=> {
 						navigate("/")
 					}}>Chattrr</h1>
+				</div>
+				<div className="header-right">
+					<div className="link-card">
+						<img src={defaultPFP} width="35" height="35" alt={`${userDetail.username}'s profile picture`} onClick={()=>{
+							window.location.replace(`../user/${userDetail.username}`)
+						}} />
+						<div className="user-detail">
+							<p className="display-name">{userDetail.display_name}</p>
+							<p className="username">@{userDetail.username}</p>
+						</div>
+						<img className="more" src={moreIcon} width="25" height="25" alt="more icon"/>
+					</div>
 				</div>
 			</div>
 			<div className="profile-container">

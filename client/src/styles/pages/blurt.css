@@ -1,5 +1,5 @@
 /* Styles for Blurt.js */
-.home .header{
+/*.home .header{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -12,11 +12,7 @@
 	flex-direction: row;
 	justify-content: center;
 	width: 100%
-}
-
-.home .header img{
-	cursor: pointer;
-}
+}*/
 
 .home .blurt-page-container{
 	display: flex;
