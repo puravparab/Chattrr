@@ -35,6 +35,9 @@ const Profile = () =>{
 
 	const [profile, setProfile] = useState('')
 
+	const [linkCardState, setLinkCardState] = useState('link-card')
+	const [dialogState, setDialogState] = useState('dialog-box close')
+
 	useEffect(() => {
 		//Attempt to retreive data
 		try {
@@ -47,6 +50,7 @@ const Profile = () =>{
 		}
 	}, [])
 
+	// Get details of the requesting user
 	const getLoggedUserDetail = async () => {
 		const res = await fetch(ROOT_URL + '/accounts/me', {
 			method: 'GET',
@@ -66,6 +70,7 @@ const Profile = () =>{
 		}
 	}
 
+	// Get details of the requested user
 	const getUserDetail = async () => {
 		const res = await fetch(ROOT_URL + '/accounts/' + params.username, {
 			method: 'GET',
@@ -86,6 +91,18 @@ const Profile = () =>{
 		}
 	}
 
+	// Handle Dialog box
+	const handleDialogBox = () => {
+		if (dialogState === 'dialog-box close'){
+			setDialogState('dialog-box')
+			setLinkCardState('link-card fix')
+		}
+		else{
+			setDialogState('dialog-box close')
+			setLinkCardState('link-card')
+		}
+	}
+
 	return (
 		<div className="home">
 			<div className="home-header">
@@ -101,15 +118,20 @@ const Profile = () =>{
 					}}>Chattrr</h1>
 				</div>
 				<div className="header-right">
-					<div className="link-card">
-						<img src={defaultPFP} width="35" height="35" alt={`${userDetail.username}'s profile picture`} onClick={()=>{
-							window.location.replace(`../user/${userDetail.username}`)
-						}} />
-						<div className="user-detail">
-							<p className="display-name">{userDetail.display_name}</p>
-							<p className="username">@{userDetail.username}</p>
+					<div className={linkCardState}>
+						<div className="link-card-header">
+							<img src={defaultPFP} width="35" height="35" alt={`${userDetail.username}'s profile picture`} onClick={()=>{
+								window.location.replace(`../user/${userDetail.username}`)
+							}} />
+							<div className="user-detail">
+								<p className="display-name">{userDetail.display_name}</p>
+								<p className="username">@{userDetail.username}</p>
+							</div>
+							<img className="more" src={moreIcon} width="25" height="25" alt="more icon" onClick={handleDialogBox}/>
 						</div>
-						<img className="more" src={moreIcon} width="25" height="25" alt="more icon"/>
+						<div className={dialogState}>
+							<h1>Dialog</h1>
+						</div>
 					</div>
 				</div>
 			</div>
