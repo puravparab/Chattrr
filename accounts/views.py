@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from rest_framework.views import APIView
@@ -6,9 +7,9 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, parser_classes, permission_classes
+from rest_framework_simplejwt.tokens import RefreshToken
 from requests import post
 
-from django.contrib.auth.models import User, Group
 from .models import UserProfile
 from .serializers import UserProfileSerializer
 from blurts.models import Blurt, BlurtLike, BlurtComment
@@ -107,7 +108,7 @@ class registerUser(APIView):
 			messages['errors'] = str(e)
 			return Response(messages, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-# LOG IN USER::
+# LOG IN USER
 class loginuser(APIView):
 	parser_classes = [JSONParser]
 	def post(Self, request):
@@ -136,7 +137,19 @@ class loginuser(APIView):
 		except Exception as e:
 			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-		
+# LOG OUT USER
+class logoutuser(APIView):
+	permission_classes = [IsAuthenticated]
+	parser_classes = [JSONParser]
+	def post(self, request):
+		token = RefreshToken(request.data.get("refresh_token"))
+		try:
+			token.blacklist()
+			return Response({"detail": "User logged out"}, status=status.HTTP_200_OK)
+		except Exception as e:
+			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 # Get a new access and refresh token:
 @api_view(["GET"])
 def token_refresh(request, rt):
