@@ -59,20 +59,24 @@
 	justify-content: center;
 	align-items: center;
 	width: fit-content;
-	padding: 8px 15px;
 	margin-right: 20%;
 	margin-top: 0px;
 	border: 2px solid rgb(29, 43, 73);
 	border-radius: 30px;
 	cursor: pointer;
 }
-.home .home-header .header-right .fix{
-	margin-top: 86px;
-	position: absolute;
-}
 
 .home .home-header .header-right .link-card:hover{
 	background: rgb(29, 43, 73);
+}
+
+.home .home-header .header-right .fix-pos{
+	margin-top: 84px;
+	position: absolute;
+}
+
+.home .home-header .header-right .fix-pos:hover{
+	background: rgb(13, 19, 33);
 }
 
 .home .home-header .link-card .link-card-header{
@@ -80,7 +84,18 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	padding: 8px 15px;
 	gap: 0px 20px;
+	border-radius: 30px;
+}
+.home .home-header .link-card .fix-style{
+	border-radius: 27px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.home .home-header .link-card .link-card-header:hover{
+	background: rgb(29, 43, 73);
 }
 
 .home .home-header .header-right .link-card img{
@@ -111,9 +126,45 @@
 .home .home-header .header-right .link-card .dialog-box{
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	border-top: 2px solid rgb(29, 43, 73);	
+	color: white;
 }
 .home .home-header .header-right .link-card .close{
 	display: none;
+}
+
+.home .home-header .header-right .link-card .dialog-box .dialog-list-item{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 0px 10px;
+	padding: 10px 15px;
+}
+
+.home .home-header .header-right .link-card .dialog-box .dialog-list-item:hover{
+	background: rgb(29, 43, 73);
+}
+
+.home .home-header .header-right .link-card .dialog-box .dialog-list-item p{
+	margin: 0px;
+}
+.home .home-header .header-right .link-card .dialog-box .dialog-list-item p:hover{
+	color:
+}
+
+.home .home-header .header-right .link-card .dialog-box .log-out{
+	justify-content: center;
+	align-items: center;
+	padding: 10px 15px;
+	border-radius: 27px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	color: red;
+}
+.home .home-header .header-right .link-card .dialog-box .log-out:hover{
+	color:
 }
 
 .home .home-container{
@@ -145,12 +196,19 @@
 
 @media screen and (max-width: 1100px) {
 	.home .home-header .header-right .link-card{
-		padding: 15px 15px;
 		border: none;
 	}
 
-	.home .home-header .header-right .fix{
+	.home .home-header .header-right .fix-pos{
 		margin-top: 0px;
+	}
+
+	.home .home-header .link-card .link-card-header{
+		padding: 8px;
+	}
+	.home .home-header .link-card .fix-style{
+		border-radius: 30px;
+		padding: 8px;
 	}
 
 	.home .home-header .header-right .link-card .user-detail{

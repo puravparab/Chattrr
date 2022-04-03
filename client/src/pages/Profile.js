@@ -8,6 +8,7 @@ import '../styles/pages/profile.css';
 import defaultPFP from '../assets/images/default-pfp.png';
 import backBtn from '../assets/icons/white_arrow.svg';
 import moreIcon from '../assets/icons/more_icon_white.svg';
+import profileICon from '../assets/icons/profile_icon_white2.svg'
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -36,6 +37,7 @@ const Profile = () =>{
 	const [profile, setProfile] = useState('')
 
 	const [linkCardState, setLinkCardState] = useState('link-card')
+	const [linkCardHeaderState, setLinkCardHeaderState] = useState('link-card-header')
 	const [dialogState, setDialogState] = useState('dialog-box close')
 
 	useEffect(() => {
@@ -95,11 +97,13 @@ const Profile = () =>{
 	const handleDialogBox = () => {
 		if (dialogState === 'dialog-box close'){
 			setDialogState('dialog-box')
-			setLinkCardState('link-card fix')
+			setLinkCardState('link-card fix-pos')
+			setLinkCardHeaderState('link-card-header fix-style')
 		}
 		else{
 			setDialogState('dialog-box close')
 			setLinkCardState('link-card')
+			setLinkCardHeaderState('link-card-header')
 		}
 	}
 
@@ -119,7 +123,7 @@ const Profile = () =>{
 				</div>
 				<div className="header-right">
 					<div className={linkCardState}>
-						<div className="link-card-header">
+						<div className={linkCardHeaderState}>
 							<img src={defaultPFP} width="35" height="35" alt={`${userDetail.username}'s profile picture`} onClick={()=>{
 								window.location.replace(`../user/${userDetail.username}`)
 							}} />
@@ -130,7 +134,15 @@ const Profile = () =>{
 							<img className="more" src={moreIcon} width="25" height="25" alt="more icon" onClick={handleDialogBox}/>
 						</div>
 						<div className={dialogState}>
-							<h1>Dialog</h1>
+							<div className="dialog-list-item" onClick={()=>{
+								window.location.replace(`../user/${userDetail.username}`)
+							}}>
+								<img src={profileICon} width="20" height="20" alt="profile-icon" />
+								<p>Profile</p>
+							</div>
+							<div className="dialog-list-item log-out">
+								<p>Log Out</p>
+							</div>
 						</div>
 					</div>
 				</div>
