@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getToken, isAuthenticated } from  "../actions/authActions.js"
+import { getToken, isAuthenticated, logout } from  "../actions/authActions.js"
 import Feed from "../components/Feed"
 import PostBlurtForm from "../components/forms/PostBlurtForm"
 import defaultPFP from '../assets/images/default-pfp.png';
@@ -109,7 +109,9 @@ const HomePage = () => {
 								<img src={profileICon} width="20" height="20" alt="profile-icon" />
 								<p>Profile</p>
 							</div>
-							<div className="dialog-list-item log-out">
+							<div className="dialog-list-item log-out" onClick={()=>{
+								logout()
+							}}>
 								<p>Log Out</p>
 							</div>
 						</div>

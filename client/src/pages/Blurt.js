@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom"
-import { getToken, isAuthenticated } from  "../actions/authActions.js"
+import { getToken, isAuthenticated, logout } from  "../actions/authActions.js"
 import BlurtCard from "../components/cards/BlurtCard.js"
 import BlurtComment from "../components/cards/BlurtComment.js"
 import PostCommentForm from "../components/forms/PostCommentForm.js"
@@ -178,7 +178,9 @@ const Blurt = () => {
 								<img src={profileICon} width="20" height="20" alt="profile-icon" />
 								<p>Profile</p>
 							</div>
-							<div className="dialog-list-item log-out">
+							<div className="dialog-list-item log-out" onClick={()=>{
+								logout()
+							}}>
 								<p>Log Out</p>
 							</div>
 						</div>

@@ -77,3 +77,43 @@ export const isAuthenticated = () => {
 	}
 };
 
+// Logout user
+export const logout = async () => {
+	let refresh_token = ""
+
+	// Get refresh token
+	try{
+		refresh_token = getToken('rt')
+	}
+	catch(e){
+		console.log(e)
+	}
+
+	console.log(refresh_token)
+
+	try{
+		document.cookie = "at=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		document.cookie = "rt=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+	}catch(e){
+		console.log(e)
+		return false
+	}
+	
+	if (refresh_token === ''){window.location.replace(ROOT_URL)}
+
+	const res = await fetch(ROOT_URL + '/accounts/logout', {
+		method: 'POST',
+		headers: {
+			'Content-type': 'application/json'
+		},
+		body: JSON.stringify({
+			"refresh_token": refresh_token
+		})
+	})
+	if(res.ok){
+		window.location.replace(ROOT_URL)
+	}
+	else{
+		console.log("logout failed")
+	}
+}

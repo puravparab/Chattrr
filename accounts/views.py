@@ -139,7 +139,6 @@ class loginuser(APIView):
 
 # LOG OUT USER
 class logoutuser(APIView):
-	permission_classes = [IsAuthenticated]
 	parser_classes = [JSONParser]
 	def post(self, request):
 		token = RefreshToken(request.data.get("refresh_token"))
