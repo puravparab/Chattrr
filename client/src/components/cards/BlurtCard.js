@@ -5,6 +5,7 @@ import { dateDifference } from "../../utilities/time.js"
 import '../../styles/components/cards/blurtcard.css';
 import heartGreyOutline from '../../assets/icons/heart_grey_outline.svg';
 import heartRed from '../../assets/icons/heart_red.svg';
+import moreIcon from '../../assets/icons/more_icon_white.svg';
 import defaultPFP from '../../assets/images/default-pfp.png';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
@@ -124,19 +125,24 @@ const BlurtCard = (props) => {
 			<div className="blurt-container-right">
 				<div className="blurt-body" >
 					<div className="blurt-body-header">
-						<div className="display-name" onClick={()=>{
-							navigate(`/user/${props.username}`);
-						}}>
-							<p>{props.display_name}</p>
-						</div>
+						<div className="header-left">
+							<div className="display-name" onClick={()=>{
+								navigate(`/user/${props.username}`);
+							}}>
+								<p>{props.display_name}</p>
+							</div>
 
-						<div className="username" onClick={()=>{
-							navigate(`/user/${props.username}`);
-						}}>
-							<p>@{props.username}</p>
-						</div>
+							<div className="username" onClick={()=>{
+								navigate(`/user/${props.username}`);
+							}}>
+								<p>@{props.username}</p>
+							</div>
 
-						<div className="timestamp"><p>{dateDifference(props.created_at)}</p></div>
+							<div className="timestamp"><p>{dateDifference(props.created_at)}</p></div>
+						</div>
+						<div className="header-right">
+							<img className="more" src={moreIcon} width="25" height="25" alt="more icon" />
+						</div>
 					</div>
 					<div className="blurt-content" onClick={()=>{
 						navigate(`/user/${props.username}/status/${props.id}`);

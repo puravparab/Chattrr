@@ -44,31 +44,44 @@
 .blurt-card .blurt-body .blurt-body-header{
 	display: flex;
 	flex-direction: row;
-	gap: 0px 20px;
+	justify-content: space-between;
+	align-items: flex-start;
 }
 
-.blurt-card .blurt-body .blurt-body-header p{
+.blurt-card .blurt-body .blurt-body-header .header-left{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 0px 15px;
+}
+
+.blurt-card .blurt-body .blurt-body-header .header-left p{
     margin: 0px;
 }
 
-.blurt-card .blurt-body .blurt-body-header .display-name{
+.blurt-card .blurt-body .blurt-body-header .header-left .display-name{
     font-weight: bold;
 }
-.blurt-card .blurt-body .blurt-body-header .display-name:hover{
+.blurt-card .blurt-body .blurt-body-header .header-left .display-name:hover{
 	color: rgb(217, 217, 217);
 	text-decoration: underline;
 }
 
-.blurt-card .blurt-body .blurt-body-header .username{
+.blurt-card .blurt-body .blurt-body-header .header-left .username{
     color: rgb(189, 189, 189);
 }
-.blurt-card .blurt-body .blurt-body-header .username:hover{
+.blurt-card .blurt-body .blurt-body-header .header-left .username:hover{
 	color: rgb(153, 153, 153);
 	text-decoration: underline;
 }
 
-.blurt-card .blurt-body .blurt-body-header .timestamp{
+.blurt-card .blurt-body .blurt-body-header .header-left .timestamp{
     color: rgb(189, 189, 189);
+}
+
+.blurt-card .blurt-body .blurt-body-header .header-right{
+	display: flex;
+	flex-direction: row;
 }
 
 .blurt-card .blurt-body .blurt-content{
@@ -84,7 +97,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding: 0px 20px 0 10px;
+	padding: 0px 15px 0 0px;
 }
 
 .blurt-card .blurt-footer .blurt-comment-container{
