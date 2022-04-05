@@ -44,6 +44,31 @@ def createBlurt(request, format=None):
 	except Exception as e:
 		return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+# Delete a blurt
+@api_view(["DELETE"])
+@parser_classes([JSONParser])
+@permission_classes([IsAuthenticated])
+def deleteBlurt(request, blurt_id):
+	author = request.user
+	# Does author exist in database?
+	user = User.objects.filter(username=author)
+	if not user.exists():
+		return Response({'error': "author does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+	else:
+		user_profile = UserProfile.objects.filter(user=user[0])
+		if not user_profile.exists():
+			return Response({'error': "author does not exist"}, status=status.HTTP_400_BAD_REQUEST)
+
+	# Find BLurt
+	blurt = Blurt.objects.filter(author=user_profile[0], id=blurt_id)
+	if blurt.exists():
+		try:
+			blurt.delete()
+			return Response({"detail" : "Blurt succesfully deleted"}, status=status.HTTP_200_OK)
+		except Exception as e:
+			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+	else:
+		Response({"error": "Blurt does not exist"}, status=HTTP_400_BAD_REQUEST)
 
 # TODO: Add more data to API call
 # GET a specific blurt
