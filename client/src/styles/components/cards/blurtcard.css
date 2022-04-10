@@ -91,6 +91,10 @@
 }
 
 .blurt-card .blurt-body .blurt-body-header .header-right .dialog-box{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	position: absolute;
 	left: 50px;
 	top: 1px;
@@ -106,6 +110,22 @@
 
 .blurt-card .blurt-body .blurt-body-header .header-right .close{
 	display: none;
+}
+
+.blurt-card .blurt-body .blurt-body-header .header-right .dialog-box-item{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 0 10px;
+	font-size: 17px;
+}
+.blurt-card .blurt-body .blurt-body-header .header-right .dialog-box-item p{
+	margin: 0px;
+}
+
+.blurt-card .blurt-body .blurt-body-header .header-right .delete{
+	color: rgb(213, 11, 11);
 }
 
 .blurt-card .blurt-body .blurt-content{

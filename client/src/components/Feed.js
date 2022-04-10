@@ -42,7 +42,8 @@ const Feed = ({ accessToken, renderComment }) => {
 								likes_detail={blurtItem.likes_detail}
 								no_of_comments={blurtItem.no_of_comments}
 								accessToken={accessToken} 
-								renderComment={renderComment} />
+								renderComment={renderComment} 
+								is_user_author={blurtItem.is_user_author} />
 				})
 				console.log(BlurtList)
 				setBlurtList(BlurtList)

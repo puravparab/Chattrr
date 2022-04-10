@@ -6,11 +6,14 @@ import '../../styles/components/cards/blurtcard.css';
 import heartGreyOutline from '../../assets/icons/heart_grey_outline.svg';
 import heartRed from '../../assets/icons/heart_red.svg';
 import moreIcon from '../../assets/icons/more_icon_white.svg';
+import trashIcon from '../../assets/icons/trash_red.svg';
 import defaultPFP from '../../assets/images/default-pfp.png';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
 // TODO: Timestamp incorrect for posts less than a day old in transition periods
+// TODO: Check if access token is valid
+// TODO: Update page when blurt is deleted
 const BlurtCard = (props) => {
 	const [likeBtn, setLikeBtn] = useState('')
 	const [likesNum, setLikesNum] = useState('')
@@ -118,13 +121,24 @@ const BlurtCard = (props) => {
 		}
 	}
 
-	const handleDialogBox = () =>{
+	const handleDialogBox = () => {
 		if (dialogBoxState === 'dialog-box close'){
 			setDialogBoxState('dialog-box')
 		}
 		else{
 			setDialogBoxState('dialog-box close')
 		}
+	}
+
+	const handleDelete = async () => {
+		const res = await fetch(ROOT_URL + '/blurt/delete/' + props.id, {
+			method: 'DELETE',
+			headers: {
+				'Content-type': 'application/json',
+				'Authorization': "Bearer " + accessToken
+			}
+		})
+		const data = await res.json()
 	}
 
 	return (
@@ -155,7 +169,13 @@ const BlurtCard = (props) => {
 						<div className="header-right">
 							<img className="more" src={moreIcon} width="25" height="25" alt="more icon" onClick={handleDialogBox} />
 							<div className={dialogBoxState}>
-								<h1>Dialog box</h1>
+								{props.is_user_author ? 
+									<div className="dialog-box-item delete"  onClick={()=>{
+											handleDelete()
+										}} >
+										<img src={trashIcon} width="25" height="25" alt="delete btn" /> 
+										<p>Delete</p>
+									</div> : ""}
 							</div>
 						</div>
 					</div>

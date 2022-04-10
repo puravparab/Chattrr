@@ -185,6 +185,12 @@ def blurt_list(request):
 				else:
 					serializer.data[i]["no_of_comments"] = 0
 
+				# Check if requesting user is the blurt author
+				if serializer.data[i]["username"] == user.username:
+					serializer.data[i]["is_user_author"]  = True
+				else:
+					serializer.data[i]["is_user_author"]  = False
+
 		data = {
 			'blurts': serializer.data,
 			'no_of_blurts': blurts.count()
