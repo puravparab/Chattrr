@@ -16,6 +16,9 @@ const BlurtCard = (props) => {
 	const [likesNum, setLikesNum] = useState('')
 	const [accessToken, setAccessToken] = useState(props.accessToken)
 	const [comments, setComments] = useState(props.accessToken)
+
+	const [dialogBoxState, setDialogBoxState] = useState("dialog-box close")
+
 	let navigate = useNavigate();
 
 	// Check if access token is valid
@@ -115,6 +118,15 @@ const BlurtCard = (props) => {
 		}
 	}
 
+	const handleDialogBox = () =>{
+		if (dialogBoxState === 'dialog-box close'){
+			setDialogBoxState('dialog-box')
+		}
+		else{
+			setDialogBoxState('dialog-box close')
+		}
+	}
+
 	return (
 		<div className="blurt-card" >
 			<div className="pfp-container">
@@ -141,7 +153,10 @@ const BlurtCard = (props) => {
 							<div className="timestamp"><p>{dateDifference(props.created_at)}</p></div>
 						</div>
 						<div className="header-right">
-							<img className="more" src={moreIcon} width="25" height="25" alt="more icon" />
+							<img className="more" src={moreIcon} width="25" height="25" alt="more icon" onClick={handleDialogBox} />
+							<div className={dialogBoxState}>
+								<h1>Dialog box</h1>
+							</div>
 						</div>
 					</div>
 					<div className="blurt-content" onClick={()=>{

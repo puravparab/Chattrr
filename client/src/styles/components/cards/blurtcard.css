@@ -81,7 +81,31 @@
 
 .blurt-card .blurt-body .blurt-body-header .header-right{
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+	position: relative;
+}
+
+.blurt-card .blurt-body .blurt-body-header .header-right .dialog-box{
+	position: absolute;
+	left: 50px;
+	top: 1px;
+	padding: 10px;
+	background: rgb(30, 42, 72);
+	border-radius: 10px;
+	width: 120px;
+}
+
+.blurt-card .blurt-body .blurt-body-header .header-right .dialog-box h1{
+	margin: 0px;
+}
+
+.blurt-card .blurt-body .blurt-body-header .header-right .close{
+	display: none;
 }
 
 .blurt-card .blurt-body .blurt-content{
@@ -122,4 +146,11 @@
 
 .blurt-card .blurt-footer .blurt-likes .red{
 	color: rgb(192, 57, 43);
+}
+
+@media screen and (max-width: 1000px){
+	.blurt-card .blurt-body .blurt-body-header .header-right .dialog-box{
+		top: 25px;
+		left: -115px;
+	}
 }
