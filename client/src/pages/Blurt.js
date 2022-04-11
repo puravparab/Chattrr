@@ -93,7 +93,8 @@ const Blurt = () => {
 							likes_detail={data[0].likes_detail}
 							no_of_comments={data[0].no_of_comments}
 							accessToken={accessToken} 
-							renderComment={false} />
+							renderComment={false} 
+							is_user_author={data[0].is_user_author} />
 			setBlurt(Blurt)
  		}else{
  			console.log("Blurt does not exist")

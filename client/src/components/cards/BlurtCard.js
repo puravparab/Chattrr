@@ -12,8 +12,6 @@ import defaultPFP from '../../assets/images/default-pfp.png';
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
 // TODO: Timestamp incorrect for posts less than a day old in transition periods
-// TODO: Check if access token is valid
-// TODO: Update page when blurt is deleted
 const BlurtCard = (props) => {
 	const [likeBtn, setLikeBtn] = useState('')
 	const [likesNum, setLikesNum] = useState('')
@@ -131,6 +129,7 @@ const BlurtCard = (props) => {
 	}
 
 	const handleDelete = async () => {
+		authCheck()
 		const res = await fetch(ROOT_URL + '/blurt/delete/' + props.id, {
 			method: 'DELETE',
 			headers: {
@@ -139,6 +138,9 @@ const BlurtCard = (props) => {
 			}
 		})
 		const data = await res.json()
+		if(res.ok){
+			navigate(0)
+		}
 	}
 
 	return (

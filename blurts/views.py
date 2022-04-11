@@ -118,6 +118,12 @@ def blurt_detail(request, blurt_id):
 			else:
 				serializer.data[0]["no_of_comments"] = 0
 
+			# Check if requesting user is the blurt author
+			if serializer.data[0]["username"] == user.username:
+				serializer.data[0]["is_user_author"]  = True
+			else:
+				serializer.data[0]["is_user_author"]  = False
+
 			return Response(serializer.data, status=status.HTTP_200_OK)
 		else:
 			return Response({"error": "blurt does not exist"}, status=status.HTTP_400_BAD_REQUEST)
