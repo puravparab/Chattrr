@@ -330,6 +330,33 @@ class blurt_comment(APIView):
 		except Exception as e:
 			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@api_view(["DELETE"])
+@parser_classes([JSONParser])
+@permission_classes([IsAuthenticated])
+def deleteComment(request, blurt_comment_id):
+	# Verify User
+	user = request.user
+	user_list = User.objects.filter(username=user)
+
+	if not user_list.exists():
+		return Response({'error': 'User does not exist'}, status=status.HTTP_401_UNAUTHORIZED)
+	else:
+		user_profile = UserProfile.objects.filter(user=user_list[0])
+		if not user_profile.exists():
+			return Response({'error': "user does not exist"}, status=status.HTTP_401_UNAUTHORIZED)
+
+	# Get Comment
+	blurtComment = BlurtComment.objects.filter(id=blurt_comment_id, author=user_profile[0])
+
+	if not blurtComment.exists():
+		return Response({'error': 'Blurt comment does not exist'}, status=status.HTTP_400_BAD_REQUEST)
+
+	try:
+		blurtComment.delete()
+		return Response({'detail': 'Blurt comment succesfully deleted'}, status=status.HTTP_200_OK)
+	except Exception as e:
+		return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 # Get all comments of a blurt:
 @api_view(["GET"])
 def blurt_comment_list(request, blurt_id):
