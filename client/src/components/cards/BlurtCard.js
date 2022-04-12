@@ -139,7 +139,11 @@ const BlurtCard = (props) => {
 		})
 		const data = await res.json()
 		if(res.ok){
-			navigate(0)
+			if (props.blurt_page) {
+				navigate(-1)
+			}else{
+				navigate(0)
+			}
 		}
 	}
 

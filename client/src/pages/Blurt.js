@@ -94,10 +94,11 @@ const Blurt = () => {
 							no_of_comments={data[0].no_of_comments}
 							accessToken={accessToken} 
 							renderComment={false} 
-							is_user_author={data[0].is_user_author} />
+							is_user_author={data[0].is_user_author} 
+							blurt_page={true} />
 			setBlurt(Blurt)
  		}else{
- 			console.log("Blurt does not exist")
+ 			navigate('./error')
  		}
   	}
 
