@@ -43,9 +43,17 @@
 .comment-card .comment-container-right .comment-body .comment-body-header{
 	display: flex;
 	flex-direction: row;
-	gap: 0px 20px;
+	justify-content: space-between;
+	align-items: flex-start;
 }
-.comment-card .comment-container-right .comment-body .comment-body-header p{
+
+.comment-card .comment-container-right .comment-body .comment-body-header .header-left{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 0px 15px;
+}
+.comment-card .comment-container-right .comment-body .comment-body-header .header-left p{
 	margin: 0px;
 }
 
@@ -67,6 +75,51 @@
 
 .comment-card .comment-container-right .comment-body .comment-body-header .timestamp{
 	color: rgb(189, 189, 189);
+}
+
+.comment-card .comment-container-right .comment-body .comment-body-header .header-right{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+	position: relative;
+}
+
+.comment-card .comment-container-right .comment-body .comment-body-header .header-right .dialog-box{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	left: 50px;
+	top: 1px;
+	padding: 10px;
+	background: rgb(30, 42, 72);
+	border-radius: 10px;
+	width: 120px;
+}
+.comment-card .comment-container-right .comment-body .comment-body-header .header-right .dialog-box h1{
+	margin: 0px;
+}
+.comment-card .comment-container-right .comment-body .comment-body-header .header-right .close{
+	display: none;
+}
+.comment-card .comment-container-right .comment-body .comment-body-header .header-right .dialog-box-item{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 0 10px;
+	font-size: 17px;
+}
+.comment-card .comment-container-right .comment-body .comment-body-header .header-right .dialog-box-item p{
+	margin: 0px;
+}
+.comment-card .comment-container-right .comment-body .comment-body-header .header-right .delete{
+	color: red;
 }
 
 .comment-card .comment-container-right .comment-body .comment-content{
@@ -93,4 +146,11 @@
 
 .comment-card .comment-container-right .comment-footer .comment-likes:hover{
 	color: rgb(192, 57, 43);
+}
+
+@media screen and (max-width: 1000px){
+	.comment-card .comment-container-right .comment-body .comment-body-header .header-right .dialog-box{
+		top: 25px;
+		left: -115px;
+	}
 }

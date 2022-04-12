@@ -5,6 +5,8 @@ import { dateDifference } from "../../utilities/time.js"
 import '../../styles/components/cards/blurtcomment.css';
 import heartGreyOutline from '../../assets/icons/heart_grey_outline.svg';
 import heartRed from '../../assets/icons/heart_red.svg';
+import moreIcon from '../../assets/icons/more_icon_white.svg';
+import trashIcon from '../../assets/icons/trash_red.svg';
 import defaultPFP from '../../assets/images/default-pfp.png';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
@@ -13,6 +15,8 @@ const BlurtComment = (props) => {
 	const [likeBtn, setLikeBtn] = useState('')
 	const [likesNum, setLikesNum] = useState('')
 	const [accessToken, setAccessToken] = useState(props.accessToken)
+
+	const [dialogBoxState, setDialogBoxState] = useState("dialog-box close")
 
 	let navigate = useNavigate();
 
@@ -101,6 +105,34 @@ const BlurtComment = (props) => {
 		}
 	}
 
+	const handleDialogBox = () => {
+		if (dialogBoxState === 'dialog-box close'){
+			setDialogBoxState('dialog-box')
+		}
+		else{
+			setDialogBoxState('dialog-box close')
+		}
+	}
+
+	const handleDelete = async () => {
+		authCheck()
+		const res = await fetch(ROOT_URL + '/blurt/comment/delete/' + props.id, {
+			method: 'DELETE',
+			headers: {
+				'Content-type': 'application/json',
+				'Authorization': "Bearer " + accessToken
+			}
+		})
+		const data = await res.json()
+		if(res.ok){
+			if (props.blurt_page) {
+				navigate(-1)
+			}else{
+				navigate(0)
+			}
+		}
+	}
+
 	return (
 		<div className="comment-card">
 			<div className="pfp-container">
@@ -111,19 +143,33 @@ const BlurtComment = (props) => {
 			<div className="comment-container-right">
 				<div className="comment-body">
 					<div className="comment-body-header">
-						<div className="display-name" onClick={()=>{
-							navigate(`../../../../user/${props.username}`);
-						}}>
-							<p>{props.display_name}</p>
-						</div>
+						<div className="header-left">
+							<div className="display-name" onClick={()=>{
+								navigate(`../../../../user/${props.username}`);
+							}}>
+								<p>{props.display_name}</p>
+							</div>
 
-						<div className="username" onClick={()=>{
-							navigate(`../../../../user/${props.username}`);
-						}}>
-							<p>@{props.username}</p>
-						</div>
+							<div className="username" onClick={()=>{
+								navigate(`../../../../user/${props.username}`);
+							}}>
+								<p>@{props.username}</p>
+							</div>
 
-						<div className="timestamp"><p>{dateDifference(props.created_at)}</p></div>
+							<div className="timestamp"><p>{dateDifference(props.created_at)}</p></div>
+						</div>
+						<div className="header-right">
+							<img className="more" src={moreIcon} width="25" height="25" alt="more icon" onClick={handleDialogBox} />
+							<div className={dialogBoxState}>
+								{props.is_user_author ? 
+									<div className="dialog-box-item delete"  onClick={()=>{
+											handleDelete()
+										}} >
+										<img src={trashIcon} width="25" height="25" alt="delete btn" /> 
+										<p>Delete</p>
+									</div> : ""}
+							</div>
+						</div>
 					</div>
 					<div className="comment-content"><p>{props.content}</p></div>
 				</div>

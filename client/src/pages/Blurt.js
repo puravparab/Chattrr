@@ -125,7 +125,8 @@ const Blurt = () => {
   							content={blurtComment.content}
   							created_at={blurtComment.created_at}
   							likes_detail={blurtComment.likes_detail}
-  							accessToken={accessToken} />
+  							accessToken={accessToken} 
+  							is_user_author={false} />
   			})
   			setBlurtComments(BlurtComments)
   		}else{
