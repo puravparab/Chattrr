@@ -125,11 +125,7 @@ const BlurtComment = (props) => {
 		})
 		const data = await res.json()
 		if(res.ok){
-			if (props.blurt_page) {
-				navigate(-1)
-			}else{
-				navigate(0)
-			}
+			navigate(0)
 		}
 	}
 

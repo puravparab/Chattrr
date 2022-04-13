@@ -414,6 +414,11 @@ def blurt_comment_list(request, blurt_id):
 					}
 				serializer.data[i]["likes_detail"] = like_data
 
+				if serializer.data[i]["author"] == user.username:
+					serializer.data[i]["is_user_author"] = True
+				else:
+					serializer.data[i]["is_user_author"] = False
+
 			data = {
 				'comments': serializer.data,
 				'blurt_id': blurt_id,
