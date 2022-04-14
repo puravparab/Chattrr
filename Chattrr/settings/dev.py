@@ -55,7 +55,10 @@ INSTALLED_APPS = [
 
     # Created Apps
     'accounts.apps.AccountsConfig',
-    'blurts.apps.BlurtsConfig'
+    'blurts.apps.BlurtsConfig',
+
+    # DJANGO STORAGES
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -187,5 +190,11 @@ STATIC_ROOT = Path(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+# AMAZON WEB SERVICE
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')

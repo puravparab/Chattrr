@@ -10,6 +10,9 @@ whitenoise = "*"
 djangorestframework = "*"
 requests = "*"
 djangorestframework-simplejwt = "*"
+django-storages = "*"
+boto3 = "*"
+pillow = "*"
 
 [dev-packages]
 
