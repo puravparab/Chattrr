@@ -6,7 +6,7 @@ class UserProfile(models.Model):
 	user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 	display_name = models.CharField(max_length=20, null=True)
 	bio = models.CharField(max_length=160, blank=True)
-	profile_image = models.ImageField(blank=True, null=True)
+	profile_image = models.ImageField(upload_to='users/profile_images/', blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 	# username = models.CharField(max_length=20, null=True, blank=False, unique=True)
