@@ -9,4 +9,5 @@ def delete_profile_image_s3(sender, instance, **kwargs):
 	except UserProfile.DoesNotExist:
 		return None
 
-	old_instance.profile_image.delete(save=False)
+	if(instance.profile_image != old_instance.profile_image):
+		old_instance.profile_image.delete(save=False)

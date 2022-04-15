@@ -17,7 +17,7 @@ const BlurtCard = (props) => {
 	const [likesNum, setLikesNum] = useState('')
 	const [accessToken, setAccessToken] = useState(props.accessToken)
 	const [comments, setComments] = useState(props.accessToken)
-
+	const [profileImage, setProfileImage] = useState('')
 	const [dialogBoxState, setDialogBoxState] = useState("dialog-box close")
 
 	let navigate = useNavigate();
@@ -46,6 +46,14 @@ const BlurtCard = (props) => {
 		// TODO: Test This
 		catch (e) {
 			console.log(e)
+		}
+
+		if(props.profile_image === null){
+			console.log("null")
+			setProfileImage(defaultPFP)
+		}
+		else{
+			setProfileImage(props.profile_image)
 		}
 	}, [])
 
@@ -150,7 +158,7 @@ const BlurtCard = (props) => {
 	return (
 		<div className="blurt-card" >
 			<div className="pfp-container">
-				<img src={defaultPFP} width="32" height="32" alt={`${props.username}'s profile picture`} onClick={()=>{
+				<img src={profileImage} onerror={()=>{this.src={defaultPFP}}} width="48" height="48" alt={`${props.username}'s profile picture`} onClick={()=>{
 					navigate(`/user/${props.username}`);
 				}}/>
 			</div>
