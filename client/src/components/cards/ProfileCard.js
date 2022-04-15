@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { dateDifference } from "../../utilities/time.js"
 import '../../styles/components/cards/profilecard.css';
@@ -7,12 +7,24 @@ import defaultPFP from '../../assets/images/default-pfp.png';
 const ProfileCard = (props) => {
 	let navigate = useNavigate();
 	const [accessToken, setAccessToken] = useState(props.accessToken)
+	const [profileImage, setProfileImage] = useState('')
+
+	useEffect(()=>{
+		if(props.profile_image === null){
+			setProfileImage(defaultPFP)
+		}
+		else{
+			setProfileImage(props.user.profile_image)
+		}
+	}, [])
 
 	return (
 		<div className="profile-card">
 			<div className="profile-card-left">
-				<img src={defaultPFP} width="64" height="64" alt={`${props.user.username}'s profile picture`} onClick={()=>{
-					navigate(`/user/${props.user.username}`);
+				<img 
+					src={profileImage} onerror={()=>{setProfileImage(defaultPFP)}} width="64" height="64" alt={`${props.user.username}'s profile picture`} 
+					onClick={()=>{
+						navigate(`/user/${props.user.username}`);
 				}}/>
 			</div>
 			<div className="profile-card-right">

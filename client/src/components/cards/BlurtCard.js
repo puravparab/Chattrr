@@ -49,7 +49,6 @@ const BlurtCard = (props) => {
 		}
 
 		if(props.profile_image === null){
-			console.log("null")
 			setProfileImage(defaultPFP)
 		}
 		else{
@@ -158,8 +157,10 @@ const BlurtCard = (props) => {
 	return (
 		<div className="blurt-card" >
 			<div className="pfp-container">
-				<img src={profileImage} onerror={()=>{this.src={defaultPFP}}} width="48" height="48" alt={`${props.username}'s profile picture`} onClick={()=>{
-					navigate(`/user/${props.username}`);
+				<img 
+					src={profileImage} width="48" height="48" alt={`${props.username}'s profile picture`} 
+					onClick={()=>{
+						navigate(`/user/${props.username}`);
 				}}/>
 			</div>
 			<div className="blurt-container-right">
