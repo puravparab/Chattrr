@@ -7,7 +7,7 @@ import defaultPFP from '../../assets/images/default-pfp.png';
 const ProfileCard = (props) => {
 	let navigate = useNavigate();
 	const [accessToken, setAccessToken] = useState(props.accessToken)
-	const [profileImage, setProfileImage] = useState('')
+	const [profileImage, setProfileImage] = useState(defaultPFP)
 
 	useEffect(()=>{
 		// Set profile image
@@ -23,7 +23,7 @@ const ProfileCard = (props) => {
 		<div className="profile-card">
 			<div className="profile-card-left">
 				<img 
-					src={profileImage} onerror={()=>{setProfileImage(defaultPFP)}} width="64" height="64" alt={`${props.user.username}'s profile picture`} 
+					src={profileImage} onerror={()=>{setProfileImage(defaultPFP)}} width="100" height="100" alt={`${props.user.username}'s profile picture`} 
 					onClick={()=>{
 						navigate(`/user/${props.user.username}`);
 				}}/>

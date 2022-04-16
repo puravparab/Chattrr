@@ -17,7 +17,7 @@ const BlurtCard = (props) => {
 	const [likesNum, setLikesNum] = useState('')
 	const [accessToken, setAccessToken] = useState(props.accessToken)
 	const [comments, setComments] = useState(props.accessToken)
-	const [profileImage, setProfileImage] = useState('')
+	const [profileImage, setProfileImage] = useState(defaultPFP)
 	const [dialogBoxState, setDialogBoxState] = useState("dialog-box close")
 
 	let navigate = useNavigate();
@@ -159,7 +159,7 @@ const BlurtCard = (props) => {
 		<div className="blurt-card" >
 			<div className="pfp-container">
 				<img 
-					src={profileImage} width="48" height="48" alt={`${props.username}'s profile picture`} 
+					src={profileImage} width="48" height="48" alt={`${props.username}'s profile picture`}
 					onClick={()=>{
 						navigate(`/user/${props.username}`);
 				}}/>

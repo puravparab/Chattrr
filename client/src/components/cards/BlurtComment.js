@@ -15,7 +15,7 @@ const BlurtComment = (props) => {
 	const [likeBtn, setLikeBtn] = useState('')
 	const [likesNum, setLikesNum] = useState('')
 	const [accessToken, setAccessToken] = useState(props.accessToken)
-	const [profileImage, setProfileImage] = useState('')
+	const [profileImage, setProfileImage] = useState('defaultPFP')
 	const [dialogBoxState, setDialogBoxState] = useState("dialog-box close")
 
 	let navigate = useNavigate();
