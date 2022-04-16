@@ -38,6 +38,7 @@ const Profile = () =>{
 
 	const [linkCardState, setLinkCardState] = useState('link-card')
 	const [linkCardHeaderState, setLinkCardHeaderState] = useState('link-card-header')
+	const [profileImage, setProfileImage] = useState(defaultPFP)
 	const [dialogState, setDialogState] = useState('dialog-box close')
 
 	useEffect(() => {
@@ -67,6 +68,14 @@ const Profile = () =>{
 				username: data.user.username,
 				display_name: data.user.display_name
 			})
+
+			// Set profile image
+			if(data.user.profile_image === null){
+				setProfileImage(defaultPFP)
+			}
+			else{
+				setProfileImage(data.user.profile_image)
+			}
 		}else{
 			console.log('user detail load failure')
 		}
@@ -124,7 +133,7 @@ const Profile = () =>{
 				<div className="header-right">
 					<div className={linkCardState}>
 						<div className={linkCardHeaderState}>
-							<img src={defaultPFP} width="35" height="35" alt={`${userDetail.username}'s profile picture`} onClick={()=>{
+							<img src={profileImage} width="35" height="35" alt={`${userDetail.username}'s profile picture`} onClick={()=>{
 								window.location.replace(`../user/${userDetail.username}`)
 							}} />
 							<div className="user-detail">
