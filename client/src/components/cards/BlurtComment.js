@@ -15,7 +15,7 @@ const BlurtComment = (props) => {
 	const [likeBtn, setLikeBtn] = useState('')
 	const [likesNum, setLikesNum] = useState('')
 	const [accessToken, setAccessToken] = useState(props.accessToken)
-
+	const [profileImage, setProfileImage] = useState('')
 	const [dialogBoxState, setDialogBoxState] = useState("dialog-box close")
 
 	let navigate = useNavigate();
@@ -43,6 +43,14 @@ const BlurtComment = (props) => {
 		// TODO: Test This
 		catch (e) {
 			console.log(e)
+		}
+
+		// Set profile image
+		if(props.profile_image === null){
+			setProfileImage(defaultPFP)
+		}
+		else{
+			setProfileImage(props.profile_image)
 		}
 	}, [])
 
@@ -132,7 +140,7 @@ const BlurtComment = (props) => {
 	return (
 		<div className="comment-card">
 			<div className="pfp-container">
-				<img src={defaultPFP} width="32" height="32" alt={`${props.username}'s profile picture`} onClick={()=>{
+				<img src={profileImage} width="42" height="42" alt={`${props.username}'s profile picture`} onClick={()=>{
 						navigate(`/user/${props.username}`);
 					}}/>
 			</div>

@@ -48,6 +48,7 @@ const BlurtCard = (props) => {
 			console.log(e)
 		}
 
+		// Set profile image
 		if(props.profile_image === null){
 			setProfileImage(defaultPFP)
 		}

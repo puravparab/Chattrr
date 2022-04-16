@@ -123,6 +123,7 @@ const Blurt = () => {
   							blurt_id={blurtComment.blurt_id}
   							username={blurtComment.author}
   							display_name={blurtComment.display_name}
+  							profile_image={blurtComment.profile_image}
   							content={blurtComment.content}
   							created_at={blurtComment.created_at}
   							likes_detail={blurtComment.likes_detail}

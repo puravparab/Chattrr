@@ -10,6 +10,7 @@ const ProfileCard = (props) => {
 	const [profileImage, setProfileImage] = useState('')
 
 	useEffect(()=>{
+		// Set profile image
 		if(props.profile_image === null){
 			setProfileImage(defaultPFP)
 		}
