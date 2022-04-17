@@ -3,7 +3,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	gap: 0px 20px;
 	padding: 30px 10px 30px 10px;
 	width: 95%;
@@ -12,7 +12,7 @@
 .profile-card .profile-card-left{
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	width: 30%;
 }
@@ -34,8 +34,11 @@
 .profile-card .profile-card-right .profile-header{
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 10px 0px;
+	width: 100%;
+	flex-wrap: wrap;
 }
 
 .profile-card .profile-card-right .profile-header .header-detail{
@@ -43,20 +46,48 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+	width: auto;
+	max-width: 75%;
 }
 
 .profile-card .profile-card-right .profile-header .header-detail .display-name{
 	font-size: 20px;
 	font-weight: bold;
+	width: 100%;
 }
 
 .profile-card .profile-card-right .profile-header .header-detail .username{
 	font-size: 16px;
+	width: 100%;
 	color: rgb(189, 189, 189);
 }
 
 .profile-card .profile-card-right .profile-header .header-detail p{
 	margin: 0px;
+}
+
+.profile-card .profile-card-right .profile-header .header-detail .display-name p{
+	overflow-wrap: break-word;
+}
+.profile-card .profile-card-right .profile-header .header-detail .username p{
+	overflow-wrap: break-word;
+}
+
+.profile-card .profile-card-right .profile-header .header-edit-btn{
+	display: flex;
+	flex-direction: row;
+}
+.profile-card .profile-card-right .profile-header .header-edit-btn button{
+	color: white;
+	background: rgb(13, 19, 33);
+	border: 2px solid rgb(29, 43, 73);
+	border-radius: 25px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.profile-card .profile-card-right .profile-header .header-edit-btn button:hover{
+	background: rgb(29, 43, 73);
 }
 
 .profile-card .profile-card-right .profile-footer{
@@ -68,4 +99,11 @@
 
 .profile-card .profile-card-right .profile-footer p{
 	margin: 0px;
+}
+
+@media screen and (max-width: 600px){
+	.profile-card .profile-card-right .profile-header .header-detail{
+		width: auto;
+		max-width: 100%
+	}
 }
