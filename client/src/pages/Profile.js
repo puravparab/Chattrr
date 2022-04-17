@@ -94,6 +94,7 @@ const Profile = () =>{
 		if(res.ok){
 			const profileCard = <ProfileCard 
 									user={data.user}
+									is_user={data.is_user}
 									no_of_blurts={data.no_of_blurts}
 									accessToken={accessToken} />
 			setProfile(profileCard)

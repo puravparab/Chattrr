@@ -42,9 +42,10 @@ const ProfileCard = (props) => {
 							<p>@{props.user.username}</p>
 						</div>
 					</div>
-					<div className="header-edit-btn">
-						<button className="edit-btn">Edit Profile</button>
-					</div>
+					{props.is_user ?
+						<div className="header-edit-btn">
+							<button className="edit-btn">Edit Profile</button>
+						</div> : ""}
 				</div>
 				<div className="profile-body">
 					{props.user.bio}
