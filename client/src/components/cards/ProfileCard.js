@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { dateDifference } from "../../utilities/time.js"
+import EditProfileForm from "../forms/EditProfileForm.js"
 import '../../styles/components/cards/profilecard.css';
 import defaultPFP from '../../assets/images/default-pfp.png';
 
@@ -8,6 +9,9 @@ const ProfileCard = (props) => {
 	let navigate = useNavigate();
 	const [accessToken, setAccessToken] = useState(props.accessToken)
 	const [profileImage, setProfileImage] = useState(defaultPFP)
+
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+	const [editModalClass, setIsEditModalClass] = useState('modal-close')
 
 	useEffect(()=>{
 		// Set profile image
@@ -18,6 +22,17 @@ const ProfileCard = (props) => {
 			setProfileImage(props.user.profile_image)
 		}
 	}, [])
+
+	const handleEditModel = () => {
+		if (isEditModalOpen) {
+			setIsEditModalOpen(false)
+			setIsEditModalClass('modal-close')
+
+		}else{
+			setIsEditModalOpen(true)
+			setIsEditModalClass('modal-open')
+		}
+	}
 
 	return (
 		<div className="profile-card">
@@ -44,7 +59,10 @@ const ProfileCard = (props) => {
 					</div>
 					{props.is_user ?
 						<div className="header-edit-btn">
-							<button className="edit-btn">Edit Profile</button>
+							<button className="edit-btn" onClick={handleEditModel}>Edit Profile</button>
+							<div className={editModalClass}>
+								<EditProfileForm handleEditModel={handleEditModel}/>
+							</div>
 						</div> : ""}
 				</div>
 				<div className="profile-body">

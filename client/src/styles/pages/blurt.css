@@ -58,13 +58,13 @@
 }
 
 @media screen and (max-width: 600px)  {
-	.home .header{
+	/*.home .header{
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		width: 90%;
-	}
+	}*/
 
 	.home .blurt-container-center{
 	    display: flex;

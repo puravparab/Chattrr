@@ -1,0 +1,51 @@
+/* Styles for EditProfileForm.js */
+
+.edit-profile-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px 0px;
+	background-color: rgb(29, 43, 73);
+	border-radius: 10px;
+	padding: 20px 20px;
+}
+
+.edit-profile-container .header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.edit-profile-container .header h4{
+	margin: 0px
+}
+.edit-profile-container .header img{
+	cursor: pointer;
+}
+
+.edit-profile-container .edit-profile-form{
+	display: flex;
+	flex-direction: column;
+}
+
+.edit-profile-container .edit-profile-form form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 15px 0px;
+}
+
+.edit-profile-container .edit-profile-form form .form-entry{
+	display: flex;
+	flex-direction: column;
+	gap: 10px 0px;
+	width: 90%;
+}
+
+.edit-profile-container .edit-profile-form form .form-entry input{
+	width: 100%;
+}
