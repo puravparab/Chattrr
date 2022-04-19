@@ -20,7 +20,7 @@ const EditProfileForm = (props) => {
 					</div>
 					<div className="form-entry">
 						<label className="label">Update Bio</label>
-						<input type="text" />
+						<textarea type="text" maxlength="160" wrap="hard" />
 					</div>
 				</form>
 			</div>

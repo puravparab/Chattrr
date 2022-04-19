@@ -5,10 +5,11 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 10px 0px;
+	gap: 20px 0px;
 	background-color: rgb(29, 43, 73);
 	border-radius: 10px;
 	padding: 20px 20px;
+	width: 400px;
 }
 
 .edit-profile-container .header{
@@ -29,6 +30,7 @@
 .edit-profile-container .edit-profile-form{
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 .edit-profile-container .edit-profile-form form{
@@ -36,16 +38,39 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	gap: 15px 0px;
+	gap: 20px 0px;
 }
 
 .edit-profile-container .edit-profile-form form .form-entry{
 	display: flex;
 	flex-direction: column;
 	gap: 10px 0px;
-	width: 90%;
+	width: 95%;
 }
 
+.edit-profile-container .edit-profile-form form .form-entry label{
+	font-size: 18px;
+}
 .edit-profile-container .edit-profile-form form .form-entry input{
 	width: 100%;
+	height: 20px;
+	outline: none;
+	font-size: 16px;
+	border-radius: 5px;
+}
+
+.edit-profile-container .edit-profile-form form .form-entry textarea{
+	width: 100%;
+	height: 100px;
+	outline: none;
+	font-size: 16px;
+	border-radius: 5px;
+	resize: none;
+}
+
+@media screen and (max-width: 600px){
+	.edit-profile-container{
+		padding: 20px 20px;
+		width: 65%;
+	}
 }

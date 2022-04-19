@@ -21,6 +21,7 @@ load_dotenv(override=True)
 
 # REGISTER VIEW
 # TODO: Email Verification through email
+# TODO: Add character limits
 class registerUser(APIView):
 	parser_classes = [JSONParser]
 
