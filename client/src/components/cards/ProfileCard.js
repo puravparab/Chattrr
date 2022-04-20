@@ -9,8 +9,6 @@ const ProfileCard = (props) => {
 	let navigate = useNavigate();
 	const [accessToken, setAccessToken] = useState(props.accessToken)
 	const [profileImage, setProfileImage] = useState(defaultPFP)
-
-	const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 	const [editModalClass, setIsEditModalClass] = useState('modal-close')
 
 	useEffect(()=>{
@@ -23,13 +21,10 @@ const ProfileCard = (props) => {
 		}
 	}, [])
 
-	const handleEditModel = () => {
-		if (isEditModalOpen) {
-			setIsEditModalOpen(false)
+	const handleEditModel = (state) => {
+		if (state) {
 			setIsEditModalClass('modal-close')
-
 		}else{
-			setIsEditModalOpen(true)
 			setIsEditModalClass('modal-open')
 		}
 	}
@@ -59,7 +54,7 @@ const ProfileCard = (props) => {
 					</div>
 					{props.is_user ?
 						<div className="header-edit-btn">
-							<button className="edit-btn" onClick={handleEditModel}>Edit Profile</button>
+							<button className="edit-btn" onClick={()=>{handleEditModel(false)}}>Edit Profile</button>
 							<div className={editModalClass}>
 								<EditProfileForm handleEditModel={handleEditModel}/>
 							</div>
