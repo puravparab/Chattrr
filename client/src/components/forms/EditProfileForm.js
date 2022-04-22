@@ -14,6 +14,7 @@ const EditProfileForm = (props) => {
 	const handleProfileImage = (e) => {
 		setProfileImage(e.target.value)
 		console.log(e.target.value)
+		console.log(e)
 	}
 
 	const handleBio = (e) => {
@@ -37,11 +38,11 @@ const EditProfileForm = (props) => {
 				<form className="form">
 					<div className="form-entry">
 						<label className="label">Display Name</label>
-						<input className="display-name" type="text" onChange={handleDisplayName} value={display_name}/>
+						<input className="display-name" type="text"  maxlength="40" onChange={handleDisplayName} value={display_name}/>
 					</div>
 					<div className="form-entry">
 						<label className="label">Change Profile Picture</label>
-						<input type="file" onChange={handleProfileImage} value={profile_image}/>
+						<input type="file" onChange={handleProfileImage} value={profile_image} accept="image/*" />
 					</div>
 					<div className="form-entry">
 						<label className="label">Update Bio</label>

@@ -22,6 +22,7 @@ urlpatterns = [
     path('register', registerUser.as_view(), name='accounts-register'),
     path('login', loginuser.as_view(), name='accounts-login'),
     path('logout', logoutuser.as_view(), name='accounts-logout'),
+    path('edit', edit_profile, name='accounts-edit-profile'),
     path('token/refresh/<str:rt>', token_refresh, name='accounts-token-refresh'),
     path('<str:username>', user_profile_detail, name='accounts-detail'),
     path('<str:username>/blurts', user_blurts, name='accounts-blurts')

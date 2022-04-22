@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import JSONParser, FormParser, MultiPartParser, FileUploadParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -149,6 +149,45 @@ class logoutuser(APIView):
 		except Exception as e:
 			return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+# Edit Profile
+@api_view(["POST"])
+@parser_classes([JSONParser, MultiPartParser])
+@permission_classes([IsAuthenticated])
+def edit_profile(request):
+	user = request.user
+	data = request.data
+	display_name = data.get("display_name")
+	profile_image = data.get("profile_image")
+	print(profile_image)
+	bio = data.get("bio")
+
+	# Find User in database
+	user_list = User.objects.filter(username=user.username)
+	if not user_list.exists():
+		return Response({"errors": f'username: {user.username} does not exist'}, status=status.HTTP_404_NOT_FOUND)
+	else:
+		user_profile = UserProfile.objects.filter(user=user_list[0])
+		if not user_profile.exists():
+			return Response({"errors": f'User Profile for username: {username}  does not exist'}, status=status.HTTP_404_NOT_FOUND)
+		else:
+			user_profile = user_profile[0]
+
+	# Try updating the user profile model
+	try:
+		update_list = []
+		if display_name != None:
+			user_profile.display_name = display_name
+			update_list.append("display_name")
+		if profile_image != None:
+			user_profile.profile_image = profile_image
+			update_list.append("profile_image")
+		if bio != None:
+			user_profile.bio = bio
+			update_list.append("bio")
+		user_profile.save(update_fields=update_list)
+		return Response({"detail": "user profile successfully updated"}, status=status.HTTP_200_OK)
+	except Exception as e:
+		return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # Get a new access and refresh token:
 @api_view(["GET"])
