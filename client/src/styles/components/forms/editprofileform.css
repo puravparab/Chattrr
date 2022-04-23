@@ -31,6 +31,20 @@
 	cursor: pointer;
 }
 
+.edit-profile-container .error{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 90%;
+	padding: 10px 20px 0px 20px; 
+}
+
+.edit-profile-container .error p{
+	margin: 0px;
+	color: red;
+	font-size: 16px;
+}
+
 .edit-profile-container .edit-profile-form{
 	display: flex;
 	flex-direction: column;
@@ -79,11 +93,23 @@
 	resize: none;
 }
 
+.edit-profile-container .edit-profile-form form .btn-submit{
+	color: white !important;
+	background:  rgb(13, 19, 33) !important;
+	padding: 10px 15px !important;
+}
+.edit-profile-container .edit-profile-form form .btn-submit:hover{
+	background: rgba(5,2,30,0.17) !important;
+}
+
 @media screen and (max-width: 600px){
 	.edit-profile-container{
 		width: 75%;
 	}
 	.edit-profile-container .header{
+		width: 85%;
+	}
+	.edit-profile-container .error{
 		width: 85%;
 	}
 	.edit-profile-container .edit-profile-form{

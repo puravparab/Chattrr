@@ -158,7 +158,6 @@ def edit_profile(request):
 	data = request.data
 	display_name = data.get("display_name")
 	profile_image = data.get("profile_image")
-	print(profile_image)
 	bio = data.get("bio")
 
 	# Find User in database

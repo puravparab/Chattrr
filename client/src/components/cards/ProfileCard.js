@@ -56,7 +56,7 @@ const ProfileCard = (props) => {
 						<div className="header-edit-btn">
 							<button className="edit-btn" onClick={()=>{handleEditModel(false)}}>Edit Profile</button>
 							<div className={editModalClass}>
-								<EditProfileForm handleEditModel={handleEditModel}/>
+								<EditProfileForm handleEditModel={handleEditModel} accessToken={accessToken}/>
 							</div>
 						</div> : ""}
 				</div>
