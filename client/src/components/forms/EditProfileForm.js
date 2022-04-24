@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { getToken, isAuthenticated } from  "../../actions/authActions.js"
 import '../../styles/components/forms/editprofileform.css';
 import alertRed from '../../assets/icons/alert_red.svg';
+import crossWhite from '../../assets/icons/cross_white.svg';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
@@ -92,7 +93,7 @@ const EditProfileForm = (props) => {
 				resetState()
 				navigate('/')
 			}else{
-				console.log(data)
+				setError('Update Failed')
 			}
 		}
 	}
@@ -101,7 +102,7 @@ const EditProfileForm = (props) => {
 		<div className="edit-profile-container">
 			<div className="header">
 				<h4>Edit Profile</h4>
-				<img src={alertRed} onClick={resetState} alt="close" width="20" height="20" />
+				<img src={crossWhite} onClick={resetState} alt="close" width="20" height="20" />
 			</div>
 			{error !== ''? 
 				<div className="error"><p>{error}</p></div> : ""

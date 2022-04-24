@@ -96,6 +96,7 @@
 .edit-profile-container .edit-profile-form form .btn-submit{
 	color: white !important;
 	background:  rgb(13, 19, 33) !important;
+	border-radius: 20px !important;
 	padding: 10px 15px !important;
 }
 .edit-profile-container .edit-profile-form form .btn-submit:hover{
