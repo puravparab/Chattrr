@@ -9,9 +9,10 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 const RegisterForm = () =>{
 	// States for Registration
 	const [username, setUsername] = useState('')
-	const [display_name, setDisplayName] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+	const [display_name, setDisplayName] = useState('')
+	const [profile_image_file, setProfileImageFile] = useState('')
 
 	// States for logging errors
 	const [error, setError] = useState({
@@ -35,6 +36,11 @@ const RegisterForm = () =>{
 	const handleDisplayName = (e) => {
 		setDisplayName(e.target.value);
 	};
+
+	// Handling profile image upload
+	const handleProfileImage = (e) => {
+		setProfileImageFile(e.target.files[0])
+	}
   
 	// Handling the email change
 	const handleEmail = (e) => {
@@ -94,7 +100,7 @@ const RegisterForm = () =>{
 				updateError(errors)
 				
 				// POST User registration details to accounts/register API
-				const res = await fetch(ROOT_URL + '/accounts/register', {
+				const res = await fetch(ROOT_URL + '/accounts/register/1', {
 					method: 'POST',
 					headers: {
 						'Content-type': 'application/json'
@@ -102,7 +108,6 @@ const RegisterForm = () =>{
 					},
 					body: JSON.stringify({
 						"username": username,
-						"display_name": display_name,
 						"password": password,
 						"email": email
 					})
@@ -141,7 +146,34 @@ const RegisterForm = () =>{
 				}
 			}
 		} else if (stage === "2"){
+			if (display_name !== '' || profile_image_file !== ''){
+				const formData = new FormData();
+				const content = {}
+				if (username !== ''){
+					formData.append('username', username);
+				}
+				if (display_name !== ''){
+					formData.append('display_name', display_name);
+				}
+				if (profile_image_file !== ''){
+					formData.append('profile_image', profile_image_file);
+				}
 
+				// POST User registration details to accounts/register API
+				const res = await fetch(ROOT_URL + '/accounts/register/2',{
+					method: 'POST',
+					body: formData
+				})
+				const data = await res.json()
+
+				if (res.ok){
+					redirect()
+				}else{
+					console.log("Submition failed")
+				}
+			} else{
+				redirect()
+			}
 		}
 	};
 

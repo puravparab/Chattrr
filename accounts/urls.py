@@ -19,7 +19,7 @@ from .views import *
 app_name = 'accounts'
 
 urlpatterns = [
-    path('register', registerUser.as_view(), name='accounts-register'),
+    path('register/<int:stage>', registerUser.as_view(), name='accounts-register'),
     path('login', loginuser.as_view(), name='accounts-login'),
     path('logout', logoutuser.as_view(), name='accounts-logout'),
     path('edit', edit_profile, name='accounts-edit-profile'),

@@ -23,91 +23,110 @@ load_dotenv(override=True)
 # TODO: Email Verification through email
 # TODO: Add character limits
 class registerUser(APIView):
-	parser_classes = [JSONParser]
+	parser_classes = [JSONParser, MultiPartParser]
 
-	def post(self, request):
+	def post(self, request, stage):
 		data = request.data
 		username = data.get("username")
 		display_name = data.get("display_name")
 		password = make_password(data.get("password"))
 		email = data.get("email")
+		profile_image = data.get("profile_image")
 
-		# Validate user profile data
-		no_of_errors = 0
-		messages = {'details': "", 
-					'errors': {
-						"username": "",
-						"email": "",
-						"password": ""
-					}}
+		if stage == 1:
+			# Validate user profile data
+			no_of_errors = 0
+			messages = {'details': "", 
+						'errors': {
+							"username": "",
+							"email": "",
+							"password": ""
+						}}
 
-		# Validate username
-		if User.objects.filter(username=username).exists():
-			items = []
-			items.append("An account with this username already exists.")
-			messages['errors']["username"] = items
-			no_of_errors += 1
+			# Validate username
+			if User.objects.filter(username=username).exists():
+				items = []
+				items.append("An account with this username already exists.")
+				messages['errors']["username"] = items
+				no_of_errors += 1
 
-		# Validate email
-		if User.objects.filter(email=email).exists():
-			items = []
-			items.append("An account with this email already exists.")
-			messages['errors']["email"] = items
-			no_of_errors += 1
+			# Validate email
+			if User.objects.filter(email=email).exists():
+				items = []
+				items.append("An account with this email already exists.")
+				messages['errors']["email"] = items
+				no_of_errors += 1
 
-		# If errors are detected
-		if no_of_errors != 0:
-			messages["details"] = (f'There are {no_of_errors} errors with this request')
-			return Response(messages, status=status.HTTP_400_BAD_REQUEST)
-		
-		# Create a UserProfile entry
-		try:
-			password = str(password)
-			# Create User model
-			user = User.objects.create(
-				username=username, 
-				email=email, 
-				password=password
-			)
-			user.save()
+			# If errors are detected
+			if no_of_errors != 0:
+				messages["details"] = (f'There are {no_of_errors} errors with this request')
+				return Response(messages, status=status.HTTP_400_BAD_REQUEST)
+			
+			# Create a UserProfile entry
+			try:
+				password = str(password)
+				# Create User model
+				user = User.objects.create(
+					username=username, 
+					email=email, 
+					password=password
+				)
+				user.save()
 
-			# Add to group
-			group = Group.objects.get(name="User Accounts")
-			user.groups.add(group)
+				# Add to group
+				group = Group.objects.get(name="User Accounts")
+				user.groups.add(group)
 
-			# Create UserProfile model
-			user_profile = UserProfile.objects.create(
-				user = user,
-				display_name = display_name
-				# username = username,
-				# email = email
-			)
-			user_profile.save()
+				# Create UserProfile model
+				user_profile = UserProfile.objects.create(
+					user = user,
+					# display_name = display_name
+					# username = username,
+					# email = email
+				)
+				user_profile.save()
 
-			messages['details'] = 'Account successfully created'
+				messages['details'] = 'Account successfully created'
 
-			# Get authentication tokens
-			ROOT_URL = request.build_absolute_uri('/')
-			tokens = post((f'{ROOT_URL}api/token/'),
-				json={
-					'username': username,
-					'password': data.get("password")
-				},
-				headers={
-					'content-type': 'application/json'
-				})
+				# Get authentication tokens
+				ROOT_URL = request.build_absolute_uri('/')
+				tokens = post((f'{ROOT_URL}api/token/'),
+					json={
+						'username': username,
+						'password': data.get("password")
+					},
+					headers={
+						'content-type': 'application/json'
+					})
 
-			if tokens.ok:
-				messages["tokens"] = tokens.json()
-				messages["expiry"] = {'at_tk_expiry': os.getenv('ACCESS_TOKEN_LIFETIME'),
-										'rt_tk_expiry': os.getenv('REFRESH_TOKEN_LIFETIME')}
-				return Response(messages, status=status.HTTP_200_OK)
+				if tokens.ok:
+					messages["tokens"] = tokens.json()
+					messages["expiry"] = {'at_tk_expiry': os.getenv('ACCESS_TOKEN_LIFETIME'),
+											'rt_tk_expiry': os.getenv('REFRESH_TOKEN_LIFETIME')}
+					return Response(messages, status=status.HTTP_200_OK)
+				else:
+					return Response({"errors":tokens.json()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+			except Exception as e:
+				messages['errors'] = str(e)
+				return Response(messages, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+		elif stage == 2:
+			User_list = User.objects.filter(username=username)
+			if User_list.exists():
+				user_profile = UserProfile.objects.filter(user=User_list[0])
+				if user_profile.exists():
+					try:
+						user_profile.display_name = display_name
+						user_profile.profile_image = profile_image
+						user_profile[0].save(update_fields=['display_name', 'profile_image'])
+						return Response({"detail": "user profile successfully created"}, status=status.HTTP_200_OK)
+					except Exception as e:
+						return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+				else:
+					return Response({"error": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
 			else:
-				return Response({"errors":tokens.json()}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-		except Exception as e:
-			messages['errors'] = str(e)
-			return Response(messages, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+				return Response({"error": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
 # LOG IN USER
 class loginuser(APIView):
