@@ -13,7 +13,7 @@ const ProfileCard = (props) => {
 
 	useEffect(()=>{
 		// Set profile image
-		if(props.profile_image === null){
+		if(props.user.profile_image === null){
 			setProfileImage(defaultPFP)
 		}
 		else{
@@ -33,7 +33,7 @@ const ProfileCard = (props) => {
 		<div className="profile-card">
 			<div className="profile-card-left">
 				<img 
-					src={profileImage} onerror={()=>{setProfileImage(defaultPFP)}} width="100" height="100" alt={`${props.user.username}'s profile picture`} 
+					src={profileImage} width="100" height="100" alt={`${props.user.username}'s profile picture`} 
 					onClick={()=>{
 						navigate(`/user/${props.user.username}`);
 				}}/>
