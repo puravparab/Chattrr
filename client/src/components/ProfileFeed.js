@@ -34,22 +34,32 @@ const ProfileFeed = (props) =>{
 		console.log(data)
 
 		if (res.ok){
-				const BlurtList = await data.blurts.map((blurtItem) =>{
-					return <BlurtCard
-								id={blurtItem.id}
-								username={blurtItem.username} 
-								display_name={blurtItem.display_name}
-								content={blurtItem.content}
-								profile_image={blurtItem.profile_image} 
-								created_at={blurtItem.created_at} 
-								likes_detail={blurtItem.likes_detail}
-								no_of_comments={blurtItem.no_of_comments}
-								accessToken={props.accessToken} 
-								renderComment={props.renderComment} 
-								is_user_author={data.is_user}/>
-				})
-				console.log(BlurtList)
+			const BlurtList = await data.blurts.map((blurtItem) =>{
+				return <BlurtCard
+							id={blurtItem.id}
+							username={blurtItem.username} 
+							display_name={blurtItem.display_name}
+							content={blurtItem.content}
+							profile_image={blurtItem.profile_image} 
+							created_at={blurtItem.created_at} 
+							likes_detail={blurtItem.likes_detail}
+							no_of_comments={blurtItem.no_of_comments}
+							accessToken={props.accessToken} 
+							renderComment={props.renderComment} 
+							is_user_author={data.is_user}/>
+			})
+			console.log(BlurtList)
+			if(BlurtList.length !== 0){
 				setBlurtList(BlurtList)
+			}
+			else{
+				setBlurtList(
+					<div className="empty-card">
+						<p> No Blurts yet</p>
+					</div>
+				)
+			}
+			
 		} else{
 			console.log("blurts loading fail")
 			navigate('../error')
