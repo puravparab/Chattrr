@@ -36,9 +36,6 @@ const EditProfileForm = (props) => {
 	}
 
 	const handleProfileImage = (e) => {
-		console.log(e)
-		setProfileImage(e.target.value)
-		console.log(e.target.value)
 		setProfileImageFile(e.target.files[0])
 	}
 
@@ -58,28 +55,20 @@ const EditProfileForm = (props) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		authCheck()
-
 		const formData = new FormData();
-
-		const content = {}
 		if(display_name === '' && profile_image_file === '' && bio === ''){
 			setError('Fields empty')
 		}
 		else{
 			if (display_name !== ''){
-				// content["display_name"] = display_name
 				formData.append('display_name', display_name);
 			}
-
 			if (profile_image_file !== ''){
-				// content["profile_image"] = profile_image
 				formData.append('profile_image', profile_image_file);
 			}
 			if (bio !== ''){
-				// content["bio"] = bio
 				formData.append('bio', bio);
 			}
-
 			const res = await fetch(ROOT_URL + '/accounts/edit',{
 				method: 'POST',
 				headers: {
@@ -111,7 +100,7 @@ const EditProfileForm = (props) => {
 				<form className="form">
 					<div className="form-entry">
 						<label className="label">Display Name</label>
-						<input className="display-name" type="text"  maxlength="40" onChange={handleDisplayName} value={display_name}/>
+						<input className="display-name" type="text" maxlength="40" onChange={handleDisplayName} value={display_name}/>
 					</div>
 					<div className="form-entry">
 						<label className="label">Change Profile Picture</label>

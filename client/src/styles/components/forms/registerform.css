@@ -50,13 +50,27 @@
 	padding: 8px 12px 8px 12px;
 	outline: none;
 	border: 2px solid lightgrey;
-	border-radius: 7px
-	}
+	border-radius: 7px;
+	font-size: 16px;
+}
 .register-form .form .form-entry .input:focus{
 	border: 2px solid lightblue;
 	transition: border 0.1s;
 }
 
+.register-form .form .form-entry textarea{
+	height: 100px;
+	outline: none;
+	font-size: 16px;
+	border: 2px solid lightgrey;
+	border-radius: 7px;
+	resize: none;
+	padding: 8px 12px 8px 12px;
+}
+.register-form .form .form-entry textarea:focus{
+	border: 2px solid lightblue;
+	transition: border 0.1s;
+}
 
 /* If there is any errors with user input */
 .register-form .form .form-entry .error{

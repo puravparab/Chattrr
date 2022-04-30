@@ -12,6 +12,7 @@ const RegisterForm = () =>{
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [display_name, setDisplayName] = useState('')
+	const [bio, setBio] = useState('')
 	const [profile_image_file, setProfileImageFile] = useState('')
 
 	// States for logging errors
@@ -40,6 +41,11 @@ const RegisterForm = () =>{
 	// Handling profile image upload
 	const handleProfileImage = (e) => {
 		setProfileImageFile(e.target.files[0])
+	}
+
+	// Handling bio change
+	const handleBio = (e) => {
+		setBio(e.target.value)
 	}
   
 	// Handling the email change
@@ -146,9 +152,8 @@ const RegisterForm = () =>{
 				}
 			}
 		} else if (stage === "2"){
-			if (display_name !== '' || profile_image_file !== ''){
+			if (display_name !== '' || profile_image_file !== '' || bio !== ''){
 				const formData = new FormData();
-				const content = {}
 				if (username !== ''){
 					formData.append('username', username);
 				}
@@ -157,6 +162,9 @@ const RegisterForm = () =>{
 				}
 				if (profile_image_file !== ''){
 					formData.append('profile_image', profile_image_file);
+				}
+				if (bio !== ''){
+					formData.append('bio', bio);
 				}
 
 				// POST User registration details to accounts/register API
@@ -191,7 +199,9 @@ const RegisterForm = () =>{
 	return (
 		<div className="register-form">
 			<div className="title">
-				<h1>Register your account</h1>
+				{stage === "1" && <h1>Register your account</h1>}
+				{stage === "2" && <h1>Add details to your profile</h1>}
+				
 			</div>
 
 			<div className="stage-no">
@@ -204,7 +214,7 @@ const RegisterForm = () =>{
 						<div className="form-entry">
 							<label className="label">Username</label>
 							<input className={error.username !== "" ? ("input error") : ("input")} 
-								onChange={handleUsername} value={username} type="text" required/>
+								onChange={handleUsername} value={username} type="text" maxlength="15" required/>
 							{error.username !== "" ? (<div role="alert" className="alert">
 														<img src={alertRed} alt="alert" width="20" height="20"/>
 														<span>{error.username}</span></div>) : ("")}
@@ -236,10 +246,20 @@ const RegisterForm = () =>{
 				}
 
 				{stage === "2" &&
-					(<div className="form-entry">
-						<label className="label">Display Name</label>
-						<input className="input" onChange={handleDisplayName} value={display_name} type="text" />
-					</div>)
+					(<>
+						<div className="form-entry">
+							<label className="label">Display Name</label>
+							<input className="input" onChange={handleDisplayName} value={display_name} maxlength="40" type="text" />
+						</div>
+						<div className="form-entry">
+							<label className="label">Add Bio</label>
+							<textarea type="text" onChange={handleBio} value={bio} maxlength="160" wrap="hard" />
+						</div>
+						<div className="form-entry">
+							<label className="label">Add Profile Picture</label>
+							<input type="file" onChange={handleProfileImage} accept="image/*" />
+						</div>
+					</>)
 				}
 
 				<button onClick={handleSubmit} className="btn-submit" type="submit">
