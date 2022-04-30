@@ -32,6 +32,7 @@ class registerUser(APIView):
 		password = make_password(data.get("password"))
 		email = data.get("email")
 		profile_image = data.get("profile_image")
+		bio = data.get("bio")
 
 		if stage == 1:
 			# Validate user profile data
@@ -116,10 +117,19 @@ class registerUser(APIView):
 			if User_list.exists():
 				user_profile = UserProfile.objects.filter(user=User_list[0])
 				if user_profile.exists():
+					user_profile = user_profile[0]
 					try:
-						user_profile.display_name = display_name
-						user_profile.profile_image = profile_image
-						user_profile[0].save(update_fields=['display_name', 'profile_image'])
+						update_list = []
+						if display_name != None:
+							user_profile.display_name = display_name
+							update_list.append("display_name")
+						if profile_image != None:
+							user_profile.profile_image = profile_image
+							update_list.append("profile_image")
+						if bio != None:
+							user_profile.bio = bio
+							update_list.append("bio")
+						user_profile.save(update_fields=update_list)
 						return Response({"detail": "user profile successfully created"}, status=status.HTTP_200_OK)
 					except Exception as e:
 						return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
