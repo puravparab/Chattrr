@@ -100,7 +100,7 @@ const EditProfileForm = (props) => {
 				<form className="form">
 					<div className="form-entry">
 						<label className="label">Display Name</label>
-						<input className="display-name" type="text" maxlength="40" onChange={handleDisplayName} value={display_name}/>
+						<input className="display-name" type="text" maxlength="20" onChange={handleDisplayName} value={display_name}/>
 					</div>
 					<div className="form-entry">
 						<label className="label">Change Profile Picture</label>

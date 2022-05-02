@@ -1,5 +1,5 @@
-/* Styles for HomePage.js */
-/*.home {
+/* Styles for Header.js */
+.home {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -230,4 +230,4 @@
 	.home .home-header .header-right .link-card .dialog-box{
 		display: none;
 	}
-}*/
+}

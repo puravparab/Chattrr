@@ -249,7 +249,7 @@ const RegisterForm = () =>{
 					(<>
 						<div className="form-entry">
 							<label className="label">Display Name</label>
-							<input className="input" onChange={handleDisplayName} value={display_name} maxlength="40" type="text" />
+							<input className="input" onChange={handleDisplayName} value={display_name} maxlength="20" type="text" />
 						</div>
 						<div className="form-entry">
 							<label className="label">Add Bio</label>
