@@ -145,7 +145,7 @@ def blurt_list(request):
 			user_profile = None
 
 		# Get Blurts
-		blurts = Blurt.objects.filter(author__isnull=False, content__isnull=False).exclude(content="")
+		blurts = Blurt.objects.filter(author__isnull=False, content__isnull=False).exclude(content="").order_by('-created_at')
 		serializer = BlurtSerializer(blurts, many=True)
 
 		# Iterate through each blurt
