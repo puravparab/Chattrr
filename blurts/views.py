@@ -377,7 +377,7 @@ def blurt_comment_list(request, blurt_id):
 			return Response({'error': 'Blurt does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
 
 		# Get Comment
-		blurtComment = BlurtComment.objects.filter(blurt=blurt[0])
+		blurtComment = BlurtComment.objects.filter(blurt=blurt[0]).order_by('-created_at')
 		if not blurtComment.exists():
 			return Response({'detail': 'Blurt does not have any comments.', 'no_of_comments': 0}, status=status.HTTP_200_OK)
 		else:
