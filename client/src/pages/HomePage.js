@@ -6,9 +6,8 @@ import Feed from "../components/Feed"
 import PostBlurtForm from "../components/forms/PostBlurtForm"
 import Header from '../components/Header'
 
+import '../styles/pages/homepage.css';
 import defaultPFP from '../assets/images/default-pfp.png';
-import moreIcon from '../assets/icons/more_icon_white.svg';
-import profileIcon from '../assets/icons/profile_icon_white2.svg'
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
