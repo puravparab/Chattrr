@@ -18,7 +18,7 @@
 }
 
 .home .home-header .header-left{
-	width: 100%;
+	width: 30%;
 }
 
 .home .home-header img{
@@ -29,7 +29,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	width: 550px;
+	width: 700px;
 }
 .home .home-header .title h1{
 	padding: 5px 10px 5px 10px;
@@ -47,9 +47,9 @@
 .home .home-header .header-right{
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	align-items: center;
-	width: 100%;
+	width: 30%;
 	position: relative;
 }
 
@@ -59,7 +59,7 @@
 	justify-content: center;
 	align-items: center;
 	width: 240px;
-	margin-right: 20%;
+	/*margin-right: 20%;*/
 	margin-top: 0px;
 	border: 2px solid rgb(29, 43, 73);
 	border-radius: 30px;
@@ -196,13 +196,21 @@
 
 @media screen and (max-width: 1300px){
 	.home .home-header{
-		width: 100%;
+		width: 95%;
+	}
+
+	.home .home-header .title{
+		width: 330px;
+	}
+	.home .home-header .header-right{
+		justify-content: center;
 	}
 }
 
 @media screen and (max-width: 850px) {
 	.home .home-header{
-		width: 100%;
+		padding: 10px 0px;
+		width: 95%;
 	}
 	.home .home-header .header-right .link-card{
 		width: auto;
