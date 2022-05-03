@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { logout } from  "../actions/authActions.js"
 import moreIcon from '../assets/icons/more_icon_white.svg';
 import profileIcon from '../assets/icons/profile_icon_white2.svg'
+import backBtn from '../assets/icons/white_arrow.svg';
 import '../styles/components/header.css';
 
 const Header = (props) => {
@@ -29,7 +30,13 @@ const Header = (props) => {
 	return (
 		<div className="home-header">
 			<div className="header-left">
-				
+				{props.backBtn && 
+					<img src={backBtn} alt="back-btn" width="30" height="30"
+						onClick={()=> {
+							navigate(-1)
+						}} 
+					/>
+				}
 			</div>
 			<div className="title">
 				<h1 onClick={()=> {
