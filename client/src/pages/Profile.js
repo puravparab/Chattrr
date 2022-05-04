@@ -104,6 +104,7 @@ const Profile = () =>{
 				userDetail={userDetail}
 				profileImage={profileImage}
 				backBtn={true}
+				profilePage={true}
 			/>
 
 			<div className="profile-container">

@@ -47,7 +47,8 @@ const Header = (props) => {
 				<div className={linkCardState} >
 					<div className={linkCardHeaderState}>
 						<img src={props.profileImage} width="35" height="35" alt={`${props.userDetail.username}'s profile picture`} onClick={()=>{
-							navigate(`../user/${props.userDetail.username}`);
+							{props.profilePage && window.location.replace(`../user/${props.userDetail.username}`)}
+							{!props.profilePage && navigate(`../user/${props.userDetail.username}`)}
 						}}/>
 						<div className="user-detail">
 							<p className="display-name">{props.userDetail.display_name}</p>
@@ -57,7 +58,8 @@ const Header = (props) => {
 					</div>
 					<div className={dialogState}>
 						<div className="dialog-list-item" onClick={()=>{
-							navigate(`../user/${props.userDetail.username}`);
+							{props.profilePage && window.location.replace(`../user/${props.userDetail.username}`)}
+							{!props.profilePage && navigate(`../user/${props.userDetail.username}`)}
 						}}>
 							<img src={profileIcon} width="20" height="20" alt="profile-icon" />
 							<p>Profile</p>

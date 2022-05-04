@@ -147,6 +147,7 @@ const Blurt = () => {
 				userDetail={userDetail}
 				profileImage={profileImage}
 				backBtn={true}
+				profilePage={false}
 			/>
 
 			<div className="blurt-page-container">

@@ -79,6 +79,7 @@ const HomePage = () => {
 				userDetail={userDetail}
 				profileImage={profileImage}
 				backBtn={false}
+				profilePage={false}
 			/>
 			
 			<div className="home-container">
