@@ -178,7 +178,11 @@
 @media screen and (max-width: 850px) {
 	.home .home-header{
 		padding: 10px 0px;
-		width: 95%;
+		width: 100%;
+		position: sticky;
+		top: 0px;
+		z-index: 1;
+		background: rgb(13, 19, 33);
 	}
 	.home .home-header .header-right .link-card{
 		width: auto;
