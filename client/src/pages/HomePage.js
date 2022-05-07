@@ -5,6 +5,7 @@ import { getToken, isAuthenticated, logout } from  "../actions/authActions.js"
 import Feed from "../components/Feed"
 import PostBlurtForm from "../components/forms/PostBlurtForm"
 import Header from '../components/Header'
+import MobileNav from '../components/MobileNav'
 
 import '../styles/pages/homepage.css';
 import defaultPFP from '../assets/images/default-pfp.png';
@@ -88,6 +89,8 @@ const HomePage = () => {
 					<Feed accessToken={accessToken} renderComment={true} />
 				</div>
 			</div>
+
+			<MobileNav />
 		</div>
 	);
 }
