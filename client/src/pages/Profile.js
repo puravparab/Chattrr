@@ -5,7 +5,9 @@ import { getToken, isAuthenticated, logout } from  "../actions/authActions.js"
 import Header from '../components/Header'
 import ProfileCard from "../components/cards/ProfileCard"
 import ProfileFeed from "../components/ProfileFeed"
+import MobileNav from '../components/MobileNav'
 
+import '../styles/pages/homepage.css';
 import '../styles/pages/profile.css';
 import defaultPFP from '../assets/images/default-pfp.png';
 
@@ -113,6 +115,8 @@ const Profile = () =>{
 					<ProfileFeed accessToken={accessToken} username={params.username} renderComment={true} />
 				</div>
 			</div>
+
+			<MobileNav username={userDetail.username} profilePage={true} />
 		</div>
 	)
 }

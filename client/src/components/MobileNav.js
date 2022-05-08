@@ -14,7 +14,8 @@ const MobileNav = (props) => {
 			</div>
 			<div className="nav-item">
 				<img src={profileIcon} width="30" height="30" alt="profile button"  onClick={()=>{
-					navigate(`../user/${props.username}`, {replace: true})
+					{props.profilePage && window.location.replace(`../user/${props.username}`)}
+					{!props.profilePage && navigate(`../user/${props.username}`)}	
 				}}/>
 			</div>
 		</div>

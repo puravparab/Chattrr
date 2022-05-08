@@ -6,7 +6,9 @@ import Header from '../components/Header'
 import BlurtCard from "../components/cards/BlurtCard.js"
 import BlurtComment from "../components/cards/BlurtComment.js"
 import PostCommentForm from "../components/forms/PostCommentForm.js"
+import MobileNav from '../components/MobileNav'
 
+import '../styles/pages/homepage.css';
 import '../styles/pages/blurt.css';
 import defaultPFP from '../assets/images/default-pfp.png';
 
@@ -163,6 +165,8 @@ const Blurt = () => {
 					</div>
 				</div>
 			</div>
+
+			<MobileNav username={userDetail.username} profilePage={false} />
 		</div>
 	)
 }
