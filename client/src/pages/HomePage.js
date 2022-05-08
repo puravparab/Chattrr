@@ -90,7 +90,7 @@ const HomePage = () => {
 				</div>
 			</div>
 
-			<MobileNav />
+			<MobileNav username={userDetail.username} profilePage={false} />
 		</div>
 	);
 }

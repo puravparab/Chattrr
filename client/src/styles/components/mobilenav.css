@@ -6,7 +6,7 @@
 	justify-content: space-evenly;
 	align-items: center;
 	width: 100%;
-	padding: 10px 0px;
+	padding: 5px 0px;
 	background: rgb(13, 19, 33);
 	position: sticky;
 	bottom: 0px;
@@ -15,6 +15,12 @@
 
 .mobile-nav .nav-item{
 	cursor: pointer;
+	padding: 5px;
+	border-radius: 50%;
+}
+
+.mobile-nav .nav-item:hover{
+	background: rgb(22, 30, 49);
 }
 
 @media screen and (min-width: 850px){
