@@ -196,6 +196,11 @@ const BlurtCard = (props) => {
 								}}>
 									<p>Show Profile</p>
 								</div>
+								<div className="dialog-box-item" onClick={()=>{
+									navigate(`/user/${props.username}/status/${props.id}`);
+								}}>
+									<p>Show Comments</p>
+								</div>
 								{props.is_user_author ? 
 									<div className="dialog-box-item delete"  onClick={()=>{
 											handleDelete()
