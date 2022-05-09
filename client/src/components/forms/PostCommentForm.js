@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { isAuthenticated } from  "../../actions/authActions.js"
 import '../../styles/components/forms/postcommentform.css';
 
@@ -6,11 +7,10 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 
 // TODO: Fix Auth check before fetch
 // TODO: Allow variety of text inputs
-// TODO: prohibit submit on enter btn click
-// TODO: Character limit warning
 
 const PostCommentForm = ({ accessToken, blurt_id}) => {
 	const [comment, setComment] = useState('')
+	let navigate = useNavigate();
 
 	const handleComment = (e) =>{
 		// Auto resize textarea
@@ -37,12 +37,10 @@ const PostCommentForm = ({ accessToken, blurt_id}) => {
 			})
 		})
 
-		console.log(res)
 		const data = await res.json()
-		console.log(data)
 
 		if (res.ok) {
-			console.log("ok")
+			navigate(0)
 		}else{
 			if(res.status === 401){
 				console.log("accessToken invalid")

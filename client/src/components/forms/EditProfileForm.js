@@ -80,7 +80,7 @@ const EditProfileForm = (props) => {
 
 			if (res.ok){
 				resetState()
-				navigate('/')
+				navigate(0)
 			}else{
 				setError('Update Failed')
 			}
