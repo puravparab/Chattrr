@@ -7,6 +7,10 @@
 	align-items: center;
 	width: 90%;
 	padding: 30px 0px;
+	background: rgba(13, 19, 33, 0.8);
+	position: sticky;
+	top: 0px;
+	z-index: 1;
 }
 
 .home .home-header .header-left{
@@ -182,7 +186,7 @@
 		position: sticky;
 		top: 0px;
 		z-index: 1;
-		background: rgb(13, 19, 33);
+		background: rgba(13, 19, 33, 0.9);
 	}
 	.home .home-header .header-right .link-card{
 		width: auto;
