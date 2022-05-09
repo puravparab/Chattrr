@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { isAuthenticated } from  "../../actions/authActions.js"
 import '../../styles/components/forms/postblurtform.css';
 
@@ -11,6 +12,7 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 
 const PostBlurtForm = ({ accessToken }) =>{
 	const [blurt, setBlurt] = useState('')
+	let navigate = useNavigate()
 
 	const handleBlurt = (e) =>{
 		// Auto resize textarea
@@ -38,12 +40,10 @@ const PostBlurtForm = ({ accessToken }) =>{
 			})
 		})
 
-		console.log(res)
 		const data = await res.json()
-		console.log(data)
 
 		if (res.ok) {
-			console.log("ok")
+			navigate('/')
 		}else{
 			if(res.status === 401){
 				console.log("accessToken invalid")
