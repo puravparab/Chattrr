@@ -185,13 +185,25 @@ const BlurtCard = (props) => {
 						<div className="header-right">
 							<img className="more" src={moreIcon} width="25" height="25" alt="more icon" onClick={handleDialogBox} />
 							<div className={dialogBoxState}>
+								<div className="dialog-box-item" onClick={changeLikeBtn}>
+									<p>
+										{likeBtn === heartGreyOutline && "Like"}
+										{likeBtn === heartRed && "Unlike"}
+									</p>
+								</div>
+								<div className="dialog-box-item" onClick={()=>{
+									navigate(`/user/${props.username}`);
+								}}>
+									<p>Show Profile</p>
+								</div>
 								{props.is_user_author ? 
 									<div className="dialog-box-item delete"  onClick={()=>{
 											handleDelete()
 										}} >
 										<img src={trashIcon} width="25" height="25" alt="delete btn" /> 
 										<p>Delete</p>
-									</div> : ""}
+									</div> : ""
+								}
 							</div>
 						</div>
 					</div>

@@ -106,13 +106,9 @@
 	position: absolute;
 	left: 50px;
 	top: 1px;
-	padding: 8px 10px;
 	background: rgb(30, 42, 72);
 	border-radius: 10px;
 	width: 120px;
-}
-.blurt-card .blurt-body .blurt-body-header .header-right .dialog-box:hover{
-	background: rgb(37, 42, 55);
 }
 
 .blurt-card .blurt-body .blurt-body-header .header-right .dialog-box h1{
@@ -126,10 +122,17 @@
 .blurt-card .blurt-body .blurt-body-header .header-right .dialog-box-item{
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
-	gap: 0 10px;
+	gap: 0 5px;
 	font-size: 16px;
+	width: 100px;
+	padding: 10px 10px;
+	border-radius: 10px;
+}
+
+.blurt-card .blurt-body .blurt-body-header .header-right .dialog-box-item:hover{
+	background: rgb(37, 42, 55);
 }
 
 .blurt-card .blurt-body .blurt-body-header .header-right .dialog-box-item p{
@@ -184,5 +187,9 @@
 	.blurt-card .blurt-body .blurt-body-header .header-right .dialog-box{
 		top: 25px;
 		left: -115px;
+	}
+
+	.blurt-card .blurt-body .blurt-body-header .header-right .dialog-box-item:hover{
+		background: rgb(30, 42, 72);
 	}
 }
