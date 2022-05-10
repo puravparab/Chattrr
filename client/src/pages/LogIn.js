@@ -7,7 +7,7 @@ const LogIn = ({isAuth}) => {
 	if(isAuth){ return <Navigate to='/' />}
 	return (
 		<div className="home login">
-			<div className="home-header">
+			<div className="login-header">
 				<div className="title">
 					<h1 onClick={()=> {
 						navigate("/")

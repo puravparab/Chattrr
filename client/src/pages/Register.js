@@ -7,7 +7,7 @@ const Register = ({isAuth}) => {
 	if(isAuth){ return <Navigate to='/' />}
 	return (
 		<div className="home register">
-			<div className="home-header">
+			<div className="register-header">
 				<div className="title">
 					<h1 onClick={()=> {
 						navigate("/")

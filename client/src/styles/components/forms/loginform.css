@@ -1,11 +1,25 @@
 /* Styles for Login Form */
 .login {
  	background-color: white !important;
+ 	margin: 10px 0px;
+ 	gap: 2vh 0px;
 }
-.login .home-header .title h1{
-	color: #3C4257 !important;
+.login .login-header{
+	background: white;
+}
+.login .login-header .title h1{
+	margin: 0px;
+	padding: 30px 0px;
+	color: #3C4257;
 }
 
+@media screen and (max-width: 530px){
+	.login .login-header .title h1{
+		padding: 10px 0px;
+	}
+}
+
+/* LOGIN FORM */
 .App .login-form{
 	display: flex;
 	flex-direction: column;
@@ -93,15 +107,15 @@
 /* Screen with less than 530px */
 @media screen and (max-width: 530px){
 	.App .login-form{
-	padding: 56px 20px 56px 20px;
-	width: 80%;
+		padding: 40px 20px 40px 20px;
+		width: 80%;
 	}
 
 	.App .login-form .title h1{
-	font-size: 25px;
+		font-size: 25px;
 	}
 
 	.App .login-form .form{
-	width: 100%;
+		width: 100%;
 	}
 }
