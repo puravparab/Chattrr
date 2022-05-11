@@ -1,0 +1,35 @@
+/* Styles for DesktopNav.js */
+
+.desktop-nav{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 20px 0px;
+}
+
+.desktop-nav .nav-item{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 0px 30px;
+	padding: 10px 15px;
+	border-radius: 20px;
+	cursor:  pointer;
+}
+.desktop-nav .nav-item:hover{
+	background-color: rgb(37, 42, 55);
+}
+
+.desktop-nav .nav-item img{
+	width: 30px;
+	height: 30px;
+}
+
+.desktop-nav .nav-item p{
+	margin: 0px;
+	color: white;
+	font-size: 25px;
+	font-weight: bold;
+}

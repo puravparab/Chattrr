@@ -5,6 +5,7 @@ import { getToken, isAuthenticated, logout } from  "../actions/authActions.js"
 import Feed from "../components/Feed"
 import PostBlurtForm from "../components/forms/PostBlurtForm"
 import Header from '../components/Header'
+import DesktopNav from '../components/DesktopNav'
 import MobileNav from '../components/MobileNav'
 
 import '../styles/pages/homepage.css';
@@ -84,9 +85,14 @@ const HomePage = () => {
 			/>
 			
 			<div className="home-container">
+				<div className="container-left">
+					<DesktopNav username={userDetail.username} profilePage={false} />
+				</div>
 				<div className="home-container-center">
 					<PostBlurtForm accessToken={accessToken} />
 					<Feed accessToken={accessToken} renderComment={true} />
+				</div>
+				<div className="container-right">
 				</div>
 			</div>
 
