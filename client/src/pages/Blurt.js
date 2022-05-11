@@ -6,6 +6,7 @@ import Header from '../components/Header'
 import BlurtCard from "../components/cards/BlurtCard.js"
 import BlurtComment from "../components/cards/BlurtComment.js"
 import PostCommentForm from "../components/forms/PostCommentForm.js"
+import DesktopNav from '../components/DesktopNav'
 import MobileNav from '../components/MobileNav'
 
 import '../styles/pages/homepage.css';
@@ -153,6 +154,9 @@ const Blurt = () => {
 			/>
 
 			<div className="blurt-page-container">
+				<div className="container-left">
+					<DesktopNav username={userDetail.username} profilePage={false} />
+				</div>
 				<div className="blurt-container-center">
 					<div className="blurt-container">
 						{Blurt}
@@ -163,6 +167,8 @@ const Blurt = () => {
 					<div className="comments-container">
 						{blurtComments}
 					</div>
+				</div>
+				<div className="container-right">
 				</div>
 			</div>
 

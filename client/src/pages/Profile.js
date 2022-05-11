@@ -5,6 +5,7 @@ import { getToken, isAuthenticated, logout } from  "../actions/authActions.js"
 import Header from '../components/Header'
 import ProfileCard from "../components/cards/ProfileCard"
 import ProfileFeed from "../components/ProfileFeed"
+import DesktopNav from '../components/DesktopNav'
 import MobileNav from '../components/MobileNav'
 
 import '../styles/pages/homepage.css';
@@ -110,9 +111,14 @@ const Profile = () =>{
 			/>
 
 			<div className="profile-container">
+				<div className="container-left">
+					<DesktopNav username={userDetail.username} profilePage={true} />
+				</div>
 				<div className="profile-container-center">
 					{profile}
 					<ProfileFeed accessToken={accessToken} username={params.username} renderComment={true} />
+				</div>
+				<div className="container-right">
 				</div>
 			</div>
 
