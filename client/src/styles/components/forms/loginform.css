@@ -13,9 +13,27 @@
 	color: #3C4257;
 }
 
+.login .login-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 0px 20px;
+	gap: 0px 50px;
+}
+
 @media screen and (max-width: 530px){
 	.login .login-header .title h1{
 		padding: 10px 0px;
+	}
+}
+@media screen and (max-width: 950px){
+	.login .login-container{
+		padding: 0px;
+		gap: 0px 50px;
+	}
+	.login .login-container .login-img{
+		display: none;
 	}
 }
 

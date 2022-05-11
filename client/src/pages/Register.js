@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
 import RegisterForm from "../components/forms/RegisterForm"
+import SocialImage from "../assets/images/Social_Media_Monochromatic.svg"
 
 const Register = ({isAuth}) => {
 	let navigate = useNavigate();
@@ -14,7 +15,10 @@ const Register = ({isAuth}) => {
 					}}>Chattrr</h1>
 				</div>
 			</div>
-			<RegisterForm />
+			<div className="register-container">
+				<img className="register-img" src={SocialImage}/>
+				<RegisterForm />
+			</div>
 		</div>
 	);
 }

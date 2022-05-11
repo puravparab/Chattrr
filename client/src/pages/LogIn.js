@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
 import LogInForm from "../components/forms/LogInForm"
+import SocialImage from "../assets/images/Social_Media_Monochromatic.svg"
 
 const LogIn = ({isAuth}) => {
 	let navigate = useNavigate();
@@ -14,7 +15,10 @@ const LogIn = ({isAuth}) => {
 					}}>Chattrr</h1>
 				</div>
 			</div>
-			<LogInForm />
+			<div className="login-container">
+				<img className="login-img" src={SocialImage}/>
+				<LogInForm />
+			</div>
 		</div>
 	);
 }
