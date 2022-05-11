@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import homeBtn from '../assets/icons/home_white.svg';
 import profileIcon from '../assets/icons/profile_icon_white2.svg'
 import searchIcon from '../assets/icons/whitesearch.svg'
+import sendIcon from '../assets/icons/send_icon_purple.svg'
 import '../styles/components/mobilenav.css';
 
 const MobileNav = (props) => {
@@ -21,6 +22,9 @@ const MobileNav = (props) => {
 			</div>
 			<div className="nav-item">
 				<img src={searchIcon} width="30" height="30" alt="search button" />
+			</div>
+			<div className="nav-item">
+				<img src={sendIcon} width="30" height="30" alt="send button" />
 			</div>
 		</div>
 	)
