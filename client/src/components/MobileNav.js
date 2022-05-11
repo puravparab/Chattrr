@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import homeBtn from '../assets/icons/home_white.svg';
 import profileIcon from '../assets/icons/profile_icon_white2.svg'
+import searchIcon from '../assets/icons/whitesearch.svg'
 import '../styles/components/mobilenav.css';
 
 const MobileNav = (props) => {
@@ -17,6 +18,9 @@ const MobileNav = (props) => {
 					{props.profilePage && window.location.replace(`../user/${props.username}`)}
 					{!props.profilePage && navigate(`../user/${props.username}`)}	
 				}}/>
+			</div>
+			<div className="nav-item">
+				<img src={searchIcon} width="30" height="30" alt="search button" />
 			</div>
 		</div>
 	)
