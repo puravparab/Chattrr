@@ -24,6 +24,17 @@
 	background: rgb(22, 30, 49);
 }
 
+/* desktopnav.css has the base css styling */
+.mobile-nav .post-blurt-modal-container .post-blurt-modal{
+	max-width: 400px !important;
+	width: 87% !important;
+	padding: 20px 10px;
+}
+
+.mobile-nav .post-blurt-modal-container .post-blurt-modal .post-blurt-modal-header{
+	width: 85%;
+}
+
 @media screen and (min-width: 850px){
 	.mobile-nav{
 		display: none;
