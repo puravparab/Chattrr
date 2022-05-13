@@ -19,4 +19,6 @@ from .views import *
 
 app_name = 'search'
 
-urlpatterns = []
+urlpatterns = [
+    path('user', userSearch, name='search-user')
+]
