@@ -39,6 +39,9 @@ urlpatterns = [
     path('api/user/<str:username>', user_profile_detail, name='user-profile-detail'),
     path('api/user/<str:username>/blurts', user_blurts, name='user-blurts'),
 
+    # Search
+    path('api/search', include('search.urls', namespace='search')),
+
     # Client (Frontend) Endpoint
     path('', TemplateView.as_view(template_name='index.html')),
     re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="index.html"))

@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     # Created Apps
     'accounts.apps.AccountsConfig',
     'blurts.apps.BlurtsConfig',
+    'search.apps.SearchConfig',
 
     # DJANGO STORAGES
     "storages",
