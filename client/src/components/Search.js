@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getToken, isAuthenticated, logout } from  "../actions/authActions.js"
 
@@ -6,6 +6,8 @@ import homeBtn from '../assets/icons/home_white.svg';
 import profileIcon from '../assets/icons/profile_icon_white2.svg'
 import searchIcon from '../assets/icons/whitesearch.svg'
 import '../styles/components/search.css';
+
+const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
 const Search = () => {
 	let navigate = useNavigate();
@@ -30,12 +32,46 @@ const Search = () => {
 	const [searchActive, setSearchActive] = useState(false)
 	const [inputFocus, setInputFocus] = useState(false)
 
+	const [searchResults, setSearchResults] = useState('')
+
+	useEffect(() =>{
+		if(searchText != ''){
+			Search()
+		}
+	}, [searchText])
+
 	const handleText = (e) => {
 		if (searchFilter != ''){
-			setSearchtext(e.target.value)
+			setSearchtext(e.target.value.trim())
 		}
 	}
 
+	// Call Search API
+	const Search = async () => {
+		const res = await fetch(ROOT_URL + '/api/search/' + searchFilter + '?q=' + searchText, {
+			method: 'GET',
+			headers: {
+				'Content-type': 'application/json'
+			}
+		})
+		const data = await res.json()
+		if (res.ok){
+			if (res.status == 204){
+				setSearchResults("No Content")
+			}
+			else{
+				const searchData = await data.users.map((user) =>{
+					return <p>{user.username}</p>
+				})
+				console.log(searchData)
+				setSearchResults(searchData)
+			}
+		}else{
+			setSearchResults("No Content")
+		}
+	}
+
+	// When users hovers in and out of the searchbar
 	const handleSearchActive = (state) => {
 		if(state){
 			setSearchActive(true)
@@ -48,6 +84,8 @@ const Search = () => {
 			}
 		}
 	}
+
+	// When users focus in or out of the search input
 	const handleInputFocus = (state) => {
 		if(state){
 			setSearchActive(true)
@@ -78,21 +116,27 @@ const Search = () => {
 				</div>
 				{searchActive &&	
 					<div className="search-options">
-						<img className={searchFilter === 'User'? "active-img" : ""} 
+						<img className={searchFilter === 'user'? "active-img" : ""} 
 							src={profileIcon} width="22" height="22" alt="user button" 
 							onClick={()=>{ 
-								setSearchFilter('User')
+								setSearchFilter('user')
 							}}
 						/>
-						<img className={searchFilter === 'Blurt'? "active-img" : ""} 
+						<img className={searchFilter === 'blurt'? "active-img" : ""} 
 							src={homeBtn} width="22" height="22" alt="home button" 
 							onClick={()=>{ 
-								setSearchFilter('Blurt')
+								setSearchFilter('blurt')
 							}}
 						/>
 					</div>
 				}
 			</div>
+
+			{true && 
+				<div className="search-results-container">
+					{searchResults}
+				</div>
+			}
 		</div>	
 	)
 }

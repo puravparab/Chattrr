@@ -7,6 +7,7 @@
 	align-items: flex-start;
 	width: 90%;
 	max-width: 400px;
+	gap: 30px 0px;
 	margin: auto;
 }
 
@@ -75,5 +76,20 @@
 	outline: none;
 }
 .search-container .search-bar .search-bar-input input:focus{
+	color: white;
+}
+
+.search-container .search-results-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+	margin: auto;
+	background: black;
+	border: 2px solid white;
+}
+
+.search-container .search-results-container p{
 	color: white;
 }
