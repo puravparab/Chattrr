@@ -7,6 +7,7 @@ import PostBlurtForm from "../components/forms/PostBlurtForm"
 import Header from '../components/Header'
 import DesktopNav from '../components/DesktopNav'
 import MobileNav from '../components/MobileNav'
+import Search from '../components/Search'
 
 import '../styles/pages/homepage.css';
 import defaultPFP from '../assets/images/default-pfp.png';
@@ -93,6 +94,9 @@ const HomePage = () => {
 					<Feed accessToken={accessToken} renderComment={true} />
 				</div>
 				<div className="container-right">
+					<div className="container-right-search">
+						<Search />
+					</div>
 				</div>
 			</div>
 

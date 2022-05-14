@@ -1,0 +1,79 @@
+/* Styles for Search.js */
+
+.search-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 90%;
+	max-width: 400px;
+	margin: auto;
+}
+
+.search-container .search-bar{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 85%;
+	max-width: 290px;
+	margin: auto;
+	padding: 7px 10px;
+	border: 2px solid rgb(51, 51, 51);
+	border-radius: 20px;
+	background: rgb(51, 51, 51);
+}
+
+.search-container .search-bar:hover{
+	background: rgb(13, 19, 33);
+	border: 2px solid rgb(29, 43, 73);
+	padding: 7px 10px;
+}
+.search-container .active{
+	background: rgb(13, 19, 33);
+	border: 2px solid rgb(29, 43, 73);
+	padding: 7px 10px;
+}
+
+.search-container .search-bar .search-options{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	gap: 0px 20px;
+	align-items: center;
+	padding: 10px 10px 5px 10px;
+}
+
+.search-container .search-bar .search-options img{
+	padding: 5px;
+	border-radius: 50%;
+}
+
+.search-container .search-bar .search-options .active-img{
+	background:  rgb(51, 51, 51);
+}
+
+.search-container .search-bar .search-options img:hover{
+	background:  rgb(51, 51, 51);
+}
+
+.search-container .search-bar .search-bar-input{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 0px 5%;
+}
+
+.search-container .search-bar .search-bar-input input{
+	width: 90%;
+	max-width: 250px;
+	height: 20px;
+	font-size: 18px;
+	background: none;
+	border: none;
+	outline: none;
+}
+.search-container .search-bar .search-bar-input input:focus{
+	color: white;
+}

@@ -34,7 +34,20 @@
 }
 
 .container-right{
-	width: 30%
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 30%;
+}
+
+.container-right .container-right-search{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 100%;
+	max-width: 500px;
 }
 
 @media screen and (max-width: 600px)  {
@@ -46,7 +59,6 @@
 	    border-left: none;
 	    border-right: none;
 	}
-	
 }
 
 @media screen and (max-width: 850px){
