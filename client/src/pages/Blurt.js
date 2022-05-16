@@ -8,6 +8,7 @@ import BlurtComment from "../components/cards/BlurtComment.js"
 import PostCommentForm from "../components/forms/PostCommentForm.js"
 import DesktopNav from '../components/DesktopNav'
 import MobileNav from '../components/MobileNav'
+import Search from '../components/Search'
 
 import '../styles/pages/homepage.css';
 import '../styles/pages/blurt.css';
@@ -169,6 +170,9 @@ const Blurt = () => {
 					</div>
 				</div>
 				<div className="container-right">
+					<div className="container-right-search">
+						<Search profilePage={false} />
+					</div>
 				</div>
 			</div>
 

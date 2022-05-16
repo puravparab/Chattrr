@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getToken, isAuthenticated, logout } from  "../actions/authActions.js"
 
-import homeBtn from '../assets/icons/home_white.svg';
+import NoteIcon from '../assets/icons/note_white.svg';
 import profileIcon from '../assets/icons/profile_icon_white2.svg'
 import searchIcon from '../assets/icons/whitesearch.svg'
 import defaultPFP from '../assets/images/default-pfp.png';
@@ -135,16 +135,16 @@ const Search = (props) => {
 				</div>
 				{searchActive &&	
 					<div className="search-options">
+						<img className={searchFilter === 'blurt'? "active-img" : ""} 
+							src={NoteIcon} width="22" height="22" alt="home button" 
+							onClick={()=>{ 
+								setSearchFilter('blurt')
+							}}
+						/>
 						<img className={searchFilter === 'user'? "active-img" : ""} 
 							src={profileIcon} width="22" height="22" alt="user button" 
 							onClick={()=>{ 
 								setSearchFilter('user')
-							}}
-						/>
-						<img className={searchFilter === 'blurt'? "active-img" : ""} 
-							src={homeBtn} width="22" height="22" alt="home button" 
-							onClick={()=>{ 
-								setSearchFilter('blurt')
 							}}
 						/>
 					</div>

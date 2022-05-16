@@ -7,6 +7,7 @@ import ProfileCard from "../components/cards/ProfileCard"
 import ProfileFeed from "../components/ProfileFeed"
 import DesktopNav from '../components/DesktopNav'
 import MobileNav from '../components/MobileNav'
+import Search from '../components/Search'
 
 import '../styles/pages/homepage.css';
 import '../styles/pages/profile.css';
@@ -119,6 +120,9 @@ const Profile = () =>{
 					<ProfileFeed accessToken={accessToken} username={params.username} renderComment={true} />
 				</div>
 				<div className="container-right">
+					<div className="container-right-search">
+						<Search profilePage={true} />
+					</div>
 				</div>
 			</div>
 
