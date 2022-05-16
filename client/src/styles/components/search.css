@@ -82,14 +82,72 @@
 .search-container .search-results-container{
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	justify-content: flex-start;
+	align-items: flex-start;
 	width: 90%;
 	margin: auto;
-	background: black;
-	border: 2px solid white;
+	background: rgb(13, 19, 33);
+	border: 2px solid rgb(29, 43, 73);
+	border-radius: 20px;
+}
+
+.search-container .search-results-container .search-results-card{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 0px 6%;
+	padding: 15px 20px;
+	width: 100%;
+	height: auto;
+	max-height: 500px;
+	box-sizing: border-box;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+.search-container .search-results-container .search-results-card:hover{
+	background-color: rgb(37, 42, 55);
+}
+
+.search-container .search-results-container .search-results-card img{
+	border-radius: 50%;
+}
+
+.search-container .search-results-container .search-results-card .user-detail{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 10px 0px;
+	max-width: 80%;
 }
 
 .search-container .search-results-container p{
+	margin: 0px;
 	color: white;
+	word-break: break-all;
+}
+
+.search-container .search-results-container .username{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.search-container .search-results-container .display-name{
+	font-size: 14px;
+}
+
+.search-container .search-results-container .search-error{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 20px 0px;
+	width: 100%
+}
+
+.search-container .search-results-container .search-error p{
+	font-size: 18px;
+	font-weight: bold;
 }

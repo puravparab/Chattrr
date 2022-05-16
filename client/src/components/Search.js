@@ -5,11 +5,12 @@ import { getToken, isAuthenticated, logout } from  "../actions/authActions.js"
 import homeBtn from '../assets/icons/home_white.svg';
 import profileIcon from '../assets/icons/profile_icon_white2.svg'
 import searchIcon from '../assets/icons/whitesearch.svg'
+import defaultPFP from '../assets/images/default-pfp.png';
 import '../styles/components/search.css';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
-const Search = () => {
+const Search = (props) => {
 	let navigate = useNavigate();
 
 	// Get Access Token
@@ -46,9 +47,19 @@ const Search = () => {
 		}
 	}
 
+	const handleImageSrc = (image) => {
+		if(image === null){
+			return defaultPFP
+		}else{
+			return image
+		}
+	}
+
 	// Call Search API
 	const Search = async () => {
-		const res = await fetch(ROOT_URL + '/api/search/' + searchFilter + '?q=' + searchText, {
+		const res = await fetch(ROOT_URL + '/api/search/' + searchFilter + '?' + new URLSearchParams({
+			q: searchText,
+		}), {
 			method: 'GET',
 			headers: {
 				'Content-type': 'application/json'
@@ -56,18 +67,28 @@ const Search = () => {
 		})
 		const data = await res.json()
 		if (res.ok){
-			if (res.status == 204){
-				setSearchResults("No Content")
-			}
-			else{
-				const searchData = await data.users.map((user) =>{
-					return <p>{user.username}</p>
-				})
-				console.log(searchData)
-				setSearchResults(searchData)
-			}
+			const searchData = await data.users.map((user) =>{
+				const image = handleImageSrc(user.profile_image)
+				return (
+					<div className="search-results-card" onClick={()=>{
+						{props.profilePage && window.location.replace(`../user/${user.username}`)}
+						{!props.profilePage && navigate(`../user/${user.username}`)}	
+					}}>
+						<img src={image} width="48" height="48" alt="user image"/>
+						<div className="user-detail">
+							<p className="username">{user.display_name}</p>
+							<p className="display-name">@{user.username}</p>
+						</div>
+					</div>
+				)
+			})
+			setSearchResults(searchData)
 		}else{
-			setSearchResults("No Content")
+			setSearchResults(
+				<div className="search-error">
+					<p>No {searchFilter} found</p>
+				</div>
+			)
 		}
 	}
 

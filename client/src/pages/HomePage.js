@@ -95,7 +95,7 @@ const HomePage = () => {
 				</div>
 				<div className="container-right">
 					<div className="container-right-search">
-						<Search />
+						<Search profilePage={false} />
 					</div>
 				</div>
 			</div>

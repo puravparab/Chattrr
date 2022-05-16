@@ -14,7 +14,7 @@ def userSearch(request, format=None):
 
 	user_list = UserProfile.objects.filter(user__username__icontains=query)[:limit]
 	if not user_list.exists():
-		return Response({"detail": f'Query "{query}" has no matches'}, status=status.HTTP_204_NO_CONTENT)
+		return Response({"detail": f"Query {query} does not have any results."}, status=status.HTTP_404_NOT_FOUND)
 
 	serializer = UserProfileSerializer(user_list, many=True)
 	data = {
