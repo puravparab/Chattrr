@@ -34,15 +34,19 @@ const Search = (props) => {
 	const [inputFocus, setInputFocus] = useState(false)
 
 	const [searchResults, setSearchResults] = useState('')
+	const [searchBoxState, setSearchBoxState] = useState(false)
 
 	useEffect(() =>{
 		if(searchText != ''){
 			Search()
+			setSearchBoxState(true)
+		}else{
+			setSearchBoxState(false)
 		}
 	}, [searchText])
 
 	const handleText = (e) => {
-		if (searchFilter != ''){
+		if (searchFilter != '' && inputFocus === true){
 			setSearchtext(e.target.value.trim())
 		}
 	}
@@ -96,36 +100,30 @@ const Search = (props) => {
 	const handleSearchActive = (state) => {
 		if(state){
 			setSearchActive(true)
-		}
-		else{
-			if(!inputFocus){
-				setSearchActive(false)
-				setSearchtext('')
-				setSearchFilter('')
-			}
-		}
-	}
-
-	// When users focus in or out of the search input
-	const handleInputFocus = (state) => {
-		if(state){
-			setSearchActive(true)
 			setInputFocus(true)
 		}else{
 			setSearchActive(false)
 			setInputFocus(false)
 			setSearchtext('')
 			setSearchFilter('')
+			setSearchBoxState(false)
+		}
+	}
+
+	// When users focus in or out of the search input
+	const handleInputFocus = (state) => {
+		if(state){
+			setInputFocus(true)
 		}
 	}
 
 	return (
-		<div className="search-container">
-			<div 
-				className={searchActive? "search-bar active" : "search-bar"} 
-				onMouseEnter={() => {handleSearchActive(true)}}
-				onMouseLeave={() => {handleSearchActive(false)}}
-			>
+		<div 
+			className="search-container" 
+			onMouseEnter={() => {handleSearchActive(true)}}
+			onMouseLeave={() => {handleSearchActive(false)}}
+		>
+			<div className={searchActive? "search-bar active" : "search-bar"}>
 				<div className="search-bar-input">
 					<img src={searchIcon} width="18" height="18" />
 					<input
@@ -153,7 +151,7 @@ const Search = (props) => {
 				}
 			</div>
 
-			{true && 
+			{searchBoxState && 
 				<div className="search-results-container">
 					{searchResults}
 				</div>
