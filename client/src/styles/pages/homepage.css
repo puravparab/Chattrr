@@ -21,6 +21,7 @@
 	justify-content: flex-start;
 	align-items: center;
 	width: 30%;
+	max-width: 400px;
 }
 
 .home .home-container-center{
@@ -40,6 +41,7 @@
 	justify-content: flex-start;
 	align-items: flex-start;
 	width: 30%;
+	max-width: 400px;
 }
 
 .container-right .container-right-search{
