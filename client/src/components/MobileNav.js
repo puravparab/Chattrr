@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { getToken, isAuthenticated, logout } from  "../actions/authActions.js"
 
 import PostBlurtForm from "./forms/PostBlurtForm"
+import Search from './Search'
 
 import homeBtn from '../assets/icons/home_white.svg';
 import profileIcon from '../assets/icons/profile_icon_white2.svg'
@@ -22,8 +23,17 @@ const MobileNav = (props) => {
 			window.location.replace('/')
 		}
 	})
-	const [BlurtFormVisible, setBlurtFormVisible] = useState(false)
 
+	const [SearchVisible, setSearchVisible] = useState(false)
+	const handleSearchVisible = () =>{
+		if (SearchVisible){
+			setSearchVisible(false)
+		}else{
+			setSearchVisible(true)
+		}
+	}
+
+	const [BlurtFormVisible, setBlurtFormVisible] = useState(false)
 	const handleBlurtForm = () =>{
 		if (BlurtFormVisible){
 			setBlurtFormVisible(false)
@@ -46,7 +56,7 @@ const MobileNav = (props) => {
 				}}/>
 			</div>
 			<div className="nav-item">
-				<img src={searchIcon} width="30" height="30" alt="search button" />
+				<img src={searchIcon} onClick={handleSearchVisible} width="30" height="30" alt="search button" />
 			</div>
 			<div className="nav-item">
 				<img src={sendIcon} onClick={handleBlurtForm} width="30" height="30" alt="send button" />
@@ -59,6 +69,17 @@ const MobileNav = (props) => {
 							<img src={crossWhite} onClick={handleBlurtForm} alt="close" width="20" height="20" />
 						</div>
 						<PostBlurtForm accessToken={accessToken} />
+					</div>
+				</div>
+			}
+
+			{SearchVisible && 
+				<div className="search-modal-container">
+					<div className="search-modal">
+						<div className="search-modal-header">
+							<img src={crossWhite} onClick={handleSearchVisible} alt="close" width="30" height="30" />
+						</div>
+						<Search profilePage={props.profilePage} />
 					</div>
 				</div>
 			}

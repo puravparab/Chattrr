@@ -38,6 +38,7 @@ const Search = (props) => {
 
 	useEffect(() =>{
 		if(searchText != ''){
+			setSearchResults('')
 			Search()
 			setSearchBoxState(true)
 		}else{
@@ -61,33 +62,41 @@ const Search = (props) => {
 
 	// Call Search API
 	const Search = async () => {
-		const res = await fetch(ROOT_URL + '/api/search/' + searchFilter + '?' + new URLSearchParams({
-			q: searchText,
-		}), {
-			method: 'GET',
-			headers: {
-				'Content-type': 'application/json'
-			}
-		})
-		const data = await res.json()
-		if (res.ok){
-			const searchData = await data.users.map((user) =>{
-				const image = handleImageSrc(user.profile_image)
-				return (
-					<div className="search-results-card" onClick={()=>{
-						{props.profilePage && window.location.replace(`../user/${user.username}`)}
-						{!props.profilePage && navigate(`../user/${user.username}`)}	
-					}}>
-						<img src={image} width="48" height="48" alt="user image"/>
-						<div className="user-detail">
-							<p className="username">{user.display_name}</p>
-							<p className="display-name">@{user.username}</p>
+		try{
+			const res = await fetch(ROOT_URL + '/api/search/' + searchFilter + '?' + new URLSearchParams({
+				q: searchText,
+			}), {
+				method: 'GET',
+				headers: {
+					'Content-type': 'application/json'
+				}
+			})
+			const data = await res.json()
+			if (res.ok){
+				const searchData = await data.users.map((user) =>{
+					const image = handleImageSrc(user.profile_image)
+					return (
+						<div className="search-results-card" onClick={()=>{
+							{props.profilePage && window.location.replace(`../user/${user.username}`)}
+							{!props.profilePage && navigate(`../user/${user.username}`)}	
+						}}>
+							<img src={image} width="48" height="48" alt="user image"/>
+							<div className="user-detail">
+								<p className="username">{user.display_name}</p>
+								<p className="display-name">@{user.username}</p>
+							</div>
 						</div>
+					)
+				})
+				setSearchResults(searchData)
+			}else{
+				setSearchResults(
+					<div className="search-error">
+						<p>No {searchFilter} found</p>
 					</div>
 				)
-			})
-			setSearchResults(searchData)
-		}else{
+			}
+		} catch(e){
 			setSearchResults(
 				<div className="search-error">
 					<p>No {searchFilter} found</p>
