@@ -12,6 +12,19 @@
 	align-items: center;
 	width: 550px;
 	border: 3px solid rgb(56, 68, 77);
+	z-index: 1;
+}
+
+@media screen and (min-width: 1000px)  {
+	.home .profile-container-center{
+	    margin-top: -120px;
+	}
+}
+
+@media screen and (max-width: 1000px){
+	.home .profile-container-center{
+		z-index: 0;
+	}
 }
 
 @media screen and (max-width: 600px)  {

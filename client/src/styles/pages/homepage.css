@@ -31,6 +31,7 @@
 	width: 550px;
 	padding-top: 20px;
 	border: 3px solid rgb(56, 68, 77);
+	z-index: 1;
 }
 
 .container-right{
@@ -52,6 +53,12 @@
 	top: 123px;
 }
 
+@media screen and (min-width: 1000px)  {
+	.home .home-container-center{
+	    margin-top: -120px;
+	}
+}
+
 @media screen and (max-width: 600px)  {
 	.home .home-container-center{
 	    display: flex;
@@ -63,9 +70,12 @@
 	}
 }
 
-@media screen and (max-width: 850px){
+@media screen and (max-width: 1000px){
 	.container-left{
 		display: none;
+	}
+	.home .home-container-center{
+	    z-index: 0;
 	}
 	.container-right{
 		display: none;
