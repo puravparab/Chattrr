@@ -3,9 +3,10 @@
 .home .home-header{
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
-	width: 90%;
+	width: 100%;
+	max-width: 1300px;
 	padding: 30px 0px;
 	background: rgba(13, 19, 33, 0.8);
 	position: sticky;
@@ -15,7 +16,7 @@
 
 .home .home-header .header-left{
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
 	width: 30%;
 }
@@ -24,29 +25,35 @@
 	cursor: pointer;
 }
 
-.home .home-header .title{
+.home .home-header .title-left{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	width: 700px;
+	width: 300px;
 }
-.home .home-header .title h1{
+.home .home-header .title-left h1{
 	padding: 5px 10px 5px 10px;
 	margin: 0px;
 	border-radius: 20px;
 	color: white;
 }
-
-.home .home-header .title h1:hover{
+.home .home-header .title-left h1:hover{
 	background: rgb(22, 30, 49);
 	cursor: pointer;
 	transition: 0.4s;
 }
 
+.home .home-header .title-center{
+	width: 600px;
+}
+.home .home-header .title-center h1{
+	display: none;
+}
+
 .home .home-header .header-right{
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
 	width: 30%;
 	position: relative;
@@ -168,18 +175,18 @@
 
 @media screen and (max-width: 1300px){
 	.home .home-header{
-		width: 95%;
+		width: 100%;
 	}
 
-	.home .home-header .title{
-		width: 330px;
+	.home .home-header .title-left{
+		width: 180px;
 	}
 	.home .home-header .header-right{
 		justify-content: center;
 	}
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1000px) {
 	.home .home-header{
 		padding: 10px 0px;
 		width: 100%;
@@ -188,6 +195,36 @@
 		z-index: 1;
 		background: rgba(13, 19, 33, 0.9);
 	}
+
+	.home .home-header .header-left{
+		justify-content: flex-end;
+	}
+
+	.home .home-header .title-left{
+		display: none;
+	}
+
+	.home .home-header .title-center{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 600px;
+	}
+	.home .home-header .title-center h1{
+		display: flex;
+		padding: 5px 10px 5px 10px;
+		margin: 0px;
+		border-radius: 20px;
+		color: white;
+	}
+
+	.home .home-header .title-center h1:hover{
+		background: rgb(22, 30, 49);
+		cursor: pointer;
+		transition: 0.4s;
+	}
+
 	.home .home-header .header-right .link-card{
 		width: auto;
 		border: none;

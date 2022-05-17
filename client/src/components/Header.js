@@ -29,7 +29,13 @@ const Header = (props) => {
 
 	return (
 		<div className="home-header">
+			{/* Header Left */}
 			<div className="header-left">
+				<div className="title-left">
+					<h1 onClick={()=> {
+						navigate("/")
+					}}>Chattrr</h1>
+				</div>
 				{props.backBtn && 
 					<img src={backBtn} alt="back-btn" width="30" height="30"
 						onClick={()=> {
@@ -38,11 +44,15 @@ const Header = (props) => {
 					/>
 				}
 			</div>
-			<div className="title">
+
+			{/* Header Center */}
+			<div className="title-center">
 				<h1 onClick={()=> {
 					navigate("/")
 				}}>Chattrr</h1>
 			</div>
+
+			{/* Header Right */}
 			<div className="header-right">
 				<div className={linkCardState} >
 					<div className={linkCardHeaderState}>

@@ -35,7 +35,7 @@
 	width: 85%;
 }
 
-@media screen and (min-width: 850px){
+@media screen and (min-width: 1000px){
 	.mobile-nav{
 		display: none;
 	}
