@@ -104,7 +104,7 @@ const EditProfileForm = (props) => {
 					</div>
 					<div className="form-entry">
 						<label className="label">Change Profile Picture</label>
-						<input type="file" onChange={handleProfileImage} accept="image/*" />
+						<input type="file" onChange={handleProfileImage} accept="image/*"/>
 					</div>
 					<div className="form-entry">
 						<label className="label">Update Bio</label>

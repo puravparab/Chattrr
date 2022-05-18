@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isAuthenticated } from  "../../actions/authActions.js"
+
+import ImageIcon from '../../assets/icons/image_icon_white.svg'
 import '../../styles/components/forms/postblurtform.css';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
@@ -57,6 +59,15 @@ const PostBlurtForm = ({ accessToken }) =>{
 			<form className="form">
 				<textarea onChange={handleBlurt} placeholder="What's on your mind?" maxlength="250" wrap="hard" required/>
 				<div className="footer">
+					<div className="post-blurt-options">
+						<div className="option-item">
+							<label for="files">
+								<img src={ImageIcon} width="30" height="30" alt="image icon" />
+							</label>
+							<input id="files" type="file" accept="image/*"/>
+						</div>
+					</div>
+
 					{blurt.trim().length !== 0 ? 
 						<button	onClick={createBlurt} type="submit"> Blurt Out</button> :
 						<button onClick={(e)=>{

@@ -34,8 +34,38 @@
 
 .post-blurt-container .form .footer{
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	align-items: center;
 	width: 100%;
+}
+
+.post-blurt-container .form .footer .post-blurt-options{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	width: 50%;
+}
+.post-blurt-container .form .footer .post-blurt-options .option-item{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 0px 20px;
+}
+
+.post-blurt-container .form .footer .post-blurt-options label{
+	cursor: pointer;
+}
+.post-blurt-container .form .footer .post-blurt-options img{
+	padding: 4px;
+	border-radius: 50%
+}
+.post-blurt-container .form .footer .post-blurt-options img:hover{
+	background:  rgb(51, 51, 51);
+}
+.post-blurt-container .form .footer .post-blurt-options input{
+	visibility: hidden;
 }
 
 .post-blurt-container .form .footer button{
