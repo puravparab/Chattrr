@@ -99,6 +99,7 @@ const Blurt = () => {
 							display_name={data[0].display_name}
 							content={data[0].content}
 							profile_image={data[0].profile_image}
+							image={data[0].image}
 							created_at={data[0].created_at} 
 							likes_detail={data[0].likes_detail}
 							no_of_comments={data[0].no_of_comments}

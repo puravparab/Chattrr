@@ -212,9 +212,18 @@ const BlurtCard = (props) => {
 							</div>
 						</div>
 					</div>
+
 					<div className="blurt-content" onClick={()=>{
 						navigate(`/user/${props.username}/status/${props.id}`);
 					}}><p>{props.content}</p></div>
+
+					{props.image != null?
+						(<div className="blurt-media">
+							<img src={props.image}/>
+						</div>)
+						: ("")
+					}
+					
 				</div>
 				<div className="blurt-footer">
 					<div className="blurt-comment-container" onClick={()=>{

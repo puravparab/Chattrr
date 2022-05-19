@@ -40,7 +40,8 @@ const ProfileFeed = (props) =>{
 							username={blurtItem.username} 
 							display_name={blurtItem.display_name}
 							content={blurtItem.content}
-							profile_image={blurtItem.profile_image} 
+							profile_image={blurtItem.profile_image}
+							image={blurtItem.image} 
 							created_at={blurtItem.created_at} 
 							likes_detail={blurtItem.likes_detail}
 							no_of_comments={blurtItem.no_of_comments}
