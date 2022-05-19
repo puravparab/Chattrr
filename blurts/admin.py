@@ -3,8 +3,8 @@ from .models import Blurt, BlurtLike, BlurtComment, BlurtCommentLike
 
 @admin.register(Blurt)
 class Blurt(admin.ModelAdmin):
-	list_display = ('id', 'content', 'author', 'created_at')
-	fields = ['content', 'author']
+	list_display = ('id', 'content', 'author', 'image', 'created_at')
+	fields = ['content', 'author', 'image']
 
 @admin.register(BlurtLike)
 class BlurtLikes(admin.ModelAdmin):

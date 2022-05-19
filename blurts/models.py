@@ -2,9 +2,14 @@ from django.db import models
 from accounts.models import UserProfile
 
 # BlURT Model
+
+def user_directory_path(instance, filename):
+	return 'blurts/users/{0}/blurt/{1}/images/{2}'.format(instance.author.user.id, instance.id, filename)
+
 class Blurt(models.Model):
 	content = models.TextField(null=True, blank=False)
 	author = models.ForeignKey(UserProfile, null=True, on_delete=models.SET_NULL)
+	image = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 	def __str__(self):

@@ -9,7 +9,7 @@ class BlurtSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Blurt
-		fields = ('id', 'content', 'username', 'display_name', 'email', 'profile_image', 'created_at')
+		fields = ('id', 'content', 'username', 'display_name', 'email', 'profile_image', 'image', 'created_at')
 
 class BlurtLikeSerializer(serializers.ModelSerializer):
 	username = serializers.CharField(source='user_profile.user.username')
