@@ -235,11 +235,11 @@
 	}
 
 	.home .home-header .link-card .link-card-header{
-		padding: 8px;
+		padding: 0px;
 	}
 	.home .home-header .link-card .fix-style{
 		border-radius: 30px;
-		padding: 8px;
+		padding: 0px;
 	}
 
 	.home .home-header .header-right .link-card .user-detail{

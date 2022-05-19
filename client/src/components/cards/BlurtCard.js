@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getToken, isAuthenticated } from  "../../actions/authActions.js"
 import { dateDifference } from "../../utilities/time.js"
+import ImageView from "../../pages/ImageView.js"
+
 import '../../styles/components/cards/blurtcard.css';
 import heartGreyOutline from '../../assets/icons/heart_grey_outline.svg';
 import heartRed from '../../assets/icons/heart_red.svg';
@@ -19,6 +21,7 @@ const BlurtCard = (props) => {
 	const [comments, setComments] = useState(props.accessToken)
 	const [profileImage, setProfileImage] = useState(defaultPFP)
 	const [dialogBoxState, setDialogBoxState] = useState("dialog-box close")
+	const [imageViewState, setImageViewState] = useState(false)
 
 	let navigate = useNavigate();
 
@@ -155,6 +158,14 @@ const BlurtCard = (props) => {
 		}
 	}
 
+	const handleImageViewer = () => {
+		if(imageViewState){
+			setImageViewState(false)
+		}else{
+			setImageViewState(true)
+		}
+	}
+
 	return (
 		<div className="blurt-card" >
 			<div className="pfp-container">
@@ -219,7 +230,8 @@ const BlurtCard = (props) => {
 
 					{props.image != null?
 						(<div className="blurt-media">
-							<img src={props.image}/>
+							<img src={props.image} onClick={handleImageViewer}/>
+							{imageViewState && <ImageView image={props.image} handleImageViewer={handleImageViewer} />}
 						</div>)
 						: ("")
 					}
