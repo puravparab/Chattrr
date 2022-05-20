@@ -11,12 +11,13 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 // TODO: Allow variety of text inputs
 // TODO: prohibit submit on enter btn click
 // TODO: Character limit warning
+// TODO: Fix posting images thorugh mobile nav
 
 const PostBlurtForm = ({ accessToken }) =>{
 	const [blurt, setBlurt] = useState('')
 	const [image, setImage] = useState('')
 	let navigate = useNavigate()
-
+	
 	const handleBlurt = (e) =>{
 		// Auto resize textarea
 		const height = e.target.scrollHeight; 
@@ -28,6 +29,7 @@ const PostBlurtForm = ({ accessToken }) =>{
 	}
 
 	const handleImage = (e) => {
+		console.log(e.target.files[0])
 		setImage(e.target.files[0])
 	}
 
@@ -35,19 +37,19 @@ const PostBlurtForm = ({ accessToken }) =>{
 	const createBlurt = async (e) => {
 		e.preventDefault()
 
+		const formData = new FormData()
+		formData.append('content', blurt);
+		if (image !== ''){
+			formData.append('image', image);
+		}
 		const res = await fetch(ROOT_URL + '/blurt/create' ,{
 			method: 'POST',
 			headers: {
-				'Content-type': 'application/json',
 				'Authorization': "Bearer " + accessToken
 			},
-			body: JSON.stringify({
-				"content": blurt
-			})
+			body: formData
 		})
-
 		const data = await res.json()
-
 		if (res.ok) {
 			navigate('/')
 		}else{
