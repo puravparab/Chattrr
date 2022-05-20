@@ -14,6 +14,7 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 
 const PostBlurtForm = ({ accessToken }) =>{
 	const [blurt, setBlurt] = useState('')
+	const [image, setImage] = useState('')
 	let navigate = useNavigate()
 
 	const handleBlurt = (e) =>{
@@ -26,10 +27,13 @@ const PostBlurtForm = ({ accessToken }) =>{
 		setBlurt(e.target.value)
 	}
 
+	const handleImage = (e) => {
+		setImage(e.target.files[0])
+	}
+
 	// Send request to create a blurt
 	const createBlurt = async (e) => {
 		e.preventDefault()
-		console.log(blurt)
 
 		const res = await fetch(ROOT_URL + '/blurt/create' ,{
 			method: 'POST',
@@ -48,7 +52,6 @@ const PostBlurtForm = ({ accessToken }) =>{
 			navigate('/')
 		}else{
 			if(res.status === 401){
-				console.log("accessToken invalid")
 				const res = isAuthenticated()
 			}
 		}	
@@ -64,7 +67,7 @@ const PostBlurtForm = ({ accessToken }) =>{
 							<label for="files">
 								<img src={ImageIcon} width="30" height="30" alt="image icon" />
 							</label>
-							<input id="files" type="file" accept="image/*"/>
+							<input id="files" type="file" onChange={handleImage} accept="image/*"/>
 						</div>
 					</div>
 

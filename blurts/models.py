@@ -4,7 +4,7 @@ from accounts.models import UserProfile
 # BlURT Model
 
 def user_directory_path(instance, filename):
-	return 'blurts/users/{0}/blurt/{1}/images/{2}'.format(instance.author.user.id, instance.id, filename)
+	return 'blurts/users/{0}/blurt/images/{1}'.format(instance.author.user.id, filename)
 
 class Blurt(models.Model):
 	content = models.TextField(null=True, blank=False)

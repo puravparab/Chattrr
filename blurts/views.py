@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, parser_classes, permission_classes
 
@@ -14,11 +14,12 @@ from .serializers import BlurtSerializer, BlurtLikeSerializer, BlurtCommentSeria
 # TODO: Refactor
 # Create a blurt
 @api_view(["POST"])
-@parser_classes([JSONParser])
+@parser_classes([JSONParser, MultiPartParser])
 @permission_classes([IsAuthenticated])
 def createBlurt(request, format=None):
 	# Process payload
 	content = request.data.get("content")
+	image = request.data.get("image")
 	author = request.user
 	# Validate content
 	if len(content) > 250:
@@ -37,7 +38,8 @@ def createBlurt(request, format=None):
 	try:
 		blurt = Blurt.objects.create(
 			content = content,
-			author = user_profile[0]
+			author = user_profile[0],
+			image = image
 		)
 		blurt.save()
 		return Response({"detail": "Blurt created succesfully"}, status=status.HTTP_200_OK)
