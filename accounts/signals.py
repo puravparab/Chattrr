@@ -15,4 +15,4 @@ def delete_profile_image_s3(sender, instance, **kwargs):
 
 @receiver(pre_delete, sender=UserProfile)
 def delete_profile_image_on_user_deletion_s3(sender, instance, **kwargs):
-	instance.image.delete(save=False)
+	instance.profile_image.delete(save=False)
