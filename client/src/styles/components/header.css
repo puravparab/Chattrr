@@ -1,6 +1,6 @@
 /* Styles for Header.js */
 
-.home .home-header{
+.home-header{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -14,43 +14,43 @@
 	z-index: 1;
 }
 
-.home .home-header .header-left{
+.home-header .header-left{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 30%;
 }
 
-.home .home-header img{
+.home-header img{
 	cursor: pointer;
 }
 
-.home .home-header .title-left{
+.home-header .title-left{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	width: 300px;
 }
-.home .home-header .title-left h1{
+.home-header .title-left h1{
 	padding: 5px 10px 5px 10px;
 	margin: 0px;
 	border-radius: 20px;
 	color: white;
 }
-.home .home-header .title-left h1:hover{
+.home-header .title-left h1:hover{
 	background: rgb(22, 30, 49);
 	cursor: pointer;
 	transition: 0.4s;
 }
 
-.home .home-header .title-center{
+.home-header .title-center{
 	width: 600px;
 }
-.home .home-header .title-center h1{
+.home-header .title-center h1{
 	display: none;
 }
 
-.home .home-header .header-right{
+.home-header .header-right{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -59,7 +59,7 @@
 	position: relative;
 }
 
-.home .home-header .header-right .link-card{
+.home-header .header-right .link-card{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -72,21 +72,21 @@
 	cursor: pointer;
 }
 
-.home .home-header .header-right .link-card:hover{
+.home-header .header-right .link-card:hover{
 	background: rgb(29, 43, 73);
 }
 
-.home .home-header .header-right .fix-pos{
+.home-header .header-right .fix-pos{
 	margin-top: 84px;
 	position: absolute;
 	background: rgb(13, 19, 33);
 }
 
-.home .home-header .header-right .fix-pos:hover{
+.home-header .header-right .fix-pos:hover{
 	background: rgb(13, 19, 33);
 }
 
-.home .home-header .link-card .link-card-header{
+.home-header .link-card .link-card-header{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -96,54 +96,54 @@
 	gap: 0px 20px;
 	border-radius: 30px;
 }
-.home .home-header .link-card .fix-style{
+.home-header .link-card .fix-style{
 	border-radius: 27px;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 }
 
-.home .home-header .link-card .link-card-header:hover{
+.home-header .link-card .link-card-header:hover{
 	background: rgb(29, 43, 73);
 }
 
-.home .home-header .header-right .link-card img{
+.home-header .header-right .link-card img{
 	border-radius: 50%;
 }
 
-.home .home-header .header-right .link-card .user-detail{
+.home-header .header-right .link-card .user-detail{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
 	color: white;
 }
-.home .home-header .header-right .link-card .user-detail p{
+.home-header .header-right .link-card .user-detail p{
 	margin: 0px;
 	word-break: break-all;
 }
 
-.home .home-header .header-right .link-card .user-detail .display-name{
+.home-header .header-right .link-card .user-detail .display-name{
 	font-weight: bold;
 	font-size: 16px;
 }
 
-.home .home-header .header-right .link-card .user-detail .username{
+.home-header .header-right .link-card .user-detail .username{
 	font-size: 14px;
 	color: rgb(189, 189, 189);
 }
 
-.home .home-header .header-right .link-card .dialog-box{
+.home-header .header-right .link-card .dialog-box{
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	border-top: 2px solid rgb(29, 43, 73);	
 	color: white;
 }
-.home .home-header .header-right .link-card .close{
+.home-header .header-right .link-card .close{
 	display: none;
 }
 
-.home .home-header .header-right .link-card .dialog-box .dialog-list-item{
+.home-header .header-right .link-card .dialog-box .dialog-list-item{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -152,18 +152,17 @@
 	padding: 10px 15px;
 }
 
-.home .home-header .header-right .link-card .dialog-box .dialog-list-item:hover{
+.home-header .header-right .link-card .dialog-box .dialog-list-item:hover{
 	background: rgb(29, 43, 73);
 }
-
-.home .home-header .header-right .link-card .dialog-box .dialog-list-item p{
+.home-header .header-right .link-card .dialog-box .dialog-list-item p{
 	margin: 0px;
 }
-.home .home-header .header-right .link-card .dialog-box .dialog-list-item p:hover{
+.home-header .header-right .link-card .dialog-box .dialog-list-item p:hover{
 	color:
 }
 
-.home .home-header .header-right .link-card .dialog-box .log-out{
+.home-header .header-right .link-card .dialog-box .log-out{
 	justify-content: center;
 	align-items: center;
 	padding: 10px 15px;
@@ -174,20 +173,20 @@
 }
 
 @media screen and (max-width: 1300px){
-	.home .home-header{
+	.home-header{
 		width: 100%;
 	}
 
-	.home .home-header .title-left{
+	.home-header .title-left{
 		width: 180px;
 	}
-	.home .home-header .header-right{
+	.home-header .header-right{
 		justify-content: center;
 	}
 }
 
 @media screen and (max-width: 1000px) {
-	.home .home-header{
+	.home-header{
 		padding: 10px 0px;
 		width: 100%;
 		position: sticky;
@@ -196,22 +195,22 @@
 		background: rgba(13, 19, 33, 0.9);
 	}
 
-	.home .home-header .header-left{
+	.home-header .header-left{
 		justify-content: flex-end;
 	}
 
-	.home .home-header .title-left{
+	.home-header .title-left{
 		display: none;
 	}
 
-	.home .home-header .title-center{
+	.home-header .title-center{
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		width: 600px;
 	}
-	.home .home-header .title-center h1{
+	.home-header .title-center h1{
 		display: flex;
 		padding: 5px 10px 5px 10px;
 		margin: 0px;
@@ -219,22 +218,22 @@
 		color: white;
 	}
 
-	.home .home-header .title-center h1:hover{
+	.home-header .title-center h1:hover{
 		background: rgb(22, 30, 49);
 		cursor: pointer;
 		transition: 0.4s;
 	}
 
-	.home .home-header .header-right .link-card{
+	.home-header .header-right .link-card{
 		width: auto;
 		border: none;
 	}
 
-	.home .home-header .header-right .fix-pos{
+	.home-header .header-right .fix-pos{
 		margin-top: 0px;
 	}
 
-	.home .home-header .link-card .link-card-header{
+	.home-header .link-card .link-card-header{
 		padding: 0px;
 	}
 	.home .home-header .link-card .fix-style{
@@ -242,13 +241,13 @@
 		padding: 0px;
 	}
 
-	.home .home-header .header-right .link-card .user-detail{
+	.home-header .header-right .link-card .user-detail{
 		display: none;
 	}
-	.home .home-header .header-right .link-card .more{
+	.home-header .header-right .link-card .more{
 		display: none;
 	}
-	.home .home-header .header-right .link-card .dialog-box{
+	.home-header .header-right .link-card .dialog-box{
 		display: none;
 	}
 }

@@ -6,7 +6,7 @@ import Register from "./pages/Register"
 import LogIn from "./pages/LogIn"
 import Profile from "./pages/Profile"
 import Blurt from "./pages/Blurt"
-import Error404Page from "./pages/Error404Page"
+import ErrorPage from "./pages/ErrorPage"
 import { isAuthenticated } from  "./actions/authActions.js"
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
 				<Route path='user/:username/status/:id' element={<Blurt />} />
 
 				{/* Other */}
-				<Route path='*' element={<Error404Page />} />
+				<Route path='*' element={<ErrorPage status={404} />} />
 			</Routes>
 		</div>
 	)
