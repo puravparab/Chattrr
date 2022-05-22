@@ -20,12 +20,9 @@ const HomePage = () => {
 	const [accessToken] = useState(() => {
 		try{
 			const access_token = getToken('at')
-			console.log(access_token)
 			return access_token
 		} catch(e){
-			console.log(e)
 			const res = isAuthenticated()
-			console.log(res)
 			window.location.replace('/')
 		}
 	})
@@ -72,7 +69,6 @@ const HomePage = () => {
 				setProfileImage(data.user.profile_image)
 			}
 		}else{
-			console.log('user detail load failure')
 		}
 	}
 

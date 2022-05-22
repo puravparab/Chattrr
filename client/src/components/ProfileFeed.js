@@ -28,11 +28,7 @@ const ProfileFeed = (props) =>{
 				'Authorization': "Bearer " + props.accessToken
 			}
 		})
-
-		console.log(res)
 		const data = await res.json()
-		console.log(data)
-
 		if (res.ok){
 			const BlurtList = await data.blurts.map((blurtItem) =>{
 				return <BlurtCard
@@ -49,7 +45,6 @@ const ProfileFeed = (props) =>{
 							renderComment={props.renderComment} 
 							is_user_author={data.is_user}/>
 			})
-			console.log(BlurtList)
 			if(BlurtList.length !== 0){
 				setBlurtList(BlurtList)
 			}
@@ -60,10 +55,12 @@ const ProfileFeed = (props) =>{
 					</div>
 				)
 			}
-			
 		} else{
-			console.log("blurts loading fail")
-			navigate('../error')
+			setBlurtList(
+				<div className="empty-card">
+					<p> No Blurts yet</p>
+				</div>
+			)
 		}
 	}
 

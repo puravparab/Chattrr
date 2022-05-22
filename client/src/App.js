@@ -36,7 +36,7 @@ function App() {
 				<Route path='user/:username/status/:id' element={<Blurt />} />
 
 				{/* Other */}
-				<Route path='*' element={<ErrorPage status={404} />} />
+				<Route path='*' element={<ErrorPage status={404} type={"default"} profilePage={false}/>} />
 			</Routes>
 		</div>
 	)

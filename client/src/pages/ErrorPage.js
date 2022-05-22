@@ -75,11 +75,20 @@ const ErrorPage = (props) => {
 				userDetail={userDetail}
 				profileImage={profileImage}
 				backBtn={false}
-				profilePage={false}
+				profilePage={props.profilePage}
 			/>
 
 			<div className="error-container">
-				<p className="msg-one">Error {props.status}: Sorry, this page isn't available.</p>
+				{props.type === "default" &&
+					<p className="msg-one"> Error {props.status}: Sorry, this page isn't available. </p>
+				}
+				{props.type === "blurt" &&
+					<p className="msg-one"> Error {props.status}: Sorry, this blurt doesn't exist. </p>
+				}
+				{props.type === "user" &&
+					<p className="msg-one"> Error {props.status}: Sorry, this user doesn't exist. </p>
+				}
+
 				<p className="msg-two">The link you followed may be broken, or the page may have been removed.</p>
 				<p className="msg-three" onClick={()=> {
 					navigate('/')
@@ -88,7 +97,7 @@ const ErrorPage = (props) => {
 				</p>
 			</div>
 
-			<MobileNav username={userDetail.username} profilePage={false} />
+			<MobileNav username={userDetail.username} profilePage={props.profilePage} />
 		</div>
 	);
 }

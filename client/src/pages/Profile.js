@@ -8,6 +8,7 @@ import ProfileFeed from "../components/ProfileFeed"
 import DesktopNav from '../components/DesktopNav'
 import MobileNav from '../components/MobileNav'
 import Search from '../components/Search'
+import ErrorPage from "./ErrorPage"
 
 import '../styles/pages/homepage.css';
 import '../styles/pages/profile.css';
@@ -22,12 +23,9 @@ const Profile = () =>{
 	const [accessToken] = useState(() => {
 		try{
 			const access_token = getToken('at')
-			console.log(access_token)
 			return access_token
 		} catch(e){
-			console.log(e)
 			const res = isAuthenticated()
-			console.log(res)
 			window.location.replace('/')
 		}
 	})
@@ -39,6 +37,8 @@ const Profile = () =>{
 
 	const [profile, setProfile] = useState('')
 	const [profileImage, setProfileImage] = useState(defaultPFP)
+
+	const [error, setError] = useState(false)
 
 	useEffect(() => {
 		//Attempt to retreive data
@@ -76,7 +76,6 @@ const Profile = () =>{
 				setProfileImage(data.user.profile_image)
 			}
 		}else{
-			console.log('user detail load failure')
 		}
 	}
 
@@ -98,36 +97,39 @@ const Profile = () =>{
 									accessToken={accessToken} />
 			setProfile(profileCard)
 		}else{
-			navigate('../error')
+			setError(true)
 		}
 	}
 
 	return (
-		<div className="home">
-			<Header 
-				userDetail={userDetail}
-				profileImage={profileImage}
-				backBtn={true}
-				profilePage={true}
-			/>
+		error 
+			?(<ErrorPage status={404} type={"user"} profilePage={true} />)
 
-			<div className="profile-container">
-				<div className="container-left">
-					<DesktopNav username={userDetail.username} profilePage={true} />
-				</div>
-				<div className="profile-container-center">
-					{profile}
-					<ProfileFeed accessToken={accessToken} username={params.username} renderComment={true} />
-				</div>
-				<div className="container-right">
-					<div className="container-right-search">
-						<Search profilePage={true} />
+			:(<div className="home">
+				<Header 
+					userDetail={userDetail}
+					profileImage={profileImage}
+					backBtn={true}
+					profilePage={true}
+				/>
+
+				<div className="profile-container">
+					<div className="container-left">
+						<DesktopNav username={userDetail.username} profilePage={true} />
+					</div>
+					<div className="profile-container-center">
+						{profile}
+						<ProfileFeed accessToken={accessToken} username={params.username} renderComment={true} />
+					</div>
+					<div className="container-right">
+						<div className="container-right-search">
+							<Search profilePage={true} />
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<MobileNav username={userDetail.username} profilePage={true} />
-		</div>
+				<MobileNav username={userDetail.username} profilePage={true} />
+			</div>)
 	)
 }
 

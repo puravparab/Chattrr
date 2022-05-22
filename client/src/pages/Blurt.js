@@ -9,6 +9,7 @@ import PostCommentForm from "../components/forms/PostCommentForm.js"
 import DesktopNav from '../components/DesktopNav'
 import MobileNav from '../components/MobileNav'
 import Search from '../components/Search'
+import ErrorPage from "./ErrorPage"
 
 import '../styles/pages/homepage.css';
 import '../styles/pages/blurt.css';
@@ -22,12 +23,9 @@ const Blurt = () => {
 	const [accessToken] = useState(() => {
 		try{
 			const access_token = getToken('at')
-			console.log(access_token)
 			return access_token
 		} catch(e){
-			console.log(e)
 			const res = isAuthenticated()
-			console.log(res)
 			window.location.replace('/')
 		}
 	})
@@ -41,6 +39,8 @@ const Blurt = () => {
 	})
 
 	const [profileImage, setProfileImage] = useState(defaultPFP)
+
+	const [error, setError] = useState(false)
 
 	useEffect(()=>{
 		try{
@@ -77,7 +77,6 @@ const Blurt = () => {
 				setProfileImage(data.user.profile_image)
 			}
 		}else{
-			console.log('user detail load failure')
 		}
 	}
   	
@@ -91,7 +90,6 @@ const Blurt = () => {
 			}
  		})
  		const data = await res.json()
- 		console.log(data)
  		if(res.ok){
  			const Blurt = <BlurtCard
 							id={blurt_id}
@@ -109,7 +107,7 @@ const Blurt = () => {
 							blurt_page={true} />
 			setBlurt(Blurt)
  		}else{
- 			navigate('./error')
+ 			setError(true)
  		}
   	}
 
@@ -122,10 +120,7 @@ const Blurt = () => {
 				'Authorization': "Bearer " + accessToken
 			}
   		})
-
 		const data = await res.json()
-		console.log(data)
-
   		if (res.ok){
   			const BlurtComments = await data.comments.map((blurtComment) => {
   				return <BlurtComment 
@@ -142,43 +137,45 @@ const Blurt = () => {
   			})
   			setBlurtComments(BlurtComments)
   		}else{
-  			console.log("Blurt does not have any comments")
   		}
   	}
 
 	return (
-		<div className="home" >
-			<Header 
-				userDetail={userDetail}
-				profileImage={profileImage}
-				backBtn={true}
-				profilePage={false}
-			/>
+		error
+			?(<ErrorPage status={404} type={"blurt"} profilePage={false}/>)
 
-			<div className="blurt-page-container">
-				<div className="container-left">
-					<DesktopNav username={userDetail.username} profilePage={false} />
-				</div>
-				<div className="blurt-container-center">
-					<div className="blurt-container">
-						{Blurt}
-					</div>
-					<div className="post-comment-container">
-						<PostCommentForm accessToken={accessToken} blurt_id={params.id} />
-					</div>
-					<div className="comments-container">
-						{blurtComments}
-					</div>
-				</div>
-				<div className="container-right">
-					<div className="container-right-search">
-						<Search profilePage={false} />
-					</div>
-				</div>
-			</div>
+			:(<div className="home" >
+				<Header 
+					userDetail={userDetail}
+					profileImage={profileImage}
+					backBtn={true}
+					profilePage={false}
+				/>
 
-			<MobileNav username={userDetail.username} profilePage={false} />
-		</div>
+				<div className="blurt-page-container">
+					<div className="container-left">
+						<DesktopNav username={userDetail.username} profilePage={false} />
+					</div>
+					<div className="blurt-container-center">
+						<div className="blurt-container">
+							{Blurt}
+						</div>
+						<div className="post-comment-container">
+							<PostCommentForm accessToken={accessToken} blurt_id={params.id} />
+						</div>
+						<div className="comments-container">
+							{blurtComments}
+						</div>
+					</div>
+					<div className="container-right">
+						<div className="container-right-search">
+							<Search profilePage={false} />
+						</div>
+					</div>
+				</div>
+
+				<MobileNav username={userDetail.username} profilePage={false} />
+			</div>) 
 	)
 }
 
