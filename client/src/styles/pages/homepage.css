@@ -30,6 +30,7 @@
 	align-items: center;
 	gap: 20px 0px;
 	width: 550px;
+	height: fit-content;
 	padding-top: 20px;
 	border: 3px solid rgb(56, 68, 77);
 	z-index: 1;
