@@ -90,3 +90,19 @@
 .post-blurt-modal-container .post-blurt-modal .post-blurt-modal-header img{
 	cursor: pointer;
 }
+
+.desktop-nav .footer-left{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	bottom: 0px;
+	padding: 20px 0px;
+	color: white;
+}
+.desktop-nav .footer-left p{
+	margin: 0px;
+	font-weight: bold;
+	font-size: 16px;
+}

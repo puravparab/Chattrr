@@ -26,6 +26,22 @@
 	padding-top: 80px;
 }
 
+.login .login-footer{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	bottom: 0px;
+	padding: 20px 0px;
+	color: #3C4257;
+}
+.login .login-footer p{
+	margin: 0px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
 @media screen and (max-width: 530px){
 	.login .login-header .title h1{
 		padding: 10px 0px;

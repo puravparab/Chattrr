@@ -19,6 +19,10 @@ const LogIn = ({isAuth}) => {
 				<img className="login-img" src={SocialImage}/>
 				<LogInForm />
 			</div>
+
+			<div className="login-footer">
+				<p>&copy; 2022 CHATTRR</p>
+			</div>
 		</div>
 	);
 }

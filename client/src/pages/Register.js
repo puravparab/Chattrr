@@ -19,6 +19,10 @@ const Register = ({isAuth}) => {
 				<img className="register-img" src={SocialImage}/>
 				<RegisterForm />
 			</div>
+
+			<div className="register-footer">
+				<p>&copy; 2022 CHATTRR</p>
+			</div>
 		</div>
 	);
 }

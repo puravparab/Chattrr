@@ -58,6 +58,10 @@ const DesktopNav = (props) => {
 					</div>
 				</div>
 			}
+
+			<div className="footer-left">
+				<p>&copy; 2022 CHATTRR</p>
+			</div>
 		</div>
 	)
 }
