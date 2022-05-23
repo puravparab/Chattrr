@@ -11,7 +11,7 @@
 	background: rgb(13, 19, 33);
 	position: sticky;
 	bottom: 0px;
-	z-index: 1;
+	z-index: 2;
 }
 
 .mobile-nav .nav-item{
