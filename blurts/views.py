@@ -131,11 +131,14 @@ def blurt_detail(request, blurt_id):
 			return Response({"error": "blurt does not exist"}, status=status.HTTP_400_BAD_REQUEST)
 
 # TODO: Add more data to API call
-# GET all Blurts
+# GET list of blurts
 @api_view(["GET"])
 @parser_classes([JSONParser])
 def blurt_list(request):
 	if request.method == "GET":
+		index = int(request.GET.get('index', 0))
+		limit = int(request.GET.get('limit', 10))
+		offset = int(request.GET.get('offset', 10))
 		# Get User
 		user = request.user
 		user_list = User.objects.filter(username=user)
@@ -147,7 +150,7 @@ def blurt_list(request):
 			user_profile = None
 
 		# Get Blurts
-		blurts = Blurt.objects.filter(author__isnull=False, content__isnull=False).exclude(content="").order_by('-created_at')
+		blurts = Blurt.objects.filter(author__isnull=False, content__isnull=False).exclude(content="").order_by('-created_at')[(index * offset):(index * offset + limit)]
 		serializer = BlurtSerializer(blurts, many=True)
 
 		# Iterate through each blurt

@@ -10,7 +10,7 @@ from accounts.serializers import UserProfileSerializer
 @api_view(["GET"])
 def userSearch(request, format=None):
 	query = request.GET.get('q', '')
-	limit = int(request.GET.get('limit', 10))
+	limit = int(request.GET.get('limit', 15))
 
 	user_list = UserProfile.objects.filter(user__username__icontains=query)[:limit]
 	if not user_list.exists():
