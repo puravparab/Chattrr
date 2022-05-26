@@ -81,7 +81,7 @@ const Feed = ({ accessToken, renderComment }) => {
 	return (
 		<div className="feed-container">
 			{BlurtList}
-			{loadState && <button onClick={handleLoadBlurts}>More Blurts</button>}
+			{loadState && <button className="feed-load-btn" onClick={handleLoadBlurts}>More Blurts</button>}
 		</div>
 	)
 }

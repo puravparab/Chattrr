@@ -4,11 +4,29 @@
 	flex-direction: column;
 	color: white;
 	width: 100%;
+	position: relative;
 }
 
-/*.feed-container h3{
-	text-align: center;
-}*/
+.feed-container .feed-load-btn{
+	width: 150px;
+	height: 35px;
+	font-size: 15px;
+	font-weight: bold;
+	border: none;
+	border-radius: 20px;
+	color: white;
+	background: rgb(142, 120, 255);
+	cursor: pointer;
+	margin: 15px auto;
+	margin-left: 560px;
+	position: absolute;
+	bottom: 0px;
+}
+
+.feed-container .feed-load-btn:hover{
+	background: rgb(132, 107, 255);
+	transition: 0.4s;
+}
 
 .feed-container .empty-card{
 	display: flex;
@@ -21,4 +39,20 @@
 .feed-container .empty-card p{
 	font-size: 25px;
 	font-weight: bold;
+}
+
+@media screen and (max-width: 1000px){
+	.feed-container .feed-load-btn{
+		width: 150px;
+		height: 40px;
+		font-size: 15px;
+		font-weight: bold;
+		border: none;
+		border-radius: 20px;
+		color: white;
+		background: rgb(142, 120, 255);
+		cursor: pointer;
+		margin: 15px auto;
+		position: static;
+	}
 }
