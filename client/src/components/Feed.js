@@ -6,6 +6,10 @@ const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":
 
 const Feed = ({ accessToken, renderComment }) => {
 	const [BlurtList, setBlurtList] = useState('')
+	const [blurtData, setBlurtData] = useState('')
+	const [blurtIndex, setBlurtIndex] = useState(0)
+
+	const [loadState, setLoadState] = useState(true)
 
 	useEffect(() => {
 		//Attempt to retreive data
@@ -16,23 +20,43 @@ const Feed = ({ accessToken, renderComment }) => {
 		catch (e) {
 			console.log(e)
 		}
-	}, [])
+	}, [blurtIndex])
+
+	const handleLoadBlurts = () =>{
+		let index = blurtIndex
+		setBlurtIndex(index + 1)
+	}
 
 	const getBlurtList = async () =>{
-		const res = await fetch(ROOT_URL + '/blurt/list' ,{
+		const res = await fetch(ROOT_URL + '/blurt/list?' + new URLSearchParams({
+			index: blurtIndex,
+		}),{
 			method: 'GET',
 			headers: {
 				'Content-type': 'application/json',
 				'Authorization': "Bearer " + accessToken
 			}
 		})
-
-		console.log(res)
 		const data = await res.json()
-		console.log(data)
 
 		if (res.ok){
-				const BlurtList = await data.blurts.map((blurtItem) =>{
+			if(data.no_of_blurts === 0){
+				setLoadState(false)
+			}else{
+				let list = {}
+				if(blurtIndex === 0){
+					list = data
+					setBlurtData(data)
+				}else{
+					list = blurtData
+					for (let i = 0; i < data.blurts.length; i++) {
+						list.blurts.push(data.blurts[i])
+					}
+					list["no_of_blurts"] = blurtData.no_of_blurts + data.no_of_blurts
+					setBlurtData(list)
+				}
+
+				const newBlurtList = await list.blurts.map((blurtItem) =>{
 					return <BlurtCard
 								id={blurtItem.id}
 								username={blurtItem.username} 
@@ -47,11 +71,9 @@ const Feed = ({ accessToken, renderComment }) => {
 								renderComment={renderComment} 
 								is_user_author={blurtItem.is_user_author} />
 				})
-				console.log(BlurtList)
-				setBlurtList(BlurtList)
+				setBlurtList(newBlurtList)
+			}
 		} else{
-			console.log("blurts loading fail")
-			// Remove
 			setBlurtList(<h1>Error</h1>)
 		}
 	}
@@ -59,6 +81,7 @@ const Feed = ({ accessToken, renderComment }) => {
 	return (
 		<div className="feed-container">
 			{BlurtList}
+			{loadState && <button onClick={handleLoadBlurts}>More Blurts</button>}
 		</div>
 	)
 }
