@@ -1,8 +1,7 @@
 /* Styles for Login Form */
 .login {
- 	background-color: white !important;
- 	margin: 10px 0px;
- 	gap: 2vh 0px;
+	background-color: white !important;
+	gap: 2vh 0px;
 }
 .login .login-header{
 	background: white;
@@ -29,9 +28,9 @@
 .login .login-footer{
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-end;
 	align-items: center;
-	position: fixed;
+	flex-grow: 1;
 	bottom: 0px;
 	padding: 20px 0px;
 	color: #3C4257;
