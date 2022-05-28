@@ -35,7 +35,7 @@ DEBUG = os.getenv('DEBUG') == 'True'
 try:
     ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
 except:
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS')
+    ALLOWED_HOSTS =['0.0.0.0', 'localhost', '127.0.0.1']
 
 
 # Application definition
