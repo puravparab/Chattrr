@@ -26,7 +26,6 @@ const BlurtComment = (props) => {
 			const access_token = getToken('at')
 			setAccessToken(access_token)
 		} catch(e){
-			console.log(e)
 			const res = isAuthenticated()
 			if(res === false){
 				window.location.replace('/')

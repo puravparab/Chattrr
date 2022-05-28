@@ -31,7 +31,6 @@ const BlurtCard = (props) => {
 			const access_token = getToken('at')
 			setAccessToken(access_token)
 		} catch(e){
-			console.log(e)
 			const res = isAuthenticated()
 			if(res === false){
 				window.location.replace('/')
@@ -88,7 +87,6 @@ const BlurtCard = (props) => {
 				'Authorization': "Bearer " + accessToken
 			}
 		})
-		// const data = await res.json()
 		if(res.ok){
 			return true
 		}else{

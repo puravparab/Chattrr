@@ -17,12 +17,9 @@ const Search = (props) => {
 	const [accessToken] = useState(() => {
 		try{
 			const access_token = getToken('at')
-			console.log(access_token)
 			return access_token
 		} catch(e){
-			console.log(e)
 			const res = isAuthenticated()
-			console.log(res)
 			window.location.replace('/')
 		}
 	})

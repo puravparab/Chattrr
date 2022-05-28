@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Routes, Route, Link, Navigate } from 'react-router-dom'
-// import PrivateRoute from './utilities/PrivateRoute.js'
 import HomePage from "./pages/HomePage"
 import Register from "./pages/Register"
 import LogIn from "./pages/LogIn"
@@ -31,7 +30,6 @@ function App() {
 								: <Navigate to='/login' isAuth={isAuth} /> } >
 				</Route>
 
-				{/* <Route exact path='/user/none' element={<Error404Page />} /> */}
 				<Route path='/user/:username' element={<Profile />} />
 				<Route path='user/:username/status/:id' element={<Blurt />} />
 

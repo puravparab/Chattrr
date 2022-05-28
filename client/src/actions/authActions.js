@@ -11,7 +11,6 @@ export const getToken = (token_type) => {
 			return refresh_token
 		}
 	} catch(e){
-		console.log(e)
 		throw e
 	}
 };
@@ -22,11 +21,7 @@ const updateAcessToken = async (refresh_token) => {
 		const res = await fetch(ROOT_URL + '/accounts/token/refresh/' + refresh_token, {
 			method: 'GET'
 		})
-
-		console.log(res)
 		const data = await res.json()
-		console.log(data)
-
 		if(res.ok){
 			const access_token = data["tokens"]["access_token"]
 			const refresh_token = data["tokens"]["refresh_token"]
@@ -46,11 +41,9 @@ const updateAcessToken = async (refresh_token) => {
 			window.location.replace('/')
 		} else{
 			// Refresh token invalid
-			console.log(data)
 			return false
 		}
 	} catch(e){
-		console.log(e)
 		return false
 	}
 };
@@ -60,18 +53,14 @@ export const isAuthenticated = () => {
 	// Get auth tokens from cookies
 	try{
 		const access_token = getToken('at')
-		console.log(access_token)
 		return true
 	} catch(e){
 		// Access token invalid
-		console.log(e)
 		try{
 			const refresh_token = getToken('rt')
-			console.log(refresh_token)
 			updateAcessToken(refresh_token)
 		} catch(e){
 			// Refresh token invalid
-			console.log(e)
 			return false
 		}
 	}
@@ -86,16 +75,12 @@ export const logout = async () => {
 		refresh_token = getToken('rt')
 	}
 	catch(e){
-		console.log(e)
 	}
-
-	console.log(refresh_token)
 
 	try{
 		document.cookie = "at=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 		document.cookie = "rt=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 	}catch(e){
-		console.log(e)
 		return false
 	}
 	
@@ -112,8 +97,5 @@ export const logout = async () => {
 	})
 	if(res.ok){
 		window.location.replace(ROOT_URL)
-	}
-	else{
-		console.log("logout failed")
 	}
 }
