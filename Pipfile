@@ -13,6 +13,9 @@ djangorestframework-simplejwt = "*"
 django-storages = "*"
 boto3 = "*"
 pillow = "*"
+django-environ = "*"
+gunicorn = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
