@@ -34,7 +34,7 @@ const Search = (props) => {
 	const [searchBoxState, setSearchBoxState] = useState(false)
 
 	useEffect(() =>{
-		if(searchText != ''){
+		if(searchText !== ''){
 			setSearchResults('')
 			Search()
 			setSearchBoxState(true)
@@ -44,7 +44,7 @@ const Search = (props) => {
 	}, [searchText])
 
 	const handleText = (e) => {
-		if (searchFilter != '' && inputFocus === true){
+		if (searchFilter !== '' && inputFocus === true){
 			setSearchtext(e.target.value.trim())
 		}
 	}
