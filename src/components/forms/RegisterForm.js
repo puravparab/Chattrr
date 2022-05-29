@@ -118,11 +118,7 @@ const RegisterForm = () =>{
 						"email": email
 					})
 				})
-
-				console.log(res)
 				const data = await res.json()
-				console.log(data)
-
 				if(res.ok){
 					const success = data["details"]
 					const access_token = data["tokens"]["access"]
@@ -141,14 +137,11 @@ const RegisterForm = () =>{
 					document.cookie = "at=" + access_token + ";expires=" + at_date.toUTCString() + "; samesite=lax"
 					document.cookie = "rt=" + refresh_token + ";expires=" + rt_date.toUTCString() + "; samesite=lax"
 
-					console.log(success)
 					// redirect()
 					setStage("2")
 				} else{
 					const errors = data["errors"]
 					updateError(errors)
-					console.log(errors)
-					console.log(error)
 				}
 			}
 		} else if (stage === "2"){
@@ -176,9 +169,6 @@ const RegisterForm = () =>{
 
 				if (res.ok){
 					redirect()
-				}else{
-					console.log("Submition failed")
-				}
 			} else{
 				redirect()
 			}

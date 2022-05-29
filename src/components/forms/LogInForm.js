@@ -43,9 +43,7 @@ const LogInForm = () => {
 					"password": password
 				})
 			})
-			console.log(res)
 			const data = await res.json()
-			console.log(data)
 
 			if(res.ok){
 				const access_token = data["tokens"]["access"]
