@@ -63,10 +63,7 @@ const LogInForm = () => {
 				document.cookie = "rt=" + refresh_token + ";expires=" + rt_date.toUTCString() + "; samesite=lax"
 				redirect()
 			} else{
-				// const errors = data["errors"]
-				// console.log(errors)
 				setError("Incorrect username or password")
-				console.log("Incorrect username or password")
 			}
 		}
 	}

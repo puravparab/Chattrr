@@ -6,7 +6,7 @@ import alertRed from '../../assets/icons/alert_red.svg';
 
 const ROOT_URL = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port
 
-const RegisterForm = () =>{
+const RegisterForm = () => {
 	// States for Registration
 	const [username, setUsername] = useState('')
 	const [email, setEmail] = useState('')
@@ -97,7 +97,8 @@ const RegisterForm = () =>{
 					password: passwordErr
 				}
 				updateError(errors)
-			} else {
+			} 
+			else {
 				const errors = {
 					username: "",
 					email: "",
@@ -144,7 +145,8 @@ const RegisterForm = () =>{
 					updateError(errors)
 				}
 			}
-		} else if (stage === "2"){
+		} 
+		else if (stage === "2"){
 			if (display_name !== '' || profile_image_file !== '' || bio !== ''){
 				const formData = new FormData();
 				if (username !== ''){
@@ -169,11 +171,13 @@ const RegisterForm = () =>{
 
 				if (res.ok){
 					redirect()
-			} else{
+				}
+			} 
+			else{
 				redirect()
 			}
 		}
-	};
+	}
 
 	const updateError = (errors) => {
 		setError((error) => {
@@ -209,11 +213,6 @@ const RegisterForm = () =>{
 														<img src={alertRed} alt="alert" width="20" height="20"/>
 														<span>{error.username}</span></div>) : ("")}
 						</div>
-
-						{/* <div className="form-entry"> */}
-						{/* 	<label className="label">Display Name</label> */}
-						{/* 	<input className="input" onChange={handleDisplayName} value={display_name} type="text" /> */}
-						{/* </div> */}
 
 						<div className="form-entry">
 							<label className="label">Email</label>
@@ -260,7 +259,7 @@ const RegisterForm = () =>{
 			
 			<div className="sign-in"><span>Have an account? <Link to='/login'>Sign in</Link></span></div>
 		</div>
-	)
+	);
 }
 
 export default RegisterForm
