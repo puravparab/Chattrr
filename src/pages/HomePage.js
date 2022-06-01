@@ -35,13 +35,14 @@ const HomePage = () => {
 	const [profileImage, setProfileImage] = useState(defaultPFP)
 
 	useEffect(() => {
+		document.title = "Home / Chattrr";
+
 		//Attempt to retreive data
 		try {
 			getUserDetail()
 		}
 		// TODO: Test This
 		catch (e) {
-			console.log(e)
 		}
 	}, [])
 

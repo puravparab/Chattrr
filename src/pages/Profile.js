@@ -30,7 +30,14 @@ const Profile = () =>{
 		}
 	})
 
+	// Details of logged user
 	const [userDetail, setUserDetail] = useState({
+		username: "",
+		display_name: ""
+	})
+
+	// Details of user that created the blurt
+	const [userProfileDetail, setUserProfileDetail] = useState({
 		username: "",
 		display_name: ""
 	})
@@ -51,6 +58,10 @@ const Profile = () =>{
 			console.log(e)
 		}
 	}, [])
+
+	useEffect(() =>{
+		document.title = `${userProfileDetail.display_name} (@${userProfileDetail.username}) / Chattrr`
+	}, [userProfileDetail])
 
 	// Get details of the requesting user
 	const getLoggedUserDetail = async () => {
@@ -90,6 +101,11 @@ const Profile = () =>{
 		})
 		const data = await res.json()
 		if(res.ok){
+			setUserProfileDetail({
+				username: data.user.username,
+				display_name: data.user.display_name
+			})
+
 			const profileCard = <ProfileCard 
 									user={data.user}
 									is_user={data.is_user}
