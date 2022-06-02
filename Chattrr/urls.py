@@ -44,6 +44,8 @@ urlpatterns = [
 
     # Client (Frontend) Endpoint
     path('', TemplateView.as_view(template_name='index.html')),
+    path('manifest.json', TemplateView.as_view(template_name='manifest.json')),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt')),
     re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="index.html"))
 
     # TODO: Find better solution than below
