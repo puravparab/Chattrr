@@ -1,11 +1,17 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
 import LogInForm from "../components/forms/LogInForm"
 import SocialImage from "../assets/images/Social_Media_Monochromatic.svg"
 
 const LogIn = ({isAuth}) => {
 	let navigate = useNavigate();
+
+	useEffect(() => {
+		document.title = "Login / Chattrr"
+	},[])
+
 	if(isAuth){ return <Navigate to='/' />}
+
 	return (
 		<div className="home login">
 			<div className="login-header">
