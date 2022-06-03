@@ -6,10 +6,9 @@
 	<h1 align="center">
 		Chattrr
 	</h1>
-</p
-
-<p align="center">
-	A social media application where users can blurt out their thoughts and listen to the world's chattrr.
+	<p align="center">
+		A social media application where users can blurt out their thoughts and listen to the world's chattrr.
+	</p
 </p
 
 <p align="center">
@@ -18,7 +17,7 @@
 </p>
 
 <p align="center">
-	<a href="#Installation">INSTALLATION</a>
+	<a href="#Installation">INSTALLATION</a>|
 	<a href="#License">LICENSE</a>
 </p>
 
