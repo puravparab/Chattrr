@@ -44,8 +44,9 @@ Run the virtual environment
 ```
 $ pipenv shell
 ```
-Create  a file called .env and copy contents from .envtemplate into it
-Update the entries in the .env file
+Create  a file called .env and copy contents from .envtemplate into it.
+<br>
+Update the entries in the .env file.
 ```
 SECRET_KEY= <create a secret key>
 DEBUG=True
@@ -72,8 +73,9 @@ This completes the backend/server configuration.
 
 ---
 
-For the next steps make sure node.js is and npm is installed
-You should have at least the following versions if node and npm ae installed
+For the next steps make sure node.js is and npm is installed.
+<br>
+You should have at least the following versions if node and npm ae installed.
 ```
 $ node -v
 v16.13.1
@@ -97,7 +99,7 @@ Add a superuser to Django Admin
 ```
 $ python manage.py createsuperuser
 ```
-Run the server at http//127.0.0.1:8000/ or http://localhost:3000
+Run the server at http//127.0.0.1:8000 or http://localhost:3000
 ```
 $ python manage.py runserver
 ```
