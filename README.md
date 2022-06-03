@@ -4,7 +4,7 @@
 
 <p align="center">
 	<h1 align="center">
-		Chattrr
+		CHATTRR
 	</h1>
 	<p align="center">
 		A social media application where users can blurt out their thoughts and listen to the world's chattrr.
@@ -12,12 +12,13 @@
 </p
 
 <p align="center">
-<a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.10-green.svg"></a>
-<a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+	<a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.10-green.svg"></a>
+	<a target="_blank" href="LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
 </p>
 
 <p align="center">
-	<a href="#Installation">INSTALLATION</a>|
+	<a href="#Installation">INSTALLATION</a>
+	&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 	<a href="#License">LICENSE</a>
 </p>
 
