@@ -99,7 +99,7 @@ Add a superuser to Django Admin
 ```
 $ python manage.py createsuperuser
 ```
-Run the server at http//127.0.0.1:8000 or http://localhost:3000
+Run the server at http://127.0.0.1:8000 or http://localhost:3000
 ```
 $ python manage.py runserver
 ```
