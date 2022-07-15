@@ -1,6 +1,6 @@
 <p align="center">
 	<img src="https://github.com/puravparab/Chattrr/blob/master/public/static/android-chrome-192x192.png?raw=true"/>
-</p
+</p>
 
 <p align="center">
 	<h1 align="center">
@@ -9,7 +9,7 @@
 	<p align="center">
 		A social media application where users can blurt out their thoughts and listen to the world's chattrr.
 	</p
-</p
+</p>
 
 <p align="center">
 	<a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.10-green.svg"></a>
