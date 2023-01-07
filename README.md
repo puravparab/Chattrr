@@ -20,6 +20,8 @@
 	<a href="#Installation">INSTALLATION</a>
 	&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 	<a href="#License">LICENSE</a>
+	&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+	<a href="#Screenshots">SCREENSHOTS</a>
 </p>
 
 # Installation:
@@ -133,3 +135,11 @@ SOFTWARE.
 ---
 
 Original Creator - [Purav Parab](https://github.com/puravparab)
+
+---
+
+# Screenshots
+
+![chattrr-1](https://github.com/puravparab/Chattrr/blob/b2e34640fafb073ecae1ca3ef1fcc33fbc658deb/src/assets/images/chattrr1.png)
+![chattrr-2](https://github.com/puravparab/Chattrr/blob/b2e34640fafb073ecae1ca3ef1fcc33fbc658deb/src/assets/images/chattrr2.png)
+![chattrr-3](https://github.com/puravparab/Chattrr/blob/b2e34640fafb073ecae1ca3ef1fcc33fbc658deb/src/assets/images/chattrr3.png)
