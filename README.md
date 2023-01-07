@@ -140,6 +140,11 @@ Original Creator - [Purav Parab](https://github.com/puravparab)
 
 # Screenshots
 
+1. Timeline
 ![chattrr-1](https://github.com/puravparab/Chattrr/blob/b2e34640fafb073ecae1ca3ef1fcc33fbc658deb/src/assets/images/chattrr1.png)
+
+2. Timeline
 ![chattrr-2](https://github.com/puravparab/Chattrr/blob/b2e34640fafb073ecae1ca3ef1fcc33fbc658deb/src/assets/images/chattrr2.png)
+
+3. User Profile
 ![chattrr-3](https://github.com/puravparab/Chattrr/blob/b2e34640fafb073ecae1ca3ef1fcc33fbc658deb/src/assets/images/chattrr3.png)
